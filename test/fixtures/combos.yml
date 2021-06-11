@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  fighterid: 1
+  startposition: 1
+  startpossibledamage: 1
+  level: 1
+  message: MyText
+
+two:
+  name: MyString
+  fighterid: 1
+  startposition: 1
+  startpossibledamage: 1
+  level: 1
+  message: MyText

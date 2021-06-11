@@ -1,0 +1,7 @@
+h1 コンボデータ編集
+.nav.justify-content-end
+  = link_to '一覧', combos_path, class: 'nav-link'
+
+= render partial: 'form', locals: { combo: @combo }
+
+p Find me in app/views/combos/edit.html.slim

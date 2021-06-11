@@ -1,0 +1,9 @@
+.product__topContent__commentBox__index
+  - if @comments
+    - @comments.each do |comment|
+      .product__topContent__commentBox__index__box
+        %span.product__topContent__commentBox__index__box--name= comment.user.nickname
+        - if comment.user.id == @product.saler_id
+          %span.product__topContent__commentBox__index__box--saler 出品者
+        %span.product__topContent__commentBox__index__box--date= comment.created_at.strftime("%Y-%m-%d %H:%M")
+        %p.product__topContent__commentBox__index__box--text= comment.text

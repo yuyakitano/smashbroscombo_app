@@ -1,0 +1,135 @@
+h1 コンボデータ詳細
+.nav.justify-content-end
+  = link_to '一覧', combos_path, class: 'nav-link'
+table.table.table-hover
+  tbody 
+    /tr
+      th = Combo.human_attribute_name(:id)
+      td = @combo.id
+    tr
+      th = Combo.human_attribute_name(:name)
+      td = @combo.name
+    tr
+      th = Combo.human_attribute_name(:fighter)
+      td = @combo.fighter.name
+    tr
+      th = Combo.human_attribute_name(:genre)
+      td = @combo.genre.name
+    tr
+      th = Combo.human_attribute_name(:startposition)
+      td = @combo.startposition.name
+    tr
+      th = Combo.human_attribute_name(:startpossibledamage_min)
+      td = @combo.startpossibledamage_min
+    tr
+      th = Combo.human_attribute_name(:startpossibledamage_max)
+      td = @combo.startpossibledamage_max
+    tr
+      th = Combo.human_attribute_name(:combocommand)
+      td = @combo.command_ids
+      /td = @combo.command_ids.name
+
+    tr
+      th = Combo.human_attribute_name(:damage_dealt)
+      td = @combo.damage_dealt
+    tr
+      th = Combo.human_attribute_name(:level)
+      td = @combo.level_i18n
+    tr
+      th = Combo.human_attribute_name(:youtube_url)
+      td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
+      /iframe allow=("accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture") frameborder="0" height="315" src=("https://www.youtube.com/embed/ #{%= @combo.youtube_url[32..42] }") width="560" 
+      /iframe allow=( accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture ) allowfullscreen="" frameborder="0" height="315" src=("https://www.youtube.com/embed/#{ @combo.youtube_url }") width="560" 
+      /td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{.split_id_from_youtube_url}", \
+            frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
+      /iframe allow=("accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture") allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/ojdbDYahiCQ" width="560" 
+      /%iframe{src: "https://www.youtube.com/embed/#{@combo.youtube_url[32..42]}",allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: "", frameborder: "0", height: "315", width: "560"}
+
+    tr
+      th = Combo.human_attribute_name(:message)
+      td = simple_format(h(@combo.message), {}, sanitize: false, wrapper_tag: "div")
+    tr
+      th = Combo.human_attribute_name(:make_by)
+      td = @combo.user.username
+- if user_signed_in? && current_user.id == @combo.user_id
+  = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
+  = link_to '削除', @combo, method: :delete, data: { confirm: "コンボデータ「#{@combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+
+
+/= render 'likes/like', combo: combo
+- if user_signed_in?
+  - if current_user.likes.find_by(combo_id: @combo.id)
+    = link_to unlike_path(@combo.id), method: :delete, remote: true do
+      .iine__button
+        | ❤️#{@combo.likes.count}
+  - else
+    = link_to like_path(@combo.id), method: :post, remote: true do
+      .iine__button
+        | ♡️#{@combo.likes.count}
+- else
+  | ♡️#{@combo.likes.count}
+
+
+h2 コメントする
+- if user_signed_in?
+  = form_with(model: [@combo, @comment], local: true, id: "new_comment") do |f|
+    = f.text_area :content, placeholder: "コメントする", class: "combo__topContent__contentBox__content"
+    = f.hidden_field :combo_id, value: @combo.id
+    .combo__topContent__commentBox__caution
+    p 相手のことを考え丁寧なコメントを心がけましょう。
+    p 不快な言葉遣いなどは利用制限や退会処分となることがあります。
+    = button_tag type: "submit", class: "combo__topContent__commentBox__submit" do
+      i.fa.fa-comment 
+      コメントする
+/.combo__topContent__commentBox__signin
+- else
+  p コメントの投稿には
+  = link_to "ログイン", new_user_session_path
+  p または
+  = link_to 'ユーザー新規登録', new_user_registration_path
+  p が必要です
+
+.combo__topContent__commentBox__index 
+  - if @comments
+    - @comments.each do |comment|
+        .combo__topContent__commentBox__index__box
+          span.combo__topContent__commentBox__index__box--username= comment.user.username
+          - if comment.user.id == @combo.user_id
+            span.combo__topContent__commentBox__index__box--saler 作成者
+          span.combo__topContent__commentBox__index__box--date= comment.created_at.strftime("%Y-%m-%d %H:%M")
+          p.combo__topContent__commentBox__index__box--content= comment.content
+
+/h2 コメント一覧
+/.mb-3 
+/table.table.table-hover
+  thead.thead-default 
+    tr
+      th = Comment.human_attribute_name(:name)
+      th = Comment.human_attribute_name(:comment)
+      th = Comment.human_attribute_name(:created_at)
+      th
+  tbody 
+    - @comments.each do |comment|
+      tr
+        td = comment.user.username
+        td = comment.content
+        td = comment.created_at
+        td
+
+/.row
+  - if user_signed_in?
+    .comment-create
+      h3.text-left
+        | コメントを投稿する
+      = render partial: 'comments/form', locals: { comment: @comment, combo: @combo }
+  hr
+  ul
+    li.comment-create
+      h3.text-left.title
+        | コメント一覧
+    li#comments_area
+      = render partial: 'comments/index', locals: { comments: @comments }
+  
+          
+
+p Find me in app/views/combos/show.html.slim

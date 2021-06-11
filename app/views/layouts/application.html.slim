@@ -1,0 +1,36 @@
+
+doctype html
+html
+  head
+    title
+      | SmashbroscomboApp
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    script src = "https://code.jquery.com/jquery-3.3.1.min.js"
+  body
+    .app-title.navbar.navbar-expand-md.navbar-light.bg-light 
+      .navbar-brand スマブラコンボアプリ
+      - if user_signed_in?
+        
+        = link_to 'ログアウト', destroy_user_session_path, method: :delete
+      - elsif admin_signed_in?
+        管理者
+        = link_to 'ユーザー一覧', admin_users_path, class: 'nav-link'
+        = link_to 'ログアウト', destroy_admin_session_path, method: :delete       
+      - else
+        = link_to 'ユーザー新規登録', new_user_registration_path, class: 'nav-link'
+        = link_to 'ログイン', new_user_session_path, class: 'nav-link'
+        = link_to '管理者用', new_admin_session_path, class: 'nav-link'
+      = link_to 'コンボ一覧', combos_path, class: 'nav-link'
+
+    .container
+      - if flash.notice.present?
+        .alert.alert-success = flash.notice
+
+    / User Login Notification
+    p class="notice" = notice
+    p class="alert" = alert
+
+    = yield

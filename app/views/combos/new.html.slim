@@ -1,0 +1,10 @@
+h1 コンボ新規登録
+
+.nav.justify-content-end
+  = link_to '一覧', combos_path, class: 'nav-link'
+
+= render partial: 'form', locals: { combo: @combo }
+
+= Combo.human_attribute_name(:make_by)
+= @current_user
+p Find me in app/views/combos/new.html.slim
