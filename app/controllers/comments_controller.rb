@@ -3,10 +3,10 @@ class CommentsController < ApplicationController
   
   def create
     @comment = Comment.new(comment_params)
-    binding.pry
+    
     if @comment.save
       respond_to do |format|
-        format.js
+        format.json
       end 
     else
       render combo_path(@comment.combo.id)

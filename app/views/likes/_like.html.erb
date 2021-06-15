@@ -1,0 +1,11 @@
+<div class="like-link" id="like-link-<%= combo.id %>">
+  <% if current_user.likes.find_by(story_id: combo.id) %>
+    <%= link_to unlike_path(combo.id), method: :delete, remote: true do %>
+        <div class = "iine__button">❤️<%= combo.likes.count %></div>
+    <% end %>
+  <% else %>
+    <%= link_to like_path(combo.id), method: :post, remote: true do %>
+        <div class = "iine__button">♡️<%= combo.likes.count %></div>
+    <% end %>
+  <% end %>
+</div>

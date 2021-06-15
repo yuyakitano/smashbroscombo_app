@@ -1,0 +1,14 @@
+.mb-3 
+table.table.table-hover
+  thead.thead-default 
+    tr
+      th = User.human_attribute_name(:name)
+      th = User.human_attribute_name(:email)
+      th = User.human_attribute_name(:many_combo)
+      th
+  tbody 
+    - @followings.each do |user|
+      tr
+        td = link_to user.username, [user]
+        td = user.email
+        td = user.combos.count

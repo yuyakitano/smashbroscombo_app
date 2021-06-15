@@ -14,8 +14,42 @@ table.table.table-hover
       td = @user.created_at
     tr
       th = User.human_attribute_name(:many_combo)
-      td = @combos.count
-      
+      td = @user.combos.count
+= link_to 'フォロー',  [@user, :followings] 
+= link_to 'フォロワー',  [@user, :followers]
+- if user_signed_in? && current_user != @user
+  - if current_user.active_relationships.exists?(target_user_id: @user.id)
+    = link_to 'フォロー解除', [@user, :follow], method: :delete
+  - else
+    = link_to 'フォローする', [@user, :follow], method: :post
+
+.mb-3 
+table.table.table-hover
+  thead.thead-default 
+    tr
+      th = Combo.human_attribute_name(:name)
+      th = Combo.human_attribute_name(:fighter_id)
+      th = Combo.human_attribute_name(:command)
+      th = Combo.human_attribute_name(:startpossibledamage_min)
+      th = Combo.human_attribute_name(:startpossibledamage_max)
+      th = Combo.human_attribute_name(:iine_count)
+      th = Combo.human_attribute_name(:created_at)
+      th = Combo.human_attribute_name(:make_by) 
+      th
+  tbody
+    - @user.combos.each do |combo|
+      tr
+        td = link_to combo.name, combo_path(combo)
+        td = combo.fighter.name
+        td = combo.command_id
+        td = combo.startpossibledamage_min
+        td = combo.startpossibledamage_max
+        td = combo.likes.count
+        td = combo.created_at
+        td = combo.user.username
+        td
+
+
 /- if user_signed_in? && current_user.id == @user.id
   = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
   = link_to '削除', @user, method: :delete, data: { confirm: "コンボデータ「#{@user.username}」を削除します。よろしいですか？"}, class: 'btn btn-danger'

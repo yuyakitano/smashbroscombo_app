@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions'
   }
   devise_for :users
-  resources :users
+  resources :users do
+    resource :follow
+    resources :followings
+    resources :followers
+  end
   #, only: [:show, :index, :edit]
   
   #get '/user/:id' => 'users#show', as:'user'
@@ -16,9 +20,15 @@ Rails.application.routes.draw do
     resources :commands
     resources :comments, only: [:create, :destroy]
   end
-  post '/like/:combo_id' => 'likes#like', as: 'like'
-  delete '/like/:combo_id' => 'likes#unlike', as: 'unlike'
 
+  #いいね機能の実装①
+  post 'like/:id' => 'likes#create', as: 'create_like'
+  delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
+
+  #いいね機能の実装②
+  #resources :likes, only: %i[create destroy]
+  
+  #devise実装に伴う追加
   root to:'combos#index'
 
   resources :follow

@@ -6,13 +6,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    #@combos = Combo.find(params[:user_id])
-    @combos = Combo.where(:user_id == @user.id).order('updated_at DESC')
+    #@combos = Combo.where(:user_id == @user.id).order('updated_at DESC')
+    
   end
 
   def edit
   end
 
+  def combos
+    return Combo.where(user_id: user.id)
+  end
 
 
 end
