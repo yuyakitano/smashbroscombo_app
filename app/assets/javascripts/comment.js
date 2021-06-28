@@ -1,26 +1,14 @@
  
 $(document).on('turbolinks:load', ()=> {
-  // 追加するビューを定義。長く見えますが、先ほど書いたビューのeach以下と同じです。
+  // 追加するビューを定義。先ほど書いたビューのeach以下と同じです。
   function buildHTML(comment){
-    // コメントをしたのが出品者だった時の場合分け
-    if (comment.user_id === comment.saler_id) {
-      let html =
-      `<div class='combo__topContent__commentBox__index__box'>
-        <span class='combo__topContent__commentBox__index__box--name'>${comment.user_username}</span>
-        <span class='combo__topContent__commentBox__index__box--saler'>出品者</span>
-        <span class='combo__topContent__commentBox__index__box--date'>${comment.created_at}</span>
-        <p class='combo__topContent__commentBox__index__box--text'>${comment.content}</p>
-      </div>`
-      return html;
-    } else {
-      let html =
-      `<div class='combo__topContent__commentBox__index__box'>
-        <span class='combo__topContent__commentBox__index__box--name'>${comment.user_username}</span>
-        <span class='combo__topContent__commentBox__index__box--date'>${comment.created_at}</span>
-        <p class='combo__topContent__commentBox__index__box--content'>${comment.content}</p>
-      </div>`
-      return html;
-    }
+    let html =
+    `<div class='combo__topContent__commentBox__index__box'>
+      <span class='combo__topContent__commentBox__index__box--name'>${comment.user_username}</span>
+      <span class='combo__topContent__commentBox__index__box--date'>${comment.created_at}</span>
+      <p class='combo__topContent__commentBox__index__box--content'>${comment.content}</p>
+    </div>`
+    return html;    
   }
   // データが送信された時の処理
   $('#new_comment').on('submit', function(e){

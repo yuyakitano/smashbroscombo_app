@@ -11,16 +11,6 @@ class CommentsController < ApplicationController
     else
       render combo_path(@comment.combo.id)
     end
-    #{render json: @comments}
-    #binding.pry
-    #@combo = Combo.find(params[:combo_id])
-    #@comment = @combo.comments.build(comment_params)
-    #@comments = @combo.comments.includes(:user)
-    #@comment.user_id = current_user.id
-    
-    #@comment.save
-    #非同期処理の場合
-    #render :index
   end
 
   def destroy
@@ -28,8 +18,6 @@ class CommentsController < ApplicationController
     @comment.destroy
     #非同期処理の場合
     render :index
-    
-    
   end
 
   private

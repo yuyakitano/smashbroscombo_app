@@ -7,14 +7,18 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    
+    script src="https://code.jquery.com/jquery-3.3.1.min.js"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    script src = "https://code.jquery.com/jquery-3.3.1.min.js"
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light 
       .navbar-brand スマブラコンボアプリ
       - if user_signed_in?
         = link_to 'ログアウト', destroy_user_session_path, method: :delete, data:{confirm: 'ログアウトしますか？'}
-
+        p7　ようこそ
+        = current_user.username
+        p7 さん
+        = link_to 'マイページ', user_path(current_user.id)
       - elsif admin_signed_in?
 
         管理者

@@ -38,29 +38,28 @@ table.table.table-hover
     tr
       th = Combo.human_attribute_name(:youtube_url)
       td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
-      /iframe allow=("accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture") frameborder="0" height="315" src=("https://www.youtube.com/embed/ #{%= @combo.youtube_url[32..42] }") width="560" 
-      /iframe allow=( accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture ) allowfullscreen="" frameborder="0" height="315" src=("https://www.youtube.com/embed/#{ @combo.youtube_url }") width="560" 
-      /td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{.split_id_from_youtube_url}", \
-            frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
-      /iframe allow=("accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture") allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/ojdbDYahiCQ" width="560" 
-      /%iframe{src: "https://www.youtube.com/embed/#{@combo.youtube_url[32..42]}",allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: "", frameborder: "0", height: "315", width: "560"}
-
     tr
       th = Combo.human_attribute_name(:message)
       td = simple_format(h(@combo.message), {}, sanitize: false, wrapper_tag: "div")
     tr
       th = Combo.human_attribute_name(:make_by)
-      td = @combo.user.username
+      td = link_to @combo.user.username, user_path(@combo.user_id)
 - if user_signed_in? && current_user.id == @combo.user_id
   = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
   = link_to '削除', @combo, method: :delete, data: { confirm: "コンボデータ「#{@combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+ 
+= link_to 'Twitterでコンボをシェアする', "https://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。&hashtags=スマブラ %0D%0A &hashtags=コンボメーカー", title: 'Twitter', target: '_blank'
+/=link_to "http://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。/&hashtags=スマブラ/&hashtags=コンボメーカー",{class:"footer-icon_1"} do
+/ %i.fab.fa-twitter.twitter
 
-- if current_user.liked_by?(@combo.id)
-  = link_to 'いいねを外す', destroy_like_path(@combo), method: :DELETE
-  = "❤️#{@combo.likes.count}"
-- else 
-  = link_to 'いいね', create_like_path(@combo), method: :POST
-  = "❤️#{@combo.likes.count}"
+= render 'likes/like', combo: @combo
+/ - if current_user.liked_by?(@combo.id)
+/   = link_to 'いいねを外す', destroy_like_path(@combo), method: :DELETE
+/   = "❤️#{@combo.likes.count}"
+/ - else 
+/   = link_to 'いいね', create_like_path(@combo), method: :POST
+/   = "❤️#{@combo.likes.count}"
+
 /いいね機能の実装①「[Rails]いいね機能の非同期での実装!!!」
 /= render partial: 'combos/combos', collection: @combos, as: :combo
 /= render 'likes/like', combo: combo
@@ -70,66 +69,32 @@ table.table.table-hover
   = render 'like', combo: @combo
 
 
-h2 コメントする
-- if user_signed_in?
-  = form_with(model: [@combo, @comment], local: true, id: "new_comment") do |f|
-    = f.text_area :content, placeholder: "コメントする", class: "combo__topContent__contentBox__content"
-    = f.hidden_field :combo_id, value: @combo.id
-    .combo__topContent__commentBox__caution
-    p 相手のことを考え丁寧なコメントを心がけましょう。
-    p 不快な言葉遣いなどは利用制限や退会処分となることがあります。
-    = button_tag type: "submit", class: "combo__topContent__commentBox__submit" do
-      i.fa.fa-comment 
-      コメントする
-/.combo__topContent__commentBox__signin
-- else
-  p コメントの投稿には
-  = link_to "ログイン", new_user_session_path
-  p または
-  = link_to 'ユーザー新規登録', new_user_registration_path
-  p が必要です
+h3 コメントする
+.product__topContent__commentBox__index
+  - if user_signed_in?
+    = form_with(model: [@combo, @comment], local: true, id: "new_comment") do |f|
+      = f.text_area :content, placeholder: "コメントする", class: "combo__topContent__contentBox__content"
+      = f.hidden_field :combo_id, value: @combo.id
+      p 相手のことを考え丁寧なコメントを心がけましょう。
+      p 不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      = button_tag type: "submit", class: "combo__topContent__commentBox__submit" do
+        i.fa.fa-comment コメントする
+  - else
+    p コメントの投稿には
+    = link_to "ログイン", new_user_session_path
+    p または
+    = link_to 'ユーザー新規登録', new_user_registration_path
+    p が必要です
 
 .combo__topContent__commentBox__index 
   - if @comments
-    - @comments.each do |comment|
-        .combo__topContent__commentBox__index__box
-          span.combo__topContent__commentBox__index__box--username= comment.user.username
-          - if comment.user.id == @combo.user_id
-            span.combo__topContent__commentBox__index__box--saler 作成者
-          span.combo__topContent__commentBox__index__box--date= comment.created_at.strftime("%Y-%m-%d %H:%M")
-          p.combo__topContent__commentBox__index__box--content= comment.content
+    - @comments.reverse.each do |comment|
+      .combo__topContent__commentBox__index__box       
+        span.combo__topContent__commentBox__index__box--username= comment.user.username
+        span.combo__topContent__commentBox__index__box--date= comment.created_at.strftime("%Y-%m-%d %H:%M")
+        p.combo__topContent__commentBox__index__box--content= comment.content
+      /- if current_user.id == comment.user_id
+        = link_to '削除', @combo_comment_path, method: :delete, data: { confirm: "削除しますか？"}
 
-/h2 コメント一覧
-/.mb-3 
-/table.table.table-hover
-  thead.thead-default 
-    tr
-      th = Comment.human_attribute_name(:name)
-      th = Comment.human_attribute_name(:comment)
-      th = Comment.human_attribute_name(:created_at)
-      th
-  tbody 
-    - @comments.each do |comment|
-      tr
-        td = comment.user.username
-        td = comment.content
-        td = comment.created_at
-        td
-
-/.row
-  - if user_signed_in?
-    .comment-create
-      h3.text-left
-        | コメントを投稿する
-      = render partial: 'comments/form', locals: { comment: @comment, combo: @combo }
-  hr
-  ul
-    li.comment-create
-      h3.text-left.title
-        | コメント一覧
-    li#comments_area
-      = render partial: 'comments/index', locals: { comments: @comments }
-  
-          
 
 p Find me in app/views/combos/show.html.slim

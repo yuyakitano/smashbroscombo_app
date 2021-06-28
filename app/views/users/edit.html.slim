@@ -1,2 +1,28 @@
-h1 Users#edit
+h1 ユーザー情報編集
+
+= form_with model: @user, local: true do |f|
+  .form-group 
+    = f.label :profile_image
+    = f.file_field :profile_image, class: 'img_field', style: 'display:none;'
+    = attachment_image_tag @user, :profile_image, fallback: 'no-image.png', size: '300x300',  onClick: "$('.img_field').click()", class: 'center-block img-thumbnail img-responsive img_prev' 
+  
+  /.form-group 
+    = f.label :profile_image
+    = f.file_field :profile_image, class: 'img_field', style: 'display:none;'
+    = attachment_image_tag @user, :profile_image, fallback: 'no-image.png', onClick: "$('.img_field').click()", class: 'center-block img-thumbnail img-responsive img_prev'
+  .form-group 
+    = f.label :username
+    = f.text_field :username, class: 'form-control'
+    /, id: 'user_username' 
+  .form-group 
+    = f.label :email
+    = f.text_field :email, class: 'form-control'
+    /id: 'useremail'
+  .form-group 
+    = f.label :introduction
+    = f.text_field :introduction, class: 'form-control'
+    /, id: 'user_introduction'
+    /= f.hidden_field :updated_at, id: 'user_updated_at' 
+
+  = f.submit nil, class: 'btn btn-primary'
 p Find me in app/views/users/edit.html.slim

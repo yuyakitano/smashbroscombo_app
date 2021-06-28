@@ -4,10 +4,12 @@ class CombosController < ApplicationController
   
 
   def index
-    #binding.pry
-    @combos = Combo.all
+    @q = Combo.ransack(params[:q])
+    @combos = @q.result(distinct: true).page(params[:page])
     @users = User.all 
     @likes = Like.all
+    @fighter = Fighter.all
+    @genre = Genre.all
   end
 
   def show
@@ -31,7 +33,10 @@ class CombosController < ApplicationController
     @fighter = Fighter.all
     @startposition = Startposition.all
     @genre = Genre.all
+    @user = current_user.id
   end
+
+
 
   def commandset
     #commandset = 
@@ -40,17 +45,37 @@ class CombosController < ApplicationController
     #render :combo_new
   end
 
+  #投稿確認画面の実装
+  # def confirm_new
+  #   @combo = current_user.combos.new(combo_params)
+  #   render :new unless @combo.valid?
+  # end
+
   def create
     #binding.pry
-    combo = Combo.new(combo_params)
-
-    combo.user_id = current_user.id
+    @combo = Combo.new(combo_params)
+    @combo.user_id = current_user.id
     url = params[:combo][:youtube_url]
     url = url.split('/').last
-    combo.youtube_url = url
-    combo.save!
+    @combo.youtube_url = url
+    # if params[:back].present?
+    #   render :new
+    #   return
+    # end
+    if @combo.save
+      redirect_to combos_url, notice: "コンボ「#{@combo.name}」を登録しました。"  
+    else
+      @fighter = Fighter.all
+      @commands = Command.all
+      @startposition = Startposition.all
+      @genre = Genre.all
+      render :new
+      
+    end
+    #combo.save!
+    #redirect_to combos_url, notice: "コンボ「#{combo.name}」を登録しました。"
     
-    redirect_to combos_url, notice: "コンボ「#{combo.name}」を登録しました。"
+   
   end
 
 
@@ -61,12 +86,24 @@ class CombosController < ApplicationController
     @commands = Command.all
     #@combo_command = ComboCommand.new
     @fighter = Fighter.all
+    @startposition = Startposition.all
+    @genre = Genre.all
   end
 
   def update
-    combo = Combo.find(params[:id])
-    combo.update!(combo_params)
-    redirect_to combos_url, notice: "コンボデータ「#{combo.name}」を更新しました。"
+    @combo = Combo.find(params[:id])
+    if @combo.update(combo_params)
+      redirect_to combos_url, notice: "コンボデータ「#{@combo.name}」を更新しました。"  
+    else
+      @fighter = Fighter.all
+      @commands = Command.all
+      @startposition = Startposition.all
+      @genre = Genre.all
+      render :new
+      
+    end
+  
+  
   end
 
   def destroy

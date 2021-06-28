@@ -1,17 +1,50 @@
-h1 コンボ一覧
+h6 あなたの開発したコンボを投稿してシェアしよう！
+
+= link_to '新規登録', new_combo_path, class: 'btn btn-primary'
+h1 投稿コンボ一覧
+h4 絞り込み検索
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row 
+    = f.label :name_cont, 'コンボ名キーワード', class: 'col-sm-2 col-form-label'
+    .col-sm-10 
+      = f.search_field :name_cont, class: 'form-control'
+  .form-group.row 
+    = f.label :genre_id, Combo.human_attribute_name(:genre)
+      = f.radio_button 'genre_id_eq', '', {:checked => true}
+      | 指定なし
+    .col-sm-10 
+      = f.collection_radio_buttons :genre_id_eq, @genre, :id, :name
+  .form-group.row 
+    = f.label :damage_dealt, "与ダメージ値(片方のみも可です)"
+    |　最小
+    .col-sm-10
+      = f.number_field :damage_dealt_gteq
+      | 以上のダメージ 〜 最大 
+      = f.number_field :damage_dealt_lteq
+      | 以下のダメージ
+  .form-group.row 
+    = f.label :fighter_id, Combo.human_attribute_name(:fighter)
+    .col-sm-10
+      = f.collection_select :fighter_id_eq, @fighter, :id, :name,  include_blank: '指定なし'
+  .form-group 
+    = f.submit class: 'btn btn-outline-primary'
+
 = link_to '新規登録', new_combo_path, class: 'btn btn-primary'
 
 .mb-3 
+  = paginate @combos
+  = page_entries_info @combos
+
 table.table.table-hover
   thead.thead-default 
     tr
       th = Combo.human_attribute_name(:name)
-      th = Combo.human_attribute_name(:fighter_id)
-      th = Combo.human_attribute_name(:command)
+      th = Combo.human_attribute_name(:fighter)
       th = Combo.human_attribute_name(:startpossibledamage_min)
       th = Combo.human_attribute_name(:startpossibledamage_max)
+      th = Combo.human_attribute_name(:damage_dealt)
       th = Combo.human_attribute_name(:iine_count)
-      th = Combo.human_attribute_name(:created_at)
+      th = sort_link(@q, :created_at)
       th = Combo.human_attribute_name(:make_by)      
       th
   tbody 
@@ -19,15 +52,13 @@ table.table.table-hover
       tr
         td = link_to combo.name, combo_path(combo)
         td = combo.fighter.name
-        td = combo.command_id
         td = combo.startpossibledamage_min
         td = combo.startpossibledamage_max
+        td = combo.damage_dealt
         td = combo.likes.count
         td = combo.created_at
         td = link_to combo.user.username, user_path(combo.user_id)
         td
-          
-          
           - if user_signed_in? && current_user.id == combo.user_id
             = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
             = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'

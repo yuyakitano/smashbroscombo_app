@@ -1,0 +1,51 @@
+h1　投稿内容の確認
+
+= form_with model: @combo, local: true do |f|
+  table.table.table-hover 
+    tbody 
+      tr
+        th = Combo.human_attribute_name(:name)
+        td = @combo.name
+        = f.hidden_field :name 
+      tr
+        th = Combo.human_attribute_name(:fighter)
+        td = @combo.fighter.name
+        = f.hidden_field :fighter
+      tr
+        th = Combo.human_attribute_name(:genre)
+        td = @combo.genre.name
+        = f.hidden_field :genre
+      tr
+        th = Combo.human_attribute_name(:startposition)
+        td = @combo.startposition.name
+        = f.hidden_field :startposition
+      tr
+        th = Combo.human_attribute_name(:startpossibledamage_min)
+        td = @combo.startpossibledamage_min
+        = f.hidden_field :startpossibledamage_min
+      tr
+        th = Combo.human_attribute_name(:startpossibledamage_max)
+        td = @combo.startpossibledamage_max
+        = f.hidden_field :startpossibledamage_max
+      tr
+        th = Combo.human_attribute_name(:combocommand)
+        td = @combo.command_ids
+        = f.hidden_field :combocommand
+      tr
+        th = Combo.human_attribute_name(:damage_dealt)
+        td = @combo.damage_dealt
+        = f.hidden_field :damage_dealt
+      tr
+        th = Combo.human_attribute_name(:level)
+        td = @combo.level_i18n
+        = f.hidden_field :level
+      tr
+        th = Combo.human_attribute_name(:youtube_url)
+        td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
+        = f.hidden_field :youtube_url
+      tr
+        th = Combo.human_attribute_name(:message)
+        td = simple_format(h(@combo.message), {}, sanitize: false, wrapper_tag: "div")
+        = f.hidden_field :message
+  = f.submit '戻る', name: 'back', class: 'btn btn-secondary mr-3'
+  = f.submit '登録', class: 'btn btn-primary'

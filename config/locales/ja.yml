@@ -39,7 +39,9 @@ ja:
         introduction: 自己紹介
         many_combo: コンボ投稿数
         created_at: ユーザー登録日
+        profile_image: ユーザー画像
       combo:
+        profile_image: ユーザー画像
         name: コンボ名
         commandset: コンボセット
         fighter: ファイター
@@ -49,10 +51,13 @@ ja:
         damage_dealt: 与ダメージ
         damage: ダメージ
         startposition: コンボ開始位置
+        command_id: コンボ内容
+        fighter_id: ファイター
         startpossibledamage: 始動可能ダメージ
         startpossibledamage_min: 始動可能最小ダメージ％
         startpossibledamage_max: 始動可能最大ダメージ％
         level: 難易度
+
         youtube_url: YouTubeのURL
         message: 備考
         max: 最大

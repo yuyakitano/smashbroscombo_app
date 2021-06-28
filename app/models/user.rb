@@ -13,6 +13,10 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :target_user
   has_many :followers, through: :passive_relationships, source: :user
 
+  #refile導入（ユーザー画像投稿実装）
+  #Refileがprofile_imageカラムにアクセスするためにattachmentメソッドをuserモデルに登録することが必要
+  attachment :profile_image
+  
   def liked_by?(combo_id)
     likes.where(combo_id: combo_id).exists?
   end

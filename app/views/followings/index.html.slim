@@ -1,3 +1,10 @@
+- if current_user == @user
+  h1 マイページ
+- else
+  h1 ユーザー詳細画面
+
+h3 #{@user.username}さんのフォロー中リスト
+= link_to '戻る', user_path(params[:user_id])
 .mb-3 
 table.table.table-hover
   thead.thead-default 

@@ -1,4 +1,8 @@
-= form_with model: combo, local: true do |f|
+- if combo.errors.present?
+  ul#error_explanation 
+    - combo.errors.full_messages.each do |message|
+      li= message
+= form_with model: @combo, local: true do |f|
   .form-group 
     = f.label :name
     = f.text_field :name, class: 'form-control', id: 'combo_name' 
@@ -36,7 +40,7 @@
     = f.text_field :youtube_url, placeholder: 'youtube_url'
   .form-group 
     = f.label :message
-    = f.text_area :message, rows: 5, class: 'form-control', id: 'combo_message' 
+    = f.text_area :message, rows: 3, class: 'form-control', id: 'combo_message' 
 
   = f.submit nil, class: 'btn btn-primary'
 
