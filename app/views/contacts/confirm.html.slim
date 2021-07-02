@@ -1,0 +1,22 @@
+h1 お問い合わせ内容確認
+| 以下の内容でお問い合わせメッセージを送信します。
+| よろしければ「送信」をクリックしてください。
+.nav.justify-content-end
+  = link_to '一覧', combos_path, class: 'nav-link'
+= form_with model: @contact, local: true do |f|
+  table.table.table-hover
+    tbody 
+      tr
+        td = Contact.human_attribute_name(:name)
+        td = @contact.name
+        = f.hidden_field :name
+      tr
+        td = Contact.human_attribute_name(:email)
+        td = @contact.email
+        = f.hidden_field :email
+      tr
+        td = Contact.human_attribute_name(:message)
+        td = @contact.message
+        = f.hidden_field :message
+  = f.submit '入力画面に戻る', name: 'back', class: 'btn btn-secondary mr-3'
+  = f.submit '送信', class: 'btn btn-primary'

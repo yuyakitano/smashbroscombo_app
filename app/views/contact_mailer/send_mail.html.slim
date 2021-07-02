@@ -1,0 +1,12 @@
+|以下のメッセージを受信しました
+
+ul
+  li
+    |名前
+    = @contact.name
+  li
+    |メールアドレス
+    = @contact.email
+  li
+    |問い合わせ内容
+    = simple_format(@contact.message)

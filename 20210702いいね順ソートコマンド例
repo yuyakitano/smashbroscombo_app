@@ -1,0 +1,2 @@
+User.all.left_joins(:thanks).group(:id).select('users.*, COUNT(`thanks`.`id`) AS thanks_count')
+Combo.all.left_joins(:likes).group(:id).select('combos.*, COUNT(`likes`.`id`) AS likes_count')

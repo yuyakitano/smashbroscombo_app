@@ -63,7 +63,7 @@ ja:
         max: 最大
         min: 最小
         command: コマンド
-        iine_count: いいね数
+        likes_count: いいね数
         created_at: 作成日
         make_by: 作成者
         easy: 簡単

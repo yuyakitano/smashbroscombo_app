@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :combos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  #いいねソート機能の実装
+  #has_many :liked_combos, through: :likes, source: :combo
   
 
   has_many :active_relationships, class_name: 'Follow', foreign_key: 'user_id'

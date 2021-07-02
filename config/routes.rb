@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     #投稿確認画面の実装
     post :confirm, action: :confirm_new, on: :new
+    #ソート機能の実装
+    collection do
+      match 'search' => 'combos#search', via: [:get, :post]
+    end
   end
 
   #いいね機能の実装①
@@ -40,4 +44,12 @@ Rails.application.routes.draw do
 
   resources :follow
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+  #お問い合わせ（contact）機能の実装
+  resources :contacts, onry: [:new, :create]
+  post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+  post 'contacts/back', to: 'contacts#back', as: 'back'  
+  #「お問い合わせ投稿完了しました」画面が必要なら
+  #get 'done', to: 'contacts#done', as: 'done'
 end

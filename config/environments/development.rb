@@ -60,4 +60,16 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.default_url_options = { host: 'lpcalhost', port: 3000 }
   config.active_job.queue_adapter = :sidekiq
+
+  #メイラー機能
+  config.action_mailer.delivery_method = :smtp
+    #config.action_mailer.smtp_settings = {
+    #   port: 587,
+    #   address: 'smtp.gmail.com',
+    #   domain: 'smtp.gmail.com',
+    #   user_name: ENV['SMTP_USERNAME'],
+    #   password: ENV['SMTP_PASSWORD'],
+    #   enable_starttls_auto: true
+    # }
+  config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025 }
 end

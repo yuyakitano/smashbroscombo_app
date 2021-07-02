@@ -103,6 +103,10 @@ GEM
       devise (>= 4.8.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     enum_help (0.0.17)
       activesupport (>= 3.0.0)
     erubi (1.10.0)
@@ -327,6 +331,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-i18n
+  dotenv-rails
   enum_help
   haml2slim
   html2slim

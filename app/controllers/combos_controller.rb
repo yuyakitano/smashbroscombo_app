@@ -4,13 +4,65 @@ class CombosController < ApplicationController
   
 
   def index
+    
+    # if params[:q].present?
+    #   # 検索フォームからアクセスした時の処理
+    #     @search = Combo.ransack(search_params)
+    #     @combos = @search.result
+    #   else
+    #   # 検索フォーム以外からアクセスした時の処理
+    #     params[:q] = { sorts: 'id desc' }
+    #     @search = Combo.ransack()
+    #     @combos = Combo.all
+    #   end
+    # @likes = Like.all
     @q = Combo.ransack(params[:q])
     @combos = @q.result(distinct: true).page(params[:page])
+    #binding.pry
+
+
+    #@search = Combo.ransack(params[:q])
+    
+
+
+    #いいね順のソート機能実装中(侍にて質問中)
+    #@q = Combo.ransack(params[:q])
+    #@combos = @q.result(distinct: true)
+    #@combos = Combo.joins(:likes).group("likes.combo_id").order("count(likes.id) desc")
+  
+    #.page(params[:page])
+
+    #@combos = Combo.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
     @users = User.all 
-    @likes = Like.all
     @fighter = Fighter.all
     @genre = Genre.all
   end
+
+  #ソートページに飛んでソートする場合
+  # def search
+  #   if params[:q].present?
+  #   # 検索フォームからアクセスした時の処理
+  #     @search = Combo.ransack(search_params)
+  #     @combos = @search.result(distinct: true).page(params[:page])
+  #     # @combos.likes_count + 1
+  #   else
+  #   # 検索フォーム以外からアクセスした時の処理
+  #     params[:q] = { sorts: 'id desc' }
+  #     @search = Combo.ransack()
+  #     @combos = @search.result(distinct: true).page(params[:page])
+  #     # @combos = Combo.all
+  #     # @combos.likes_count + 1
+  #   end
+  # end
+
+  # def search_params
+  #   params.require(:q).permit(:sorts)
+  #   # 他のパラメーターもここに入れる
+  # end
+
+  # def search_like_count
+  #   combo.likes.count + 1
+  # end
 
   def show
     @combo = Combo.find(params[:id])
@@ -35,8 +87,6 @@ class CombosController < ApplicationController
     @genre = Genre.all
     @user = current_user.id
   end
-
-
 
   def commandset
     #commandset = 

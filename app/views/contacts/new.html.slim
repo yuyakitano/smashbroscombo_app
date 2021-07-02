@@ -1,0 +1,16 @@
+h1 お問い合わせ内容入力
+.nav.justify-content-end
+  = link_to '一覧', combos_path, class: 'nav-link'
+/エラー発生時のメッセージ表示が必要
+
+= form_with model: @contact, url: confirm_path, local:true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+  .form-group 
+    = f.label :message
+    = f.text_field :message, size: '10*10', class: 'form-control'
+  = f.submit '入力内容確認'
