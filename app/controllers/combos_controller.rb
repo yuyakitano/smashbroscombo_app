@@ -86,6 +86,8 @@ class CombosController < ApplicationController
     @startposition = Startposition.all
     @genre = Genre.all
     @user = current_user.id
+    @fighters = Fighter.all
+    @fighter_target = ComboFighterTarget.new
   end
 
   def commandset
@@ -112,6 +114,7 @@ class CombosController < ApplicationController
     #   render :new
     #   return
     # end
+    binding.pry
     if @combo.save
       redirect_to combos_url, notice: "コンボ「#{@combo.name}」を登録しました。"  
     else
@@ -119,6 +122,7 @@ class CombosController < ApplicationController
       @commands = Command.all
       @startposition = Startposition.all
       @genre = Genre.all
+      @fighters = Fighter.all
       render :new
       
     end
@@ -164,7 +168,7 @@ class CombosController < ApplicationController
 
   private
   def combo_params
-    params.require(:combo).permit(:name, :fighter_id, :damage_dealt, :genre_id, :startposition_id, :startpossibledamage_min, :startpossibledamage_max, :level, :user_id, :youtube_url, :message, command_ids:[])
+    params.require(:combo).permit(:name, :fighter_id, :damage_dealt, :genre_id, :startposition_id, :startpossibledamage_min, :startpossibledamage_max, :level, :user_id, :youtube_url, :message, command_ids:[], combo_fighter_target_ids:[] )
   end
   #def set_current_user
   # @current_user = User.find_by(id: session[:user_id])

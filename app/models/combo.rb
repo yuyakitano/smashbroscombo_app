@@ -2,6 +2,10 @@ class Combo < ApplicationRecord
   belongs_to :user
   has_many :combo_commands, dependent: :destroy
   has_many :commands, through: :combo_commands, dependent: :destroy
+  #ターゲットキャラクター
+  has_many :combo_fighter_targets, dependent: :destroy
+  has_many :fighters, through: :combo_fighter_targets, dependent: :destroy
+
   has_many :comments, dependent: :destroy
   #いいね機能の実装①
   has_many :likes, dependent: :destroy
@@ -19,6 +23,7 @@ class Combo < ApplicationRecord
 
 
   accepts_nested_attributes_for :combo_commands
+  accepts_nested_attributes_for :combo_fighter_targets
   belongs_to :fighter
   
   validates :name, :fighter_id, :level , :user_id, presence: true

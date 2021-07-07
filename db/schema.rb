@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_013456) do
+ActiveRecord::Schema.define(version: 2021_07_07_085225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 2021_06_24_013456) do
     t.index ["command_id"], name: "index_combo_commands_on_command_id"
   end
 
+  create_table "combo_fighter_targets", force: :cascade do |t|
+    t.integer "combo_id"
+    t.integer "fighter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["combo_id"], name: "index_combo_fighter_targets_on_combo_id"
+    t.index ["fighter_id"], name: "index_combo_fighter_targets_on_fighter_id"
+  end
+
   create_table "combos", force: :cascade do |t|
     t.string "name"
     t.integer "fighter_id"
@@ -45,7 +54,6 @@ ActiveRecord::Schema.define(version: 2021_06_24_013456) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "command_id"
     t.integer "startpossibledamage_max"
     t.string "youtube_url"
     t.integer "good_or_bad"
@@ -133,6 +141,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_013456) do
 
   add_foreign_key "combo_commands", "combos"
   add_foreign_key "combo_commands", "commands"
+  add_foreign_key "combo_fighter_targets", "combos"
+  add_foreign_key "combo_fighter_targets", "fighters"
   add_foreign_key "comments", "combos"
   add_foreign_key "comments", "users"
   add_foreign_key "follows", "users"

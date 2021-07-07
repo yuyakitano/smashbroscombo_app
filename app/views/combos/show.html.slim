@@ -32,12 +32,21 @@ table.table.table-hover
     tr
       th = Combo.human_attribute_name(:damage_dealt)
       td = @combo.damage_dealt
+    - if @combo.combo_fighter_target_ids.present?
+        tr
+          th = Combo.human_attribute_name(:combotargetfighter)
+          td = @combo.combo_fighter_target_ids
+
+
     tr
       th = Combo.human_attribute_name(:level)
       td = @combo.level_i18n
-    tr
-      th = Combo.human_attribute_name(:youtube_url)
-      td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
+    - if @combo.youtube_url.present?
+      tr
+        th = Combo.human_attribute_name(:youtube_url)
+        td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
+        
+    
     tr
       th = Combo.human_attribute_name(:message)
       td = simple_format(h(@combo.message), {}, sanitize: false, wrapper_tag: "div")

@@ -27,6 +27,9 @@
   .form-group 
     = f.label :damage_dealt
     = f.text_field :damage_dealt, class: 'form-control', id: 'combo_damage_dealt'
+  .form-group
+    = f.label :combo_fighter_target
+    = f.collection_select(:fighter_target_ids, @fighters, :id, :name, {}, {multiple: true} )
   .form-group 
     = f.label :level
     = f.radio_button :level, :easy, checked: "checked" 
