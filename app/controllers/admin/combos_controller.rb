@@ -1,6 +1,7 @@
-class CombosController < ApplicationController
+class Admin::CombosController < ApplicationController
   #before_action :authenticate_admin_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy ]
+  before_action :authenticate_admin!
+  #, only: [:new, :create, :edit, :update, :destroy ]
   
 
   def index
@@ -83,7 +84,6 @@ class CombosController < ApplicationController
     #@user = User.find_by(id: @combo.user_id)
     #@kill_or_damage = {1: 'kill', 2: 'damage'}
     #@comments = @combo.comments
-    @users = User.all 
     @comment = Comment.new
     #コメントを新着順で取得
     @comments = @combo.comments.includes(:user)
@@ -182,7 +182,7 @@ class CombosController < ApplicationController
   def destroy
     combo = Combo.find(params[:id])
     combo.destroy
-    redirect_to combos_url, notice: "コンボデータ「#{combo.name}」を削除しました。"
+    redirect_to admin_combos_path, notice: "コンボデータ「#{combo.name}」を削除しました。"
   end
 
   private

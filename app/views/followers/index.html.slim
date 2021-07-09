@@ -4,7 +4,11 @@
   h1 ユーザー詳細画面
 
 h3 #{@user.username}さんの フォロワー
-= link_to '戻る', user_path(params[:user_id])
+- if admin_signed_in?
+  = link_to '戻る', admin_user_path(params[:user_id])
+- else
+  = link_to '戻る', user_path(params[:user_id])
+
 .mb-3 
 table.table.table-hover
   thead.thead-default 

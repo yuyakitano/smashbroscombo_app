@@ -1,11 +1,12 @@
-class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy ]
-  
+class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
+  def index
+    @comments = Comment.all
+  end
   def create
     @comment = Comment.new(comment_params)
     
     if @comment.save
-      
       respond_to do |format|
         format.json
       end 
@@ -18,7 +19,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     #非同期処理の場合
-    render :index
+    render admin_comments_path
   end
 
   private

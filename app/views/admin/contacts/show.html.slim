@@ -1,0 +1,21 @@
+table.table.table-hover
+  tbody
+    tr
+      th = Contact.human_attribute_name(:id)
+      td = @contact.id
+    tr
+      th = Contact.human_attribute_name(:name)
+      td = @contact.name
+    tr
+      th = Contact.human_attribute_name(:email)
+      td = @contact.email
+    tr
+      th = Contact.human_attribute_name(:message)
+      td = @contact.message
+    tr
+      th = Contact.human_attribute_name(:created_at)
+      td = @contact.created_at
+    tr
+      th = Contact.human_attribute_name(:updated_at)
+      td = @contact.updated_at
+= link_to  "削除", [:admin, @contact], method: :delete, data: { confirm: "お問い合わせメッセージID 「#{@contact.id}」 を削除します。よろしいですか？" }, class: 'btn btn-danger'

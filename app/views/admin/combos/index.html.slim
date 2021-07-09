@@ -1,10 +1,9 @@
-h6 あなたの開発したコンボを投稿してシェアしよう！
-
+h1 管理者用コンボ一覧
 = link_to '新規投稿', new_combo_path, class: 'btn btn-primary'
 
-h1 いいね数コンボTOP3
-.switch_like_rank
-  h6 選択
+いいね数ランキングTOP5 
+.switch-like-rank-wrap 
+  選択
   .like-rank
     = radio_button_tag "like-rank", "all"
     = label "like-rank", "all"
@@ -30,7 +29,7 @@ h1 いいね数コンボTOP3
         th = Combo.human_attribute_name(:fighter)
         th = Combo.human_attribute_name(:damage_dealt)
         th = Combo.human_attribute_name(:created_at)
-
+        th
     tbody 
       - @all_like_ranks.each.with_index(1) do |combo, i|
         tr
@@ -41,7 +40,9 @@ h1 いいね数コンボTOP3
           td = combo.fighter.name
           td = combo.damage_dealt
           td = combo.created_at
-
+          td  
+            = link_to '編集', edit_admin_combo_path(combo), class: 'btn btn-primary mr-3'  
+            = link_to '削除', [:admin, combo], method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
 .week_like_rank 
   h1 週間いいね数コンボTOP３
   table.table.table-hover
@@ -53,7 +54,7 @@ h1 いいね数コンボTOP3
         th = Combo.human_attribute_name(:fighter)
         th = Combo.human_attribute_name(:damage_dealt)
         th = Combo.human_attribute_name(:created_at)
-
+        th
     tbody 
       - @weekly_like_ranks.each.with_index(1) do |combo, i|
         tr
@@ -64,6 +65,9 @@ h1 いいね数コンボTOP3
           td = combo.fighter.name
           td = combo.damage_dealt
           td = combo.created_at
+          td  
+            = link_to '編集', edit_admin_combo_path(combo), class: 'btn btn-primary mr-3'  
+            = link_to '削除', [:admin, combo], method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
 .month_like_rank
   h1 月間いいね数コンボTOP３
   table.table.table-hover
@@ -75,7 +79,7 @@ h1 いいね数コンボTOP3
         th = Combo.human_attribute_name(:fighter)
         th = Combo.human_attribute_name(:damage_dealt)
         th = Combo.human_attribute_name(:created_at)
-      
+        th
     tbody 
       - @monthly_like_ranks.each.with_index(1) do |combo, i|
         tr
@@ -86,7 +90,9 @@ h1 いいね数コンボTOP3
           td = combo.fighter.name
           td = combo.damage_dealt
           td = combo.created_at
-
+          td  
+            = link_to '編集', edit_admin_combo_path(combo), class: 'btn btn-primary mr-3'  
+            = link_to '削除', [:admin, combo], method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
 .year_like_rank
   h1 年間いいね数コンボTOP３
   table.table.table-hover
@@ -98,7 +104,7 @@ h1 いいね数コンボTOP3
         th = Combo.human_attribute_name(:fighter)
         th = Combo.human_attribute_name(:damage_dealt)
         th = Combo.human_attribute_name(:created_at)
-
+        th
     tbody 
       - @yearly_like_ranks.each.with_index(1) do |combo, i|
         tr
@@ -109,7 +115,9 @@ h1 いいね数コンボTOP3
           td = combo.fighter.name
           td = combo.damage_dealt
           td = combo.created_at
-
+          td  
+            = link_to '編集', edit_admin_combo_path(combo), class: 'btn btn-primary mr-3'  
+          = link_to '削除', [:admin, combo], method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
   /9にちはここから！
 
 
@@ -187,11 +195,10 @@ table.table.table-hover
         td = combo.damage_dealt
         td = combo.likes.count
         td = combo.created_at
-        td = link_to combo.user.username, user_path(combo.user_id)
-        td
-          - if user_signed_in? && current_user.id == combo.user_id
-            = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
-            = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+        td = link_to combo.user.username, admin_user_path(combo.user_id)
+        td  
+          = link_to '編集', edit_admin_combo_path(combo), class: 'btn btn-primary mr-3'  
+          = link_to '削除', [:admin, combo], method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
 = paginate @combos
 = page_entries_info @combos
 = link_to 'お問い合わせ', new_contact_path, class: 'nav-link'

@@ -1,0 +1,21 @@
+h1 管理者用全コメント一覧
+
+=link_to '新規登録', new_admin_user_path, class: 'btn btn-primary'
+
+.mb-3 
+table.table.rable-hover 
+  thead.thead-default 
+    tr
+      th= Comment.human_attribute_name(:content)
+      th= Comment.human_attribute_name(:username)
+      th= Comment.human_attribute_name(:created_at)
+      th= Comment.human_attribute_name(:updated_at)
+      th
+  tbody 
+    - @comments.each do |comment|
+      tr
+        td = comment.content
+        td = link_to comment.user_id, admin_user_path(comment.user_id)
+        td = comment.created_at
+        td = comment.updated_at
+        td = link_to  "削除", [:admin, comment], method: :delete, data: { confirm: "コメント 「#{comment.content}」 を削除します。よろしいですか？" }, class: 'btn btn-danger'

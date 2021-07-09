@@ -1,2 +1,76 @@
-h1 Admin::Users#show
+h1 管理者用ユーザー詳細画面
+
+.nav.justify-content-end
+  = link_to 'コンボ一覧', combos_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th = Combo.human_attribute_name(:profile_image)
+      td = attachment_image_tag @user, :profile_image, fallback: 'no-image.png', size: '200x200', class: 'center-block img-thumbnail img-responsive'
+    tr
+      th = User.human_attribute_name(:name)
+      td = @user.username
+    tr
+      th = User.human_attribute_name(:introduction)
+      td = @user.introduction
+    tr
+      th = User.human_attribute_name(:created_at)
+      td = @user.created_at
+    tr
+      th = User.human_attribute_name(:updated_at)
+      td = @user.updated_at
+    tr
+      th = User.human_attribute_name(:many_combo)
+      td = @user.combos.count
+
+= link_to 'ユーザー情報編集', edit_admin_user_path, data: {"turbolinks" => false}, class: 'btn btn-primary mr-3'  
+= link_to 'ユーザー削除', [:admin, @user], method: :delete, data: { confirm: "ユーザーデータを削除します。よろしいですか？"}, class: 'btn btn-danger'
+
+= link_to 'フォロー',  [@user, :followings] 
+= link_to 'フォロワー',  [@user, :followers]
+- if user_signed_in? && current_user != @user
+  - if current_user.active_relationships.exists?(target_user_id: @user.id)
+    = link_to 'フォロー解除', [@user, :follow], method: :delete
+  - else
+    = link_to '👤フォローする', [@user, :follow], method: :post
+
+.mb-3 
+  
+table.table.table-hover
+  thead.thead-default 
+    tr
+      
+      th = Combo.human_attribute_name(:name)
+      th = Combo.human_attribute_name(:fighter_id)
+      th = Combo.human_attribute_name(:command)
+      th = Combo.human_attribute_name(:startpossibledamage_min)
+      th = Combo.human_attribute_name(:startpossibledamage_max)
+      th = Combo.human_attribute_name(:iine_count)
+      th = Combo.human_attribute_name(:created_at)
+      th = Combo.human_attribute_name(:make_by) 
+      th
+  tbody
+    - @user.combos.each do |combo|
+      tr
+        /td = image_tag @user.profile_image
+        
+        td = link_to combo.name, combo_path(combo)
+        td = combo.fighter.name
+        td = combo.command_ids
+        td = combo.startpossibledamage_min
+        td = combo.startpossibledamage_max
+        td = combo.likes.count
+        td = combo.created_at
+        td = combo.user.username
+        td
+
+
+/- if user_signed_in? && current_user.id == @user.id
+  = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
+  = link_to '削除', @user, method: :delete, data: { confirm: "コンボデータ「#{@user.username}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+
+
+p Find me in app/views/users/show.html.slim
+
+
 p Find me in app/views/admin/users/show.html.slim

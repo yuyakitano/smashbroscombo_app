@@ -48,6 +48,7 @@ ja:
         genre: コンボジャンル
         startpossition: コンボ始動位置
         combocommand: コンボコマンド
+        combofightertarget: コンボが可能な敵ファイター
         damage_dealt: 与ダメージ
         damage: ダメージ
         startposition: コンボ開始位置

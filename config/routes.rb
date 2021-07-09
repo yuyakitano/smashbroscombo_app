@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :users
+    resources :combos
+    resources :comments
+    resources :contacts
+
+    
   end
   
   devise_for :admins, controllers: {
@@ -18,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :combos do
     resources :commands
+    resources :fighters
     resources :comments, only: [:create, :destroy]
     #投稿確認画面の実装
     post :confirm, action: :confirm_new, on: :new

@@ -59,8 +59,8 @@ table.table.table-hover
 
 
 - if user_signed_in? && current_user.id == @combo.user_id
-  = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
-  = link_to '削除', @combo, method: :delete, data: { confirm: "コンボデータ「#{@combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+  = link_to '編集', edit_admin_combo_path, class: 'btn btn-primary mr-3'  
+  = link_to '削除', [:admin, @combo], method: :delete, data: { confirm: "コンボデータ「#{@combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
  
 = link_to 'Twitterでコンボをシェアする', "https://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。&hashtags=スマブラ %0D%0A &hashtags=コンボメーカー", title: 'Twitter', target: '_blank'
 /=link_to "http://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。/&hashtags=スマブラ/&hashtags=コンボメーカー",{class:"footer-icon_1"} do

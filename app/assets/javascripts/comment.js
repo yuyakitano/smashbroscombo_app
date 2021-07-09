@@ -15,6 +15,7 @@ $(document).on('turbolinks:load', ()=> {
     e.preventDefault();
     let formData = new FormData(this);
     let url = $(this).attr('action')
+    //binding.pry
     // 送るデータとオプションを指定
     $.ajax({
       url: url,
