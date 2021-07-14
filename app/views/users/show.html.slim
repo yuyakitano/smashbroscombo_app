@@ -24,7 +24,8 @@ table.table.table-hover
       td = @user.updated_at
     tr
       th = User.human_attribute_name(:many_combo)
-      td = @user.combos.count
+      td = "#{@user.combos.count}件"
+        
 - if current_user == @user
   = link_to 'ユーザー情報編集', edit_user_path, data: {"turbolinks" => false}, class: 'btn btn-primary mr-3'  
   = link_to 'ユーザー削除', @user, method: :delete, data: { confirm: "ユーザーデータを削除します。よろしいですか？"}, class: 'btn btn-danger'
@@ -59,9 +60,11 @@ table.table.table-hover
         
         td = link_to combo.name, combo_path(combo)
         td = combo.fighter.name
-        td = combo.command_ids
-        td = combo.startpossibledamage_min
-        td = combo.startpossibledamage_max
+        td 
+          - combo.commands.each do |command|
+            = command.name
+        td = "#{combo.startpossibledamage_min}%"
+        td = "#{combo.startpossibledamage_max}%"
         td = combo.likes.count
         td = combo.created_at
         td = combo.user.username

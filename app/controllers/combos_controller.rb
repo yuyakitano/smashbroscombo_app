@@ -11,19 +11,28 @@ class CombosController < ApplicationController
     @genre = Genre.all
     
 
-    # サイドバー等に表示するいいね数ランキング機能（TOP３まで）
+    # サイドバー等に表示するいいね数ランキング機能（TOP３か5まで）
       # Likeテーブル内のcombo_idが同じものにグループを分け、それを番号の多い順に並び替える、
       # limit(3)で表示する最大数を3個に指定、pluckで:combo_idカラムのみを数字で取り出す。
       # Combo.find()でplackで取り出された数字をcombo_idとしていいね数順にcomboを取得できる。
-    @all_like_ranks = Combo.find(Like.group(:combo_id).order('count(combo_id) desc').limit(3).pluck(:combo_id))
+    
     from  = Time.current.at_beginning_of_day
     to    = (from + 6.day).at_end_of_day
     
-    #@weekly_like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_week..0.days.ago.next_week}).group(:id).order("count(*) desc").limit(5)
-    @weekly_like_ranks = Combo.joins(:likes).where(likes: { created_at: from...to}).group(:id).order("count(*) desc").limit(5)
-    @monthly_like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_month..0.days.ago.end_of_month}).group(:id).order("count(*) desc").limit(5)
-    @yearly_like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_year..0.days.ago.end_of_year}).group(:id).order("count(*) desc").limit(5)
 
+    if params[:rank] == "all"
+      @like_ranks = Combo.find(Like.group(:combo_id).order('count(combo_id) desc').limit(3).pluck(:combo_id))
+    elsif params[:rank] == "week"
+      @like_ranks = Combo.joins(:likes).where(likes: { created_at: from...to}).group(:id).order("count(*) desc").limit(5)
+    elsif params[:rank] == "month"
+      @like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_month..0.days.ago.end_of_month}).group(:id).order("count(*) desc").limit(5)
+    elsif params[:rank] == "year"
+      @like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_year..0.days.ago.end_of_year}).group(:id).order("count(*) desc").limit(5)
+    else
+      @like_ranks = Combo.find(Like.group(:combo_id).order('count(combo_id) desc').limit(3).pluck(:combo_id))
+    end
+
+    #render "combos/#{params[:name]}"
     # いいね順ソート機能①実装中(侍にて質問中)
     # if params[:q].present?
     #   # 検索フォームからアクセスした時の処理
@@ -90,7 +99,7 @@ class CombosController < ApplicationController
     #@comments = @combo.comments.order(created_at: :desc)
     @fighters = Fighter.all
     @commands = Command.all
-
+    
 
   end
 

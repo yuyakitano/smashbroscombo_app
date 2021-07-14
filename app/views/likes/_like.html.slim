@@ -1,10 +1,4 @@
-/ - if current_user.liked_by?(@combo.id)
-/   = link_to '❤️', destroy_like_path(@combo), method: :DELETE
-/   = "「いいね！」#{@combo.likes.count}件"
-/ - else 
-/   = link_to '♡', create_like_path(@combo), method: :POST
-/   = "「いいね！」#{@combo.likes.count}件"
-/ remote: true,
+
 
 .like-link id="like-link-#{@combo.id}" 
   - if user_signed_in?

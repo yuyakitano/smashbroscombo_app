@@ -2,129 +2,40 @@ h6 あなたの開発したコンボを投稿してシェアしよう！
 
 = link_to '新規投稿', new_combo_path, class: 'btn btn-primary'
 
-h1 いいね数コンボTOP3
-.switch_like_rank
-  h6 選択
-  .like-rank
-    = radio_button_tag "like-rank", "all"
-    = label "like-rank", "all"
-    = radio_button_tag "like-rank", "week"
-    = label "like-rank", "week"
-    = radio_button_tag "like-rank", "month"
-    = label "like-rank", "month"
-    = radio_button_tag "like-rank", "year"
-    = label "like-rank", "year"
+h1 いいね数コンボTOP5
+= link_to "all", combos_path(rank: "all")
+= link_to "week", combos_path(rank: "week")
+= link_to "month", combos_path(rank: "month") 
+= link_to "year", combos_path(rank: "year") 
+- if request.query_string == "rank=all"
+  h2 累計
+- elsif request.query_string == "rank=week"
+  h2 週間
+- elsif request.query_string == "rank=month"
+  h2 月間
+- elsif request.query_string == "rank=year"
+  h2 年間
+- else
+  h2 累計
 
-
-
-
-
-.all_like_rank
-  h1 いいね数コンボTOP３
-  table.table.table-hover
-    thead.thead-default 
-      tr
-        th = "順位"
-        th = Combo.human_attribute_name(:likes_count)
-        th = Combo.human_attribute_name(:name)
-        th = Combo.human_attribute_name(:fighter)
-        th = Combo.human_attribute_name(:damage_dealt)
-        th = Combo.human_attribute_name(:created_at)
-
-    tbody 
-      - @all_like_ranks.each.with_index(1) do |combo, i|
-        tr
-        
-          td 第#{i}位
-          td = combo.likes.count
-          td = link_to combo.name, combo_path(combo)
-          td = combo.fighter.name
-          td = combo.damage_dealt
-          td = combo.created_at
-
-.week_like_rank 
-  h1 週間いいね数コンボTOP３
-  table.table.table-hover
-    thead.thead-default 
-      tr
-        th = "順位"
-        th = Combo.human_attribute_name(:likes_count)
-        th = Combo.human_attribute_name(:name)
-        th = Combo.human_attribute_name(:fighter)
-        th = Combo.human_attribute_name(:damage_dealt)
-        th = Combo.human_attribute_name(:created_at)
-
-    tbody 
-      - @weekly_like_ranks.each.with_index(1) do |combo, i|
-        tr
-        
-          td 第#{i}位
-          td = combo.likes.count
-          td = link_to combo.name, combo_path(combo)
-          td = combo.fighter.name
-          td = combo.damage_dealt
-          td = combo.created_at
-.month_like_rank
-  h1 月間いいね数コンボTOP３
-  table.table.table-hover
-    thead.thead-default 
-      tr
-        th = "順位"
-        th = Combo.human_attribute_name(:likes_count)
-        th = Combo.human_attribute_name(:name)
-        th = Combo.human_attribute_name(:fighter)
-        th = Combo.human_attribute_name(:damage_dealt)
-        th = Combo.human_attribute_name(:created_at)
-      
-    tbody 
-      - @monthly_like_ranks.each.with_index(1) do |combo, i|
-        tr
-
-          td 第#{i}位
-          td = combo.likes.count
-          td = link_to combo.name, combo_path(combo)
-          td = combo.fighter.name
-          td = combo.damage_dealt
-          td = combo.created_at
-
-.year_like_rank
-  h1 年間いいね数コンボTOP３
-  table.table.table-hover
-    thead.thead-default 
-      tr
-        th = "順位"
-        th = Combo.human_attribute_name(:likes_count)
-        th = Combo.human_attribute_name(:name)
-        th = Combo.human_attribute_name(:fighter)
-        th = Combo.human_attribute_name(:damage_dealt)
-        th = Combo.human_attribute_name(:created_at)
-
-    tbody 
-      - @yearly_like_ranks.each.with_index(1) do |combo, i|
-        tr
-        
-          td 第#{i}位
-          td = combo.likes.count
-          td = link_to combo.name, combo_path(combo)
-          td = combo.fighter.name
-          td = combo.damage_dealt
-          td = combo.created_at
-
-  /9にちはここから！
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+table.table.table-hover
+  thead.thead-default 
+    tr
+      th
+      th = Combo.human_attribute_name(:likes_count)
+      th = Combo.human_attribute_name(:name)
+      th = Combo.human_attribute_name(:fighter)
+      th = Combo.human_attribute_name(:damage_dealt)
+      th = Combo.human_attribute_name(:created_at)
+  tbody 
+    - @like_ranks.each.with_index(1) do |combo, i|
+      tr        
+        td 第#{i}位
+        td = combo.likes.count
+        td = link_to combo.name, combo_path(combo)
+        td = combo.fighter.name
+        td = combo.damage_dealt
+        td = l combo.created_at
 
 
 
@@ -186,7 +97,7 @@ table.table.table-hover
         td = combo.startpossibledamage_max
         td = combo.damage_dealt
         td = combo.likes.count
-        td = combo.created_at
+        td = l combo.created_at
         td = link_to combo.user.username, user_path(combo.user_id)
         td
           - if user_signed_in? && current_user.id == combo.user_id
@@ -196,3 +107,4 @@ table.table.table-hover
 = page_entries_info @combos
 = link_to 'お問い合わせ', new_contact_path, class: 'nav-link'
 p Find me in app/views/combos/index.html.slim
+= link_to "トップ", combos_path

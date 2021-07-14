@@ -33,11 +33,19 @@ Rails.application.routes.draw do
     end
   end
 
+  
+
   #いいね機能の実装①
   post 'like/:id' => 'likes#like', as: 'like'
   delete 'like/:id' => 'likes#unlike', as: 'unlike'
 
+  #いいねランキング累計・週・月・年切替の実装
+  #get 'combos/:name' => 'combos#index', as: 'all_like'
+  #get 'combos/:name', controller: 'combos', action: 'index'
   #いいね機能の実装②
+
+
+
   #resources :likes, only: %i[create destroy]
   
   # post   '/like/:id' => 'likes#like',   as: 'like'

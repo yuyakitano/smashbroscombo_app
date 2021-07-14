@@ -12,7 +12,8 @@ module SmashbroscomboApp
     config.load_defaults 5.2
     #⬇︎enum導入時、name等でのエラー対応
     config.paths.add 'lib', eager_load: true
-    config.time_zone = 'Tokyo'
+    #時間設定
+    config.time_zone = 'Asia/Tokyo'
     config.i18n.default_locale = :ja
 
     # Settings in config/environments/* take precedence over those specified here.

@@ -26,7 +26,10 @@ table.table.table-hover
       td = @combo.startpossibledamage_max
     tr
       th = Combo.human_attribute_name(:combocommand)
-      td = @combo.command_ids
+      /- binding.pry
+      td
+        - @combo.commands.each do |command|
+          = command.name
       /td = @combo.command_ids.name
     tr
       th = Combo.human_attribute_name(:damage_dealt)
@@ -34,8 +37,11 @@ table.table.table-hover
     - if @combo.fighter_ids.present?
       tr
         th = Combo.human_attribute_name(:combofightertarget)
-        td = @combo.fighter_ids
-
+        /td = @combo.fighters.name
+        
+        td 
+          - @combo.fighters.each do |fighter|
+            = fighter.name
 
     tr
       th = Combo.human_attribute_name(:level)
@@ -52,10 +58,10 @@ table.table.table-hover
       td = link_to @combo.user.username, user_path(@combo.user_id)
     tr
       th = Combo.human_attribute_name(:created_at)
-      td = @combo.created_at
+      td = l @combo.created_at
     tr
       th = Combo.human_attribute_name(:updated_at)
-      td = @combo.updated_at
+      td = l @combo.updated_at
 
 
 - if user_signed_in? && current_user.id == @combo.user_id
