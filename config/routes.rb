@@ -32,13 +32,14 @@ Rails.application.routes.draw do
       match 'search' => 'combos#search', via: [:get, :post]
     end
   end
-
+  
   
 
   #いいね機能の実装①
   post 'like/:id' => 'likes#like', as: 'like'
   delete 'like/:id' => 'likes#unlike', as: 'unlike'
-
+  
+  resources :notifications, only: :index
   #いいねランキング累計・週・月・年切替の実装
   #get 'combos/:name' => 'combos#index', as: 'all_like'
   #get 'combos/:name', controller: 'combos', action: 'index'

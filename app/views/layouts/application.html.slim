@@ -19,6 +19,8 @@ html
         = current_user.username
         p7 さん
         = link_to 'マイページ', user_path(current_user.id)
+        = link_to '通知一覧', notifications_path(current_user.id), class: 'nav-link'
+
       - elsif admin_signed_in?
 
         | 管理者

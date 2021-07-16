@@ -17,7 +17,22 @@ class LikesController < ApplicationController
   #いいね機能の実装②
   def like
     Like.create(user_id: current_user.id, combo_id: params[:id])
+    
+    combo = Combo.find(params[:id])
+    
+    combo.create_notification_like!(current_user)
   end
+  
+  # def like
+  #   @like = user_id: current_user.id, combo_id: params[:id]
+  #   @combo = @like.combo 
+  #   @like.save
+  #   #通知機能メソッド
+  #   binding.pry
+  #   combo = Combo.find(params[:combo_id])
+  #   binding.pry
+  #   combo.create_notification_like!(current_user)
+  # end
   def unlike
     Like.find_by(user_id: current_user.id, combo_id: params[:id]).destroy
 

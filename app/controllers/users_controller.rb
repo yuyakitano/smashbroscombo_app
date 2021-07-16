@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy ]
+  before_action :authenticate_admin!, only: [:index ]
+  before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
   def index
     @users = User.all
 
@@ -6,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    
     #@combos = Combo.where(:user_id == @user.id).order('updated_at DESC')
     
   end
@@ -28,6 +32,17 @@ class UsersController < ApplicationController
   def combos
     return Combo.where(user_id: user.id)
   end
+
+  #ログインユーザー自身のデータしか編集できない。
+  
+  # def ensure_current_user
+    
+  #   if current_user.id != params[:id].to_i
+  #     redirect_to combos_url, notice: "権限がありません"
+  #   end
+  # end
+
+
 
   private
   def user_params

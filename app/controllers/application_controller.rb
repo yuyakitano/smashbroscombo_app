@@ -22,7 +22,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
   end
-
+  def ensure_current_user
+    
+    if current_user.id != params[:id].to_i
+      redirect_to combos_url, notice: "権限がありません"
+    end
+  end
  
   #いいね機能の実装②
   # def default_request_format

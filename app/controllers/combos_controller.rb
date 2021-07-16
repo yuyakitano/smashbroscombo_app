@@ -1,7 +1,7 @@
 class CombosController < ApplicationController
   #before_action :authenticate_admin_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy ]
-  
+  before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
 
   def index
     @q = Combo.ransack(params[:q])

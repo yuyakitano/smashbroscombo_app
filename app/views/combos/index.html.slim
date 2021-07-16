@@ -103,8 +103,11 @@ table.table.table-hover
           - if user_signed_in? && current_user.id == combo.user_id
             = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
             = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+
+/ページネーション
 = paginate @combos
 = page_entries_info @combos
+
 = link_to 'お問い合わせ', new_contact_path, class: 'nav-link'
 p Find me in app/views/combos/index.html.slim
 = link_to "トップ", combos_path

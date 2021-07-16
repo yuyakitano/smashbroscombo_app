@@ -9,7 +9,7 @@ table.table.table-hover
   tbody
     tr
       th = Combo.human_attribute_name(:profile_image)
-      td = attachment_image_tag @user, :profile_image, fallback: 'no-image.png', size: '200x200', class: 'center-block img-thumbnail img-responsive'
+      td = attachment_image_tag @user, :profile_image, fallback: 'no-image.png', size: '150x150', class: 'center-block img-thumbnail img-responsive'
     tr
       th = User.human_attribute_name(:name)
       td = @user.username
@@ -39,7 +39,9 @@ table.table.table-hover
     = link_to '👤フォローする', [@user, :follow], method: :post
 
 .mb-3 
-  
+  /ページネーション
+= paginate @user.combos
+= page_entries_info @user.combos
 table.table.table-hover
   thead.thead-default 
     tr
