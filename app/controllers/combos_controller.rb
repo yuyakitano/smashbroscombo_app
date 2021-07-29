@@ -206,7 +206,6 @@ class CombosController < ApplicationController
       @startposition = Startposition.all
       @genre = Genre.all
       render :new
-      
     end
   
   

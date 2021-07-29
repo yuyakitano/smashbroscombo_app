@@ -93,22 +93,22 @@ class Combo < ApplicationRecord
     #投稿したログインユーザーをフォローしている人のuser_idを取得
     
     follow_ids = Follow.select(:user_id).where('target_user_id = ?', current_user.id)
-    binding.pry
+    
     follow_ids.each do |follow_id|
-      binding.pry
+      
       save_notification_follow_post!(current_user, follow_id['user_id'])
     end
     # 「フォロー」している人がいる場合通知レコードを作成    
   end
   def save_notification_follow_post!(current_user, visited_id)
-    binding.pry
+    
     notification = current_user.active_notifications.new(
       combo_id: id,
       visited_id: visited_id,
       action: 'follow_post'
     )
     notification.save if notification.valid?
-    binding.pry
+    
   end
 
 

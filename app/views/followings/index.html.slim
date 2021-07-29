@@ -22,3 +22,6 @@ table.table.table-hover
         td = link_to user.username, [user]
         td = user.email
         td = user.combos.count
+        td 
+          - if user_signed_in? && current_user.id == @user.id 
+            = link_to 'フォロー解除', [user, :follow], method: :delete, data: { confirm: "「#{user.username}」さんをフォロー解除します。よろしいですか？"}

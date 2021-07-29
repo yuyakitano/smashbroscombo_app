@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_011533) do
+ActiveRecord::Schema.define(version: 2021_07_29_053314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_07_15_011533) do
     t.integer "good_or_bad"
     t.integer "available?"
     t.integer "damage_dealt"
+    t.integer "kill_or_damage?"
     t.integer "user_id"
     t.integer "likes_count"
     t.integer "genre_id"
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 2021_07_15_011533) do
     t.bigint "target_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "notification", default: false
     t.index ["target_user_id"], name: "index_follows_on_target_user_id"
     t.index ["user_id"], name: "index_follows_on_user_id"
   end
