@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     
     if @comment.save
       combo = @comment.combo
+      
       combo.create_notification_comment!(current_user, @comment.id)
       
       respond_to do |format|

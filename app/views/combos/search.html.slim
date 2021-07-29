@@ -1,43 +1,93 @@
-= search_form_for @search, url: search_combos_path ,html: { method: :post } do |f|
-  = f.select( :sorts, { '並び替え': 'id desc', '与ダメージの高い順': ' damage_dealt desc', '与ダメージの低い順': 'samage_dealt asc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc', 'いいね順': 'likes_count desc' } , { selected: params[:q][:sorts] }, { onchange: 'this.form.submit()'} )
 
-  = f.submit '完了'
+- if request.query_string == "rank=all"
+  h2 累計いいね数ランキング
+  
+- elsif request.query_string == "rank=week"
+  h2 週間いいね数ランキング
+  
+- elsif request.query_string == "rank=month"
+  h2 月間いいね数ランキング
+  
+- elsif request.query_string == "rank=year"
+  h2 年間いいね数ランキング
+  
+- else
+  h2 累計いいね数ランキング
+= link_to "all", search_combos_path(rank: "all")
+= link_to "week", search_combos_path(rank: "week")
+= link_to "month", search_combos_path(rank: "month") 
+= link_to "year", search_combos_path(rank: "year") 
 
-.mb-3 
-  / = paginate @combos
-  / = page_entries_info @combos
 table.table.table-hover
   thead.thead-default 
     tr
+      th
       th = Combo.human_attribute_name(:name)
       th = Combo.human_attribute_name(:fighter)
       th = Combo.human_attribute_name(:startpossibledamage_min)
       th = Combo.human_attribute_name(:startpossibledamage_max)
       th = Combo.human_attribute_name(:damage_dealt)
-      th = Combo.human_attribute_name(:likes_count)
-      th = Combo.human_attribute_name(:created_at)
-      /th = sort_link(@q, :damage_dealt)
-      /th = sort_link(@q, :likes_count)
-      /th = sort_link(@q, :created_at)
-      th = Combo.human_attribute_name(:make_by)      
-      th
+      
   tbody 
-    - @combos.each do |combo|
-      tr
+    - @combos.each.with_index(1) do |combo, i|
+      tr        
+        td 第#{i}位
         td = link_to combo.name, combo_path(combo)
-        / td = combo.fighter.name
-        td = combo.id
+        td = combo.fighter.name
         td = combo.startpossibledamage_min
         td = combo.startpossibledamage_max
         td = combo.damage_dealt
-        td = combo.likes.count
-        /td = combo.search_like_count
+        
 
-        td = combo.created_at
-        td = link_to combo.user.username, user_path(combo.user_id)
-        td
-          - if user_signed_in? && current_user.id == combo.user_id
-            = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
-            = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+
+
+
+
+
+
+
+
+
+/ = search_form_for @search, url: search_combos_path ,html: { method: :post } do |f|
+/   = f.select( :sorts, { '並び替え': 'id desc', '与ダメージの高い順': ' damage_dealt desc', '与ダメージの低い順': 'samage_dealt asc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc', 'いいね順': 'likes_count desc' } , { selected: params[:q][:sorts] }, { onchange: 'this.form.submit()'} )
+
+/   = f.submit '完了'
+
+/ .mb-3 
+/   / = paginate @combos
+/   / = page_entries_info @combos
+/ table.table.table-hover
+/   thead.thead-default 
+/     tr
+/       th = Combo.human_attribute_name(:name)
+/       th = Combo.human_attribute_name(:fighter)
+/       th = Combo.human_attribute_name(:startpossibledamage_min)
+/       th = Combo.human_attribute_name(:startpossibledamage_max)
+/       th = Combo.human_attribute_name(:damage_dealt)
+/       th = Combo.human_attribute_name(:likes_count)
+/       th = Combo.human_attribute_name(:created_at)
+/       /th = sort_link(@q, :damage_dealt)
+/       /th = sort_link(@q, :likes_count)
+/       /th = sort_link(@q, :created_at)
+/       th = Combo.human_attribute_name(:make_by)      
+/       th
+/   tbody 
+/     - @combos.each do |combo|
+/       tr
+/         td = link_to combo.name, combo_path(combo)
+/         / td = combo.fighter.name
+/         td = combo.id
+/         td = combo.startpossibledamage_min
+/         td = combo.startpossibledamage_max
+/         td = combo.damage_dealt
+/         td = combo.likes.count
+/         /td = combo.search_like_count
+
+/         td = combo.created_at
+/         td = link_to combo.user.username, user_path(combo.user_id)
+/         td
+/           - if user_signed_in? && current_user.id == combo.user_id
+/             = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
+/             = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
 
 p Find me in app/views/combos/index.html.slim

@@ -4,7 +4,7 @@
   h1 ユーザー詳細画面
 
 .nav.justify-content-end
-  = link_to 'コンボ一覧', combos_path, class: 'nav-link'
+  = link_to 'メインページへ', combos_path, class: 'nav-link'
 table.table.table-hover
   tbody
     tr
@@ -37,40 +37,82 @@ table.table.table-hover
     = link_to 'フォロー解除', [@user, :follow], method: :delete
   - else
     = link_to '👤フォローする', [@user, :follow], method: :post
-
-.mb-3 
+#mypagecombo
+- if request.query_string == "combo=followingcombo"
+  
+  = link_to 'マイコンボ一覧', user_path(current_user.id, anchor: 'mypagecombo' )
+  
+  h3 フォロー中ユーザーのコンボ一覧
+  .mb-3 
+  
   /ページネーション
-= paginate @user.combos
-= page_entries_info @user.combos
-table.table.table-hover
-  thead.thead-default 
-    tr
-      
-      th = Combo.human_attribute_name(:name)
-      th = Combo.human_attribute_name(:fighter_id)
-      th = Combo.human_attribute_name(:command)
-      th = Combo.human_attribute_name(:startpossibledamage_min)
-      th = Combo.human_attribute_name(:startpossibledamage_max)
-      th = Combo.human_attribute_name(:iine_count)
-      th = Combo.human_attribute_name(:created_at)
-      th = Combo.human_attribute_name(:make_by) 
-      th
-  tbody
-    - @user.combos.each do |combo|
+  table.table.table-hover
+    thead.thead-default 
       tr
-        /td = image_tag @user.profile_image
+        th = Combo.human_attribute_name(:name)
+        th = Combo.human_attribute_name(:fighter_id)
+        th = Combo.human_attribute_name(:command)
+        th = Combo.human_attribute_name(:startpossibledamage_min)
+        th = Combo.human_attribute_name(:startpossibledamage_max)
+        th = Combo.human_attribute_name(:likes_count)
+        th = Combo.human_attribute_name(:created_at)
+        th = Combo.human_attribute_name(:make_by) 
+        th
+    tbody
+      - @combo.each do |combo|
+        tr
+          /td = image_tag @user.profile_image
         
-        td = link_to combo.name, combo_path(combo)
-        td = combo.fighter.name
-        td 
-          - combo.commands.each do |command|
-            = command.name
-        td = "#{combo.startpossibledamage_min}%"
-        td = "#{combo.startpossibledamage_max}%"
-        td = combo.likes.count
-        td = combo.created_at
-        td = combo.user.username
-        td
+          td = link_to combo.name, combo_path(combo)
+          td = combo.fighter.name
+          td 
+            - combo.commands.each do |command|
+              = command.name
+          td = "#{combo.startpossibledamage_min}%"
+          td = "#{combo.startpossibledamage_max}%"
+          td = combo.likes.count
+          td = combo.created_at
+          td = link_to combo.user.username, user_path(combo.user_id)
+          td
+
+- else
+  
+  - if current_user == @user
+  
+    = link_to 'フォロー中ユーザーのコンボ一覧', user_path(current_user.id, combo: 'followingcombo', anchor: 'mypagecombo' )
+  
+  
+  h3 マイコンボ一覧 
+  .mb-3
+  /ページネーション
+  table.table.table-hover
+    thead.thead-default 
+      tr
+        th = Combo.human_attribute_name(:name)
+        th = Combo.human_attribute_name(:fighter_id)
+        th = Combo.human_attribute_name(:command)
+        th = Combo.human_attribute_name(:startpossibledamage_min)
+        th = Combo.human_attribute_name(:startpossibledamage_max)
+        th = Combo.human_attribute_name(:likes_count)
+        th = Combo.human_attribute_name(:created_at)
+        th = Combo.human_attribute_name(:make_by) 
+        th
+    tbody
+      - @user.combos.each do |combo|
+        tr
+          /td = image_tag @user.profile_image
+
+          td = link_to combo.name, combo_path(combo)
+          td = combo.fighter.name
+          td 
+            - combo.commands.each do |command|
+              = command.name
+          td = "#{combo.startpossibledamage_min}%"
+          td = "#{combo.startpossibledamage_max}%"
+          td = combo.likes.count
+          td = combo.created_at
+          td = combo.user.username
+          td
 
 
 /- if user_signed_in? && current_user.id == @user.id

@@ -5,7 +5,7 @@
     span 
       = link_to user_path(visitor) do
         /= image_tag avatar_url(notification.combo.user).to_s, class: "icon_mini" 
-        = image_tag 'no-image.png', size: '50x50', class: "icon_mini" 
+        /= image_tag 'no-image.png', size: '50x50', class: "icon_mini" 
         strong
           = visitor.username
       = 'さんが'
@@ -19,17 +19,22 @@
         = "にいいねしました"
       - when 'comment' then
         - if notification.combo.user_id == visited.id
-          = link_to "あなたの投稿", notification.combo, style: "font-weight: bold;"
+          = "あなたの投稿"
+          = link_to notification.combo.name, notification.combo, style: "font-weight: bold;"
         - else
           span
             = link_to combo_path(notification.combo) do
-              = image_tag avatar_url(notification.combo.user).to_s, class: "icon_mini" 
+              /= image_tag avatar_url(notification.combo.user).to_s, class: "icon_mini" 
               strong
                 = notification.combo.user.username + 'さんの投稿'
         = "にコメントしました"
         p.text-muted.mb-0
           = Comment.find_by(id: notification.comment_id)&.content
+      - when 'follow_post' then
+        = "新しいコンボ「"
+        = link_to notification.combo.name, notification.combo, style: "font-weight: bold;"
+        = "」を投稿しました"
 
   .small.text-muted.text-right
-    = time_ago_in_words(notification.created_at).upcase
+    = time_ago_in_words(notification.created_at).upcase + '前'
   hr

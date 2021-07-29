@@ -40,6 +40,7 @@ ja:
         many_combo: コンボ投稿数
         created_at: ユーザー登録日
         profile_image: ユーザー画像
+        
       combo:
         profile_image: ユーザー画像
         name: コンボ名
@@ -66,6 +67,7 @@ ja:
         command: コマンド
         likes_count: いいね数
         created_at: 作成日
+        updated_at: 更新日
         make_by: 作成者
         easy: 簡単
         normal: 普通

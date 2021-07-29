@@ -8,8 +8,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    #@q = User.ransack(params[:q])
+    #@user = @q.result(distinct: true).page(params[:page])
     @user = User.find(params[:id])
-    
+    if params[:combo] == 'followingcombo'
+      @combo = Combo.where(user_id: [*current_user.following_ids])
+    end
     #@combos = Combo.where(:user_id == @user.id).order('updated_at DESC')
     
   end

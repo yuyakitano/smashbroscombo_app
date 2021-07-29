@@ -22,9 +22,19 @@
     = f.text_field :startpossibledamage_min, id: 'combo_startpossibledamage_min'
     = f.label :max, "最大"
     = f.text_field :startpossibledamage_max, id: 'combo_startpossibledamage_max' 
+  / .form-group 
+  /   = f.label :combocommand
+  /   = f.collection_select(:command_ids, @commands, :id, :name, {}, {multiple: true} )
+  
   .form-group 
     = f.label :combocommand
-    = f.collection_select(:command_ids, @commands, :id, :name, {}, {multiple: true} )
+    = f.hidden_field :commands11, id: "hidden1"
+  .btn-btn-primary#btnJs
+    = f.collection_check_boxes(:command_ids, @commands, :id, :name, {})
+  |作成中コンボ
+  #target 
+    
+
   .form-group 
     = f.label :damage_dealt
     = f.text_field :damage_dealt, class: 'form-control', id: 'combo_damage_dealt'
@@ -49,7 +59,6 @@
 
   = f.submit nil, class: 'btn btn-primary'
 
-      
 
   /.form-group 
     = f.label :startposition

@@ -8,8 +8,10 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     
+    
     script src="https://code.jquery.com/jquery-3.3.1.min.js"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light 
       .navbar-brand スマブラコンボアプリ
@@ -19,6 +21,7 @@ html
         = current_user.username
         p7 さん
         = link_to 'マイページ', user_path(current_user.id)
+        
         = link_to '通知一覧', notifications_path(current_user.id), class: 'nav-link'
 
       - elsif admin_signed_in?

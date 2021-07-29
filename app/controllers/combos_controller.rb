@@ -4,6 +4,20 @@ class CombosController < ApplicationController
   before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
 
   def index
+    if params[:sort] == "like"
+      #binding.pry
+      @q = Combo.ransack(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
+      #binding.pry
+      @combos = @q.result(distinct: true).page(params[:page])
+      #binding.pry
+    else
+      @q = Combo.ransack(params[:q])
+      #binding.pry
+      @combos = @q.result(distinct: true).page(params[:page]).order(created_at: :desc)
+      #binding.pry
+    end
+
+
     @q = Combo.ransack(params[:q])
     @combos = @q.result(distinct: true).page(params[:page]).order(created_at: :desc)
     @users = User.all 
@@ -16,21 +30,24 @@ class CombosController < ApplicationController
       # limit(3)で表示する最大数を3個に指定、pluckで:combo_idカラムのみを数字で取り出す。
       # Combo.find()でplackで取り出された数字をcombo_idとしていいね数順にcomboを取得できる。
     
-    from  = Time.current.at_beginning_of_day
-    to    = (from + 6.day).at_end_of_day
-    
+    to       = Time.current
+    week_from    = (to - 7.day)
+    month_from   = (to - 31.day)
+    year_from    = (to - 36.day)
 
     if params[:rank] == "all"
-      @like_ranks = Combo.find(Like.group(:combo_id).order('count(combo_id) desc').limit(3).pluck(:combo_id))
+      @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
     elsif params[:rank] == "week"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at: from...to}).group(:id).order("count(*) desc").limit(5)
+      @like_ranks = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(10)
     elsif params[:rank] == "month"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_month..0.days.ago.end_of_month}).group(:id).order("count(*) desc").limit(5)
+      @like_ranks = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(5)
     elsif params[:rank] == "year"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_year..0.days.ago.end_of_year}).group(:id).order("count(*) desc").limit(5)
+      @like_ranks = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(5)
     else
-      @like_ranks = Combo.find(Like.group(:combo_id).order('count(combo_id) desc').limit(3).pluck(:combo_id))
+      @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
     end
+
+
 
     #render "combos/#{params[:name]}"
     # いいね順ソート機能①実装中(侍にて質問中)
@@ -56,42 +73,40 @@ class CombosController < ApplicationController
     #@combos = Combo.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
     
   end
+  def search
+    @users = User.all 
+    @fighter = Fighter.all
+    @genre = Genre.all
+    # サイドバー等に表示するいいね数ランキング機能（TOP３か5まで）
+      # Likeテーブル内のcombo_idが同じものにグループを分け、それを番号の多い順に並び替える、
+      # limit(3)で表示する最大数を3個に指定、pluckで:combo_idカラムのみを数字で取り出す。
+      # Combo.find()でplackで取り出された数字をcombo_idとしていいね数順にcomboを取得できる。
+    
+    
+    to       = Time.current
+    week_from    = (to - 7.day)
+    month_from   = (to - 31.day)
+    year_from    = (to - 36.day)
+    if params[:rank] == "all"
+      @combos = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(30).pluck(:combo_id))
+    elsif params[:rank] == "week"
+      @combos = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(30)
+    elsif params[:rank] == "month"
+      @combos = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(30)
+      # @combos = Combo.joins(:likes).where(likes: { created_at:0.days.ago.fbeginning_of_month..0.days.ago.end_of_month}).group(:id).order("count(*) desc").limit(30)
+    elsif params[:rank] == "year"
+      @combos = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(30)
+      # @combos = Combo.joins(:likes).where(likes: { created_at:0.days.ago.beginning_of_year..0.days.ago.end_of_year}).group(:id).order("count(*) desc").limit(30)
+    else
+      @combos = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(30).pluck(:combo_id))
+    end
 
-  #ソートページに飛んでソートする場合
-  # def search
-  #   if params[:q].present?
-  #   # 検索フォームからアクセスした時の処理
-  #     @search = Combo.ransack(search_params)
-  #     @combos = @search.result(distinct: true).page(params[:page])
-  #     # @combos.likes_count + 1
-  #   else
-  #   # 検索フォーム以外からアクセスした時の処理
-  #     params[:q] = { sorts: 'id desc' }
-  #     @search = Combo.ransack()
-  #     @combos = @search.result(distinct: true).page(params[:page])
-  #     # @combos = Combo.all
-  #     # @combos.likes_count + 1
-  #   end
-  # end
 
-  # def search_params
-  #   params.require(:q).permit(:sorts)
-  #   # 他のパラメーターもここに入れる
-  # end
 
-  # def search_like_count
-  #   combo.likes.count + 1
-  # end
-
+  end
   def show
     @combo = Combo.find(params[:id])
-    #@commands = ComboCommand.find([:id])
-    #binding.pry
-    #ComboCommand.find([:combo_id = @combo.id])
-    #@commands = Command.find(params[:command_id])
-    #@user = User.find_by(id: @combo.user_id)
-    #@kill_or_damage = {1: 'kill', 2: 'damage'}
-    #@comments = @combo.comments
+    
     @users = User.all 
     @comment = Comment.new
     #コメントを新着順で取得
@@ -102,7 +117,6 @@ class CombosController < ApplicationController
     
 
   end
-
   def new
     @combo = Combo.new
     #@commands = Command.all.map {|command| [command.name, command.commandid] }
@@ -114,6 +128,8 @@ class CombosController < ApplicationController
     @user = current_user.id
     @fighters = Fighter.all
     @fighter_target = ComboFighterTarget.new
+    
+
   end
 
   def commandset
@@ -130,9 +146,14 @@ class CombosController < ApplicationController
   # end
 
   def create
-    #binding.pry
     @combo = Combo.new(combo_params)
+    #コマンド配列作成
+    command_ids1 = params[:combo][:commands11]
+    command_ids2 = command_ids1.split(",")
+    @combo.command_ids = command_ids2
     @combo.user_id = current_user.id
+
+    #ユーチューブURL加工
     url = params[:combo][:youtube_url]
     url = url.split('/').last
     @combo.youtube_url = url
@@ -143,6 +164,9 @@ class CombosController < ApplicationController
     
     if @combo.save
       redirect_to combos_url, notice: "コンボ「#{@combo.name}」を登録しました。"  
+      
+      
+      @combo.create_notification_following_post!(current_user)
     else
       @fighter = Fighter.all
       @commands = Command.all

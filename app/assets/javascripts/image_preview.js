@@ -3,7 +3,7 @@
 $(function () {  
   //inputのIDから情報の取得？ 
   function readURL(input) {
-    debugger
+    
     if (input.files && input.files[0]) {
       //ここから既存の画像の情報の取得？
       

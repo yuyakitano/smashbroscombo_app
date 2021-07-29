@@ -57,11 +57,15 @@ class Combo < ApplicationRecord
     end
   end
 
+
+
   #通知機能「コメント」時
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
     temp_ids = Comment.select(:user_id).where(combo_id: id).where.not(user_id: current_user.id).distinct
+    binding.pry
     temp_ids.each do |temp_id|
+      binding.pry
       save_notification_comment!(current_user, comment_id, temp_id['user_id'])
     end
     # まだ誰もコメントしていない場合は、投稿者に通知を送る
@@ -84,6 +88,28 @@ class Combo < ApplicationRecord
   end
 
 
+  #通知機能「フォローユーザーが投稿した」時
+  def create_notification_following_post!(current_user)
+    #投稿したログインユーザーをフォローしている人のuser_idを取得
+    
+    follow_ids = Follow.select(:user_id).where('target_user_id = ?', current_user.id)
+    binding.pry
+    follow_ids.each do |follow_id|
+      binding.pry
+      save_notification_follow_post!(current_user, follow_id['user_id'])
+    end
+    # 「フォロー」している人がいる場合通知レコードを作成    
+  end
+  def save_notification_follow_post!(current_user, visited_id)
+    binding.pry
+    notification = current_user.active_notifications.new(
+      combo_id: id,
+      visited_id: visited_id,
+      action: 'follow_post'
+    )
+    notification.save if notification.valid?
+    binding.pry
+  end
 
 
 
