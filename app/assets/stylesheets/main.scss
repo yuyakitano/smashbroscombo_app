@@ -1,0 +1,183 @@
+// @import "bootstrap";
+
+
+
+.main-title {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  //height: 700px;
+  //min-height: 600px;
+  background-color: #fff;
+}
+
+.main-title .inner .title-image .title-image-img {
+  width: 100%;
+  max-width: 700px;
+}
+
+.main-title .inner .title-logo {
+  font-size: 500%;
+  color: black;
+  font-weight: 90;
+}
+
+.main-title .inner .title-message {
+  font-weight: 500;
+  padding: 1% 0;
+}
+
+.main-title .inner .title-menu {
+  
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+.main-title .inner .title-menu .title-menu-link {
+  margin: 1%;
+}
+
+.title-button-title {
+  font-size: larger;
+  font-weight: 800;
+}
+// .main-title .inner .title-menu .title-menu-link{
+//   width: 100%;
+//   max-width: 200px;
+//   margin: 5px 3px;
+//   flex: 0 0 45%;  
+//   display: block;
+//   text-decoration: none;
+//   border: solid 1px black;
+// }
+
+.main-search-fighter {
+
+  width: 100%;
+  text-align: center;
+  min-height: 760px;
+
+  //margin: 5% 0 0 0;
+  //height: 700px;
+  background-color: #fff;
+}
+.main-search-fighter .inner .fighter-list {
+  padding-bottom: 20px;
+  
+}
+.main-search-fighter .inner .fighter-list .row {
+  max-width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.main-search-fighter .inner .fighter-list .row .col {
+  padding-top: 5px;
+  border: solid 0.5px rgb(67, 67, 67);
+  text-decoration: none;
+}
+
+.sec-title {
+  width: 100%;
+  margin: 0;
+  padding: 10% 0 3% 0;
+  font-size: 250%;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+.sec-message {
+  width: 100%;
+  margin: 0;
+  padding: 0 0 1% 0;
+  font-size: 150%;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+//.main-search-fighter .inner .fighter-list .fighter-list-item 
+
+.fighter-list-item {
+  padding: 8px 6px 7px;
+  width: 25%;
+  text-align: center;
+  border: solid 1px black;
+  //text-decoration: none;
+}
+
+.fighter-list-item-name {
+  text-decoration: none;
+
+}
+
+
+
+
+
+
+
+.main-search-condition {
+
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  //text-align: center;
+  justify-content: center;
+  
+  min-height: 400px;
+  background-color: #fff;
+}
+
+
+
+.main-search-fighter-content .main-search-fighter-search-menu {
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px black;
+  border-radius: 3px;
+}
+.main-search-fighter-content .main-search-fighter-search-menu .inner {
+  padding: 1%;
+  
+}
+
+.main-search-fighter-content .main-search-fighter-search-menu .inner .main-search-menu-form .main-search-form .main-search-group {
+   display: flex;
+}
+
+
+
+
+
+
+
+.main-create-selectfighter {
+  width: 100%;
+  text-align: center;
+
+  margin: 0;
+  min-height: 760px;
+  background-color: #fff;
+}
+
+.main-create-selectfighter .inner .fighter-list {
+  padding-bottom: 20px;
+  
+}
+.main-create-selectfighter .inner .fighter-list .row {
+  max-width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.main-create-selectfighter .inner .fighter-list .row .col {
+  padding-top: 5px;
+  border: solid 0.5px rgb(67, 67, 67);
+}

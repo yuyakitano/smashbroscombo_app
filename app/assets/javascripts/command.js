@@ -28,9 +28,15 @@ document.addEventListener('turbolinks:load', function() {
       
       const span = document.createElement("span");
         span.textContent = labelname;
+        span.classList.add("btn");
+        span.classList.add("btn-secondary");
+        span.classList.add("border");
+        span.classList.add("border-dark");
+        
         /* p.append(value); ⇨これだとエラー「何も要素がない配列を表示しようとしている。」*/
         /* span要素を生成して、１コマンドずつspanタグを挿入する */
         target.append(span);
+        
     }      
     $("input:checkbox").prop("checked", false);
     //Array.from(checked_data.parentElement.querySelectorAll("label")).filter((a) => a.getAttribute("for") == "combo_command_ids_127" )[0].innerHTML

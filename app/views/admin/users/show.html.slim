@@ -41,7 +41,7 @@ table.table.table-hover
     tr
       
       th = Combo.human_attribute_name(:name)
-      th = Combo.human_attribute_name(:fighter_id)
+      /th = Combo.human_attribute_name(:fighter_id)
       th = Combo.human_attribute_name(:command)
       th = Combo.human_attribute_name(:startpossibledamage_min)
       th = Combo.human_attribute_name(:startpossibledamage_max)
@@ -55,7 +55,7 @@ table.table.table-hover
         /td = image_tag @user.profile_image
         
         td = link_to combo.name, combo_path(combo)
-        td = combo.fighter.name
+        /td = combo.fighter.name
         td = combo.command_ids
         td = combo.startpossibledamage_min
         td = combo.startpossibledamage_max

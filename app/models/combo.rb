@@ -1,4 +1,5 @@
 class Combo < ApplicationRecord
+  
   belongs_to :user
   has_many :combo_commands, dependent: :destroy
   has_many :commands, through: :combo_commands, dependent: :destroy
@@ -37,7 +38,7 @@ class Combo < ApplicationRecord
 
   
   scope :recent, -> { order(created_at: :desc) }
-
+  #attachment :fighter_image
   #通知機能「いいね」時
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
@@ -92,7 +93,7 @@ class Combo < ApplicationRecord
   def create_notification_following_post!(current_user)
     #投稿したログインユーザーをフォローしている人のuser_idを取得
     
-    follow_ids = Follow.select(:user_id).where('target_user_id = ?', current_user.id)
+    follow_ids = Follow.select(:user_id).where('target_user_id = ? and notification = ?', current_user.id, true)
     
     follow_ids.each do |follow_id|
       

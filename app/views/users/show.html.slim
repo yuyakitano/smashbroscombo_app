@@ -35,8 +35,17 @@ table.table.table-hover
 - if user_signed_in? && current_user != @user
   - if current_user.active_relationships.exists?(target_user_id: @user.id)
     = link_to 'フォロー解除', [@user, :follow], method: :delete
+    - if current_user.active_relationships.exists?(notification: false)
+      p コンボ投稿時の通知オフ🔕
+      = link_to "コンボ投稿時に通知する", user_follow_notification_path(user_id: @user.id), method: :post
+      
+    - else 
+      p コンボ投稿時の通知オン🔔
+      = link_to "コンボ投稿時の通知をオフにする", user_follow_notification_path(user_id: @user.id), method: :post
+
   - else
     = link_to '👤フォローする', [@user, :follow], method: :post
+
 #mypagecombo
 - if request.query_string == "combo=followingcombo"
   

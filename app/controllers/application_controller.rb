@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
   def ensure_current_user
     
-    if current_user.id != params[:id].to_i
+    if current_user.id == params[:id].to_i
       redirect_to combos_url, notice: "権限がありません"
     end
   end

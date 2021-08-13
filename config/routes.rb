@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   namespace :admin do
     resources :users
     resources :combos
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resource :follow
+      post '/follownotification' => 'follows#notification_change', as: 'follow_notification'
     resources :followings
     resources :followers
   end
@@ -30,9 +32,14 @@ Rails.application.routes.draw do
     #ソート機能の実装
     collection do
       match 'search' => 'combos#search', via: [:get, :post]
+      get :search_fighter  
+        
     end
+    
+    #get '/search/fighter_id', to: 'combos#search_fighter', as:'search_fighter' 
+    
   end
-  
+  get '/main', to: 'combos#main', as: 'main'
   
 
   #いいね機能の実装①
@@ -54,7 +61,7 @@ Rails.application.routes.draw do
 
 
   #devise実装に伴う追加
-  root to:'combos#index'
+  root to:'combos#main'
 
 
   resources :follow

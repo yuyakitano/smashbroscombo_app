@@ -1,0 +1,140 @@
+#main
+  .main-title
+    .inner
+      .title-image
+        = image_tag("109.jpeg", class: "title-image-img") 
+      .title-logo
+        p コンボメーカー
+      .title-message
+        p 誰でも簡単にメッセージ誰でも簡単にメッセージ誰でも簡単にメッセージ
+        p 誰でも簡単にメッセージ誰でも簡単にメッセージ！
+      .title-menu 
+        .title-menu-link
+          = link_to main_path(anchor: 'main-search-fighter'), class: "btn btn-outline-success"
+            .title-button-title
+              p ファイターから人気コンボを探す
+            .title-button-message
+              p ファイターごとに人気のコンボを探せます。
+        .title-menu-link
+          = link_to main_path(anchor: 'main-search-condition'), class: "btn btn-outline-info"
+            .title-button-title
+              p 条件を指定してコンボを探す
+            .title-button-message
+              p 始動可能％範囲やメッセージなど、細かな条件でコンボを探せます。
+        .title-menu-link
+          = link_to main_path(anchor: 'main-create-selectfighter'), class: "btn btn-outline-primary"
+            .title-button-title
+              p コンボを投稿する
+            .title-button-message
+              p 自身で考えたコンボや、記録しておきたいコンボを投稿します。
+              
+      .title-about
+        .about-btn
+          p コンボメーカーの使い方
+  #main-search-fighter
+  .main-search-fighter 
+    .inner
+      .sec-title
+        p ファイターからコンボを探す
+      .sec-message
+        p ファイターごとの投稿されているコンボを探せますいいねランキングから人気のコンボを探せます
+      .fighter-list
+        .row
+          - @fighters.each do |fighter|
+            .col 
+              //(class="fighter-list-item")
+              = link_to search_fighter_combos_path(search_fighter_id: fighter.id), class: "fighter-list-item-name"
+                = attachment_image_tag fighter, :fighter_image, fallback: 'no-image.png', class: 'fighter-list-item-image', width:'60', height:'60'
+                = fighter.name
+  #main-search-condition
+  .main-search-condition
+    .inner
+      .sec-title
+        p 条件を指定してコンボを探す
+      .sec-message
+        p さまざまな条件でコンボを絞り込み検索できます
+      .main-search-fighter-content
+        .main-search-fighter-search-menu
+          .inner
+            .main-search-menu-title
+              h4 コンボ絞り込み検索
+            .main-search-menu-form
+              = search_form_for @q, class: 'row g-3' do |f|
+                .main-search-form
+                  .main-search-group
+                    .main-search-group-label
+                      i class="fas fa-search"
+                      | キーワード検索
+                      = f.search_field :name_cont, class: 'form .row.mb-9', placeholder: "例）下投げ"
+                  .main-search-group
+                    .main-search-group-label
+                      i class="fas fa-search"
+                      = f.label :genre_id, Combo.human_attribute_name(:genre), class: 'form-label'
+                    .main-search-group-checkbox
+                      = f.radio_button 'genre_id_eq', '', {:checked => true}
+                      | 指定なし
+                      = f.collection_radio_buttons :genre_id_eq, @genre, :id, :name
+                  .main-search-group
+                    .search-group-label
+                      i class="fas fa-search"
+                      = f.label :damage_dealt, "与ダメージ値範囲(片方のみも可です)", class: 'form-label'  
+                    .search-group-forms
+                      = f.number_field :damage_dealt_gteq, placeholder: "最小ダメージ％"
+                      | 〜
+                      = f.number_field :damage_dealt_lteq, placeholder: "最大ダメージ％"
+                  .main-search-roup
+                    .main-search-group-label
+                      = f.label :fighter_id, Combo.human_attribute_name(:fighter)
+                    .main-search-group-forms
+                      = f.collection_select :fighter_id_eq, @fighter, :id, :name,  include_blank: '指定なし'  
+                  .col-12
+                    = f.submit class: 'btn btn-primary'
+
+        / = search_form_for @q, class: 'mb-5' do |f|
+        /   / .form-group.row
+        /   /   = f.label :name_cont, 'コンボ名キーワード', class: 'col-sm-2 col-form-label'
+        /   /   .col-sm-10 
+        /   /     = f.search_field :name_cont, class: 'form-control'
+        /   .form-group.row 
+        /     = f.label :name_cont, 'キーワード検索', class: 'col-sm-2 col-form-label'
+        /     .col-sm-10
+        /       = f.search_field :name_cont, class: 'form-control'
+        /   .form-group.row 
+        /     = f.label :genre_id, Combo.human_attribute_name(:genre)
+        /       = f.radio_button 'genre_id_eq', '', {:checked => true}
+        /       | 指定なし
+        /     .col-sm-10 
+        /       = f.collection_radio_buttons :genre_id_eq, @genre, :id, :name
+        /   .form-group.row 
+        /     = f.label :damage_dealt, "与ダメージ値(片方のみも可です)"
+              
+        /     .col-sm-10
+        /       | 最小
+        /       = f.number_field :damage_dealt_gteq
+        /       | 以上のダメージ 〜 最大 
+        /       = f.number_field :damage_dealt_lteq
+        /       | 以下のダメージ
+        /   / .form-group.row 
+        /   /   = f.label :fighter_id, Combo.human_attribute_name(:fighter)
+        /   /   .col-sm-10
+        /   /     = f.collection_select :fighter_id_eq, @fighter, :id, :name,  include_blank: '指定なし'  
+        /   .form-group 
+        /     = f.submit class: 'btn btn-outline-primary'
+      
+  #main-create-selectfighter
+  .main-create-selectfighter
+    .inner
+      .sec-title
+        p コンボを投稿する
+      .sec-message
+        p 覚えておきたいコンボや自身で開拓したコンボを投稿します
+        p ファイターをクリックするとコンボ投稿作成ページへジャンプします
+      .fighter-list
+        .row
+          - @fighters.each do |fighter|
+            .col 
+              //(class="fighter-list-item")
+              = link_to new_combo_path(fighter_id: fighter.id), class: "fighter-list-item-name"
+                = attachment_image_tag fighter, :fighter_image, fallback: 'no-image.png', class: 'fighter-list-item-image', width:'60', height:'60'
+                = fighter.name
+      

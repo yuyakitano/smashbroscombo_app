@@ -10,6 +10,8 @@
   .form-group 
     = f.label :fighter
     = f.collection_select :fighter_id, @fighter, :id, :name, prompt: true
+    / = f.collection_select :fighter_id, @fighter, :id, :fighter_image, prompt: true
+    /  attachment_image_tag @combo.fighter, :fighter_image, size: '80x80', fallback: 'no-image.png'
   .form-group 
     = f.label :genre
     = f.collection_select :genre_id, @genre, :id, :name, prompt: true
@@ -22,15 +24,17 @@
     = f.text_field :startpossibledamage_min, id: 'combo_startpossibledamage_min'
     = f.label :max, "最大"
     = f.text_field :startpossibledamage_max, id: 'combo_startpossibledamage_max' 
-  / .form-group 
-  /   = f.label :combocommand
-  /   = f.collection_select(:command_ids, @commands, :id, :name, {}, {multiple: true} )
-  
+
   .form-group 
     = f.label :combocommand
     = f.hidden_field :commands11, id: "hidden1"
   .btn-btn-primary#btnJs
-    = f.collection_check_boxes(:command_ids, @commands, :id, :name, {})
+    = f.collection_check_boxes(:command_ids, @commands, :id, :name, {}) do |b|  
+      = b.label class:"btn btn-secondary border border-dark" do
+        = b.check_box
+        = b.label {b.text}
+          / collectioncheckboxのlabelを装飾する方法を調べる
+
   |作成中コンボ
   #target 
     

@@ -39,12 +39,12 @@ class UsersController < ApplicationController
 
   #ログインユーザー自身のデータしか編集できない。
   
-  # def ensure_current_user
+  def ensure_current_user
     
-  #   if current_user.id != params[:id].to_i
-  #     redirect_to combos_url, notice: "権限がありません"
-  #   end
-  # end
+    if current_user.id != params[:id].to_i
+      redirect_to combos_url, notice: "権限がありません"
+    end
+  end
 
 
 

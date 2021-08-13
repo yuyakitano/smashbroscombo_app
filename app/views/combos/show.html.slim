@@ -11,8 +11,9 @@ table.table.table-hover
       td = @combo.name
     tr
       th = Combo.human_attribute_name(:fighter)
-      td = @combo.fighter.name
-    tr
+      /td = @combo.fighter.name
+      td = attachment_image_tag @combo.fighter, :fighter_image, size: '80x80', fallback: 'no-image.png', alt: @combo.fighter.name
+    tr     
       th = Combo.human_attribute_name(:genre)
       td = @combo.genre.name
     tr
@@ -27,9 +28,12 @@ table.table.table-hover
     tr
       th = Combo.human_attribute_name(:combocommand)
       /- binding.pry
+
       td
+      
         - @combo.commands.each do |command|
-          = command.name
+          .btn.btn-secondary.border.border-dark 
+            = command.name 
       /td = @combo.command_ids.name
     tr
       th = Combo.human_attribute_name(:damage_dealt)

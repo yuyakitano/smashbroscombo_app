@@ -1,0 +1,40 @@
+.search-fighter-main-wrap {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.search-fighter-main-wrap .search-fighter-title .inner {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-fighter-main-wrap .search-fighter-title .inner .search-fighter-title-text {
+  //width: 100%;
+  margin: 0;
+  //padding: 5% 0 1% 0;
+  font-size: 250%;
+  font-weight: bold;
+  //text-align: center;
+  color: black;
+}
+
+.search-fighter-main-wrap .search-fighter-content .search-fighter-search-menu {
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px black;
+  border-radius: 3px;
+
+}
+.search-fighter-main-wrap .search-fighter-content .search-fighter-search-menu .inner {
+  padding: 1%;
+  
+}
+
+.search-fighter-main-wrap .search-fighter-content .search-fighter-search-menu .inner .search-menu-form .search-form .search-group {
+   display: flex;
+}

@@ -1,4 +1,5 @@
 
+
 doctype html
 html
   head
@@ -7,43 +8,105 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    
-    
+    meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    title= content_for?(:title) ? yield(:title) : "スマブラコンボメーカー"
     script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    .app-title.navbar.navbar-expand-md.navbar-light.bg-light 
-      .navbar-brand スマブラコンボアプリ
-      - if user_signed_in?
-        = link_to 'ログアウト', destroy_user_session_path, method: :delete, data:{confirm: 'ログアウトしますか？'}
-        p7　ようこそ
-        = current_user.username
-        p7 さん
-        = link_to 'マイページ', user_path(current_user.id)
-        
-        = link_to '通知一覧', notifications_path(current_user.id), class: 'nav-link'
 
-      - elsif admin_signed_in?
+    / .app-title.navbar.navbar-expand-md.navbar-light.bg-light 
+    /   .container
+    wrapper
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+        - if user_signed_in?
+          .container-fluid
+            a.navbar-brand href="/main"
+              = image_tag('105.jpeg', class: "navbar-brand-logo-image", width: "25", height: "25" )
+              / = image_tag "105.png", size: "16x16", alt: "アイコン"
+              / alt="logo" height="25" width="25" 
+              /img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
+              .navbar-brand-logo-word
+                | スマブラコンボメーカー
+            a.navbar-item
+              p7　ようこそ
+              = current_user.username
+              p7 さん
+            button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button" 
+              span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse
+              ul.navbar-nav
+                li.nav-item
+                /main#main-search-fighter
+                li.nav-item.dropdown
+                  a#navbarDropdown.nav-link.dropdown-toggle href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    | TOP
+                  ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+                    li 
+                      a.dropdown-item href="/main#main-search-fighter" 
+                        |ファイターから人気コンボを探す
+                    li 
+                      a.dropdown-item href="/main#main-search-condition"
+                        | 条件を指定してコンボを探す
+                    li 
+                      a.dropdown-item href="/main#main-create-selectfighter"
+                        | コンボを投稿する
 
-        | 管理者
-        = link_to 'ユーザー一覧', admin_users_path, class: 'nav-link'
-        = link_to 'お問い合わせメッセージ一覧', admin_contacts_path, class: 'nav-link'
-        = link_to '全コメント一覧', admin_comments_path, class: 'nav-link'
-        = link_to '管理者用コンボ一覧', admin_combos_path, class: 'nav-link'
-        = link_to 'ログアウト', destroy_admin_session_path, method: :delete       
-      - else
-        = link_to 'ユーザー新規登録', new_user_registration_path, class: 'nav-link'
-        = link_to 'ログイン', new_user_session_path, class: 'nav-link'
-        = link_to '管理者用', new_admin_session_path, class: 'nav-link'
-      = link_to 'コンボ一覧', combos_path, class: 'nav-link'
-
-    .container
-      - if flash.notice.present?
-        .alert.alert-success = flash.notice
-
-    / User Login Notification
-    p class="notice" = notice
-    p class="alert" = alert
-
-    = yield
+                
+                li.nav-item
+                  /a.nav-link.active aria-current="page" href="#"  Home
+                  a.nav-link href="/users/#{current_user.id}" マイページ
+                li.nav-item
+                  a.nav-link href="/notifications.#{current_user.id}" 通知一覧
+                li.nav-item
+                  a.nav-link href="/users/sign_out" data-confirm="ログアウトしますか？" data-method="delete" ログアウト
+        - elsif admin_signed_in?
+          .container-fluid
+            a.navbar-brand href="/combos"
+              img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
+              | スマブラコンボメーカー
+            a.navbar-item
+              | 管理者
+            button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button" 
+              span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse
+              ul.navbar-nav
+                li.nav-item
+                  a.nav-link.active aria-current="page" href="/combos" HOME
+                li.nav-item
+                  /a.nav-link.active aria-current="page" href="#"  Home
+                  a.nav-link href="/users/#{current_user.id}" マイページ
+                li.nav-item
+                  a.nav-link href="/notifications.#{current_user.id}" 通知一覧
+                li.nav-item
+                  a.nav-link href="/users/sign_out" data-confirm="ログアウトしますか？" data-method="delete" ログアウト
+        - else
+          .container-fluid.justify-content-start
+            a.navbar-brand href="/combos"
+              img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
+              | スマブラコンボメーカー
+            = link_to 'ユーザー新規登録', new_user_registration_path, class: 'nav-link'
+            = link_to 'ログイン', new_user_session_path, class: 'nav-link'
+      main
+        - if flash.notice.present?
+          .alert.alert-success = flash.notice
+        /p class="notice" = notice
+        /p class="alert" = alert
+        .main-content
+          = yield 
+      footer
+        / .globalfooter
+        .inner
+          .footer-corporate
+            | &copy;SUMASHBROSCOMBOMAKER
+          .footer-link
+            ul
+              li
+                a = link_to '→お問い合わせ', new_contact_path, class: 'link'
+              li
+                a = link_to "→トップ", main_path, class: 'link'
+    script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"
+    script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"
+    script src="/https:/getbootstrap.com/docs/5.0/assets/js/docs.min.js"
