@@ -1,3 +1,19 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.devise-wrap .inner {
+  margin: 50px 0 100px 20px;
+}
+
+.devise-wrap .inner .devise-content .actions {
+  margin: 10px 0 0 0;
+}
+
+.devise-wrap .inner .devise-title{
+  font-size: 200%;
+  font-weight: bolder;
+}
+.devise-wrap .inner .devise-title{
+  font-size: 130%;
+}

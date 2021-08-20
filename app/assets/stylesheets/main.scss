@@ -1,5 +1,8 @@
 // @import "bootstrap";
+.main-content {
+  min-width: 530px;
 
+}
 
 
 .main-title {
@@ -20,6 +23,7 @@
   font-size: 500%;
   color: black;
   font-weight: 90;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
 }
 
 .main-title .inner .title-message {
@@ -39,6 +43,22 @@
 }
 .main-title .inner .title-menu .title-menu-link {
   margin: 1%;
+  
+}
+.main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
+  min-width: 330px;
+  
+}
+
+
+.main-title .inner .title-menu .title-menu-link .btn.btn-outline-info {
+  min-width: 330px;
+  
+}
+
+.main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
+  min-width: 330px;
+  
 }
 
 .title-button-title {
@@ -80,13 +100,16 @@
   padding-top: 5px;
   border: solid 0.5px rgb(67, 67, 67);
   text-decoration: none;
+  
 }
 
+
 .sec-title {
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   width: 100%;
   margin: 0;
-  padding: 10% 0 3% 0;
-  font-size: 250%;
+  padding: 6% 0 1% 0;
+  font-size: 260%;
   font-weight: bold;
   text-align: center;
   color: black;
@@ -94,7 +117,7 @@
 .sec-message {
   width: 100%;
   margin: 0;
-  padding: 0 0 1% 0;
+  padding: 0;
   font-size: 150%;
   font-weight: bold;
   text-align: center;
@@ -111,8 +134,11 @@
 }
 
 .fighter-list-item-name {
+  flex: none;
   text-decoration: none;
-
+  color: rgb(52, 52, 52);
+  font-weight: 800;
+  
 }
 
 
@@ -122,34 +148,142 @@
 
 
 .main-search-condition {
+  min-height: 730px;
+  background-color: rgb(255, 150, 194);
+}
 
-  width: 90%;
+.main-search-condition .inner{
+
+  //width: 90%;
   margin-left: auto;
   margin-right: auto;
   //text-align: center;
   justify-content: center;
   
   min-height: 400px;
-  background-color: #fff;
+  
+}
+.main-search-condition .inner .main-search-condition-content {
+  padding-bottom: 20px;
 }
 
-
-
-.main-search-fighter-content .main-search-fighter-search-menu {
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  border: solid 1px black;
-  border-radius: 3px;
+.main-search-condition .inner .main-search-condition-content .main-search-form-box {
+  max-width: 700px;
+  min-width: 300px;
 }
-.main-search-fighter-content .main-search-fighter-search-menu .inner {
-  padding: 1%;
+.main-search-condition .inner .main-search-condition-content .main-search-form-box {
+  height: 550px;
+  width: 85%;
+  align-items: center;
+  margin: 20px auto;
+
+}
+
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .aa {
+  height: 100%;
+  width: 100%;
+  background-color: #ffe6fa;
+  border-radius: 140px 140px 0 0;
+  z-index: 20;
+}
+
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-title {
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 12%;
+  left: 50%;
+  font-size: 3em;
+  text-align: center;
+}
+
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
+
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 60%;
+  left: 50%;
+  font-size: 2em;
+  padding: 0 0 0 40px ;
+  z-index: 60;
+}
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form .row.g-3 .main-search-form .col-12 {
+  margin: 20px 0 0 0;
+
+  
+}
+.main-search-condition .main-search-condition-content .main-search-form-box .aa .main-search-menu-form .row.g-3 .main-search-form .col-12 .btn.btn-primary {
+  font-size: 120%;
   
 }
 
-.main-search-fighter-content .main-search-fighter-search-menu .inner .main-search-menu-form .main-search-form .main-search-group {
-   display: flex;
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .bb {
+  height: 23px;
+  width: 100%;
+  background-color: rgb(255, 150, 194);
+  position: relative;
+  transform: translate(-50% ,-50%);
+  top: -73%;
+  left: 50%;
+  z-index: 30;
 }
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .cc {
+  height: 85px;
+  width: 27%;
+  background-color: #ffe6fa;
+  position: relative;
+  transform: translate(-50% ,-50%);
+  top: -77%;
+  left: 50%;
+  z-index: 40;
+}
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .dd {
+  height: 65px;
+  width: 16%;
+  background-color: rgb(255, 150, 194);
+  position: relative;
+  transform: translate(-50% ,-50%);
+  top: -93%;
+  left: 50%;
+  z-index: 50;
+}
+.main-search-condition .inner .main-search-condition-content .main-search-form-box .ee {
+  height: 60px;
+  width: 8%;
+  background-color: rgb(255, 150, 194);
+  position: relative;
+  transform: translate(-50% ,-50%);
+  top: -99%;
+  left: 50%;
+  z-index: 50;
+}
+
+.main-search-condition .main-search-condition-content .main-search-condition-search-menu .main-search-menu-form .main-search-menu-content .row.g-3 .main-search-form .main-search-group {
+  font-size: 160%;
+  
+}
+
+
+.main-create-selectfighter .inner .combo-create-button .create-button-text {
+  padding-bottom: 20px;
+  
+}
+
+.main-create-selectfighter .inner .combo-create-button .create-button-text .btn.btn-primary.btn-lg {
+  font-size: 200%;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -162,7 +296,7 @@
   text-align: center;
 
   margin: 0;
-  min-height: 760px;
+  // min-height: 290px;
   background-color: #fff;
 }
 

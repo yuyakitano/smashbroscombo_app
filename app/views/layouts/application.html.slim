@@ -38,21 +38,27 @@ html
               span.navbar-toggler-icon
             #navbarNav.collapse.navbar-collapse
               ul.navbar-nav
+                
                 li.nav-item
+                  a.nav-link href="/main#main-search-fighter" ファイターから人気コンボを探す
+                li.nav-item
+                  a.nav-link href="/main#main-search-condition" 条件を指定してコンボを探す
+                li.nav-item
+                  a.nav-link href="/main#main-create-selectfighter" コンボを投稿する
                 /main#main-search-fighter
-                li.nav-item.dropdown
-                  a#navbarDropdown.nav-link.dropdown-toggle href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                    | TOP
-                  ul class="dropdown-menu" aria-labelledby="navbarDropdown"
-                    li 
-                      a.dropdown-item href="/main#main-search-fighter" 
-                        |ファイターから人気コンボを探す
-                    li 
-                      a.dropdown-item href="/main#main-search-condition"
-                        | 条件を指定してコンボを探す
-                    li 
-                      a.dropdown-item href="/main#main-create-selectfighter"
-                        | コンボを投稿する
+                / li.nav-item.dropdown
+                /   a#navbarDropdown.nav-link.dropdown-toggle href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                /     | TOP
+                /   ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+                /     li 
+                /       a.dropdown-item href="/main#main-search-fighter" 
+                /         |ファイターから人気コンボを探す
+                /     li 
+                /       a.dropdown-item href="/main#main-search-condition"
+                /         | 条件を指定してコンボを探す
+                /     li 
+                /       a.dropdown-item href="/main#main-create-selectfighter"
+                /         | コンボを投稿する
 
                 
                 li.nav-item
@@ -64,7 +70,7 @@ html
                   a.nav-link href="/users/sign_out" data-confirm="ログアウトしますか？" data-method="delete" ログアウト
         - elsif admin_signed_in?
           .container-fluid
-            a.navbar-brand href="/combos"
+            a.navbar-brand href="/main"
               img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
               | スマブラコンボメーカー
             a.navbar-item
@@ -84,11 +90,33 @@ html
                   a.nav-link href="/users/sign_out" data-confirm="ログアウトしますか？" data-method="delete" ログアウト
         - else
           .container-fluid.justify-content-start
-            a.navbar-brand href="/combos"
+            a.navbar-brand href="/main"
               img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
               | スマブラコンボメーカー
-            = link_to 'ユーザー新規登録', new_user_registration_path, class: 'nav-link'
-            = link_to 'ログイン', new_user_session_path, class: 'nav-link'
+            /= link_to 'ユーザー新規登録(無料)', new_user_registration_path, class: 'nav-link'
+            /= link_to 'ログイン', new_user_session_path, class: 'nav-link'
+            button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button" 
+              span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse
+              ul.navbar-nav
+                li.nav-item
+                /main#main-search-fighter
+                li.nav-item.dropdown
+                  /li.nav-item
+                    a.nav-link href="/main" TOPページへ
+                  li.nav-item
+                    a.nav-link href="/users/sign_up" ユーザー新機登録(無料)
+                  li.nav-item
+                    a.nav-link href="/users/sign_in" ログイン
+                        
+                  li.nav-item
+                    a.nav-link href="/main#main-search-fighter" ファイターから人気コンボを探す
+                  li.nav-item
+                    a.nav-link href="/main#main-search-condition" 条件を指定してコンボを探す
+                  li.nav-item
+                    a.nav-link href="/main#main-create-selectfighter" コンボを投稿する
+
+
       main
         - if flash.notice.present?
           .alert.alert-success = flash.notice

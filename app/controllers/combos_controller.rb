@@ -27,8 +27,8 @@ class CombosController < ApplicationController
     end
 
 
-    @q = Combo.ransack(params[:q])
-    @combos = @q.result(distinct: true).page(params[:page]).order(created_at: :desc)
+    # @q = Combo.ransack(params[:q])
+    # @combos = @q.result(distinct: true).page(params[:page]).order(created_at: :desc)
     @users = User.all 
     @fighter = Fighter.all
     @genre = Genre.all
@@ -39,22 +39,22 @@ class CombosController < ApplicationController
       # limit(3)で表示する最大数を3個に指定、pluckで:combo_idカラムのみを数字で取り出す。
       # Combo.find()でplackで取り出された数字をcombo_idとしていいね数順にcomboを取得できる。
     
-    to       = Time.current
-    week_from    = (to - 7.day)
-    month_from   = (to - 31.day)
-    year_from    = (to - 36.day)
+    # to       = Time.current
+    # week_from    = (to - 7.day)
+    # month_from   = (to - 31.day)
+    # year_from    = (to - 36.day)
 
-    if params[:rank] == "all"
-      @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
-    elsif params[:rank] == "week"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(10)
-    elsif params[:rank] == "month"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(5)
-    elsif params[:rank] == "year"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(5)
-    else
-      @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
-    end
+    # if params[:rank] == "all"
+    #   @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
+    # elsif params[:rank] == "week"
+    #   @like_ranks = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(10)
+    # elsif params[:rank] == "month"
+    #   @like_ranks = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(5)
+    # elsif params[:rank] == "year"
+    #   @like_ranks = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(5)
+    # else
+    #   @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
+    # end
 
 
 
@@ -111,26 +111,31 @@ class CombosController < ApplicationController
       @combos = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(30).pluck(:combo_id))
     end
 
-
-
   end
 
 
   def search_fighter
+    to       = Time.current
+    week_from    = (to - 7.day)
+    month_from   = (to - 31.day)
+    year_from    = (to - 36.day)
+    search_fighter_id = params[:search_fighter_id].to_i
+    if params[:rank] == "all"
+      like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(100).pluck(:combo_id))
+    elsif params[:rank] == "week"
+      like_ranks = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(100)
+    elsif params[:rank] == "month"
+      like_ranks = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(100)
+    elsif params[:rank] == "year"
+      like_ranks = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(100)
+    else
+      like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(100).pluck(:combo_id))
+    end
+    @combos = like_ranks.select{ |combo| combo.fighter_id==search_fighter_id}
+    # search_fighter_id = params[:search_fighter_id].to_i
+    # combos = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
+    # @combos = combos.select{ |combo| combo.fighter_id==search_fighter_id}
     
-    
-    @q = Combo.ransack(fighter_id_eq: params[:search_fighter_id])
-    #@q = Combo.ransack(params[:q], fighter_id_eq: params[:search_fighter_id])
-    @combos = @q.result(distinct: true).page(params[:page]).order(created_at: :desc)
-    #search_fighter_id = 
-    
-    #binding.pry
-    #@q = Combo.ransack(fighter_id_matches: search_fighter_id, Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
-    #binding.pry
-
-    #@combos = @q.result(distinct: true).page(params[:page])
-    #@combos_fighter = @combos.find(params[fighter_id: search_fighter_id])
-    #binding.pry
     @users = User.all 
     @fighter = Fighter.all
     @genre = Genre.all
@@ -140,23 +145,19 @@ class CombosController < ApplicationController
       # Likeテーブル内のcombo_idが同じものにグループを分け、それを番号の多い順に並び替える、
       # limit(3)で表示する最大数を3個に指定、pluckで:combo_idカラムのみを数字で取り出す。
       # Combo.find()でplackで取り出された数字をcombo_idとしていいね数順にcomboを取得できる。
-    
-    to       = Time.current
-    week_from    = (to - 7.day)
-    month_from   = (to - 31.day)
-    year_from    = (to - 36.day)
 
-    if params[:rank] == "all"
-      @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
-    elsif params[:rank] == "week"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(10)
-    elsif params[:rank] == "month"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(5)
-    elsif params[:rank] == "year"
-      @like_ranks = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(5)
-    else
-      @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
-    end
+
+    # if params[:rank] == "all"
+    #   @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
+    # elsif params[:rank] == "week"
+    #   @like_ranks = Combo.joins(:likes).where(likes: { created_at:week_from...to}).group(:id).order("count(*) desc").limit(10)
+    # elsif params[:rank] == "month"
+    #   @like_ranks = Combo.joins(:likes).where(likes: { created_at:month_from...to}).group(:id).order("count(*) desc").limit(5)
+    # elsif params[:rank] == "year"
+    #   @like_ranks = Combo.joins(:likes).where(likes: { created_at:year_from...to}).group(:id).order("count(*) desc").limit(5)
+    # else
+    #   @like_ranks = Combo.find(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
+    # end
 
 
   end

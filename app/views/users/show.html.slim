@@ -3,8 +3,8 @@
 - else
   h1 ユーザー詳細画面
 
-.nav.justify-content-end
-  = link_to 'メインページへ', combos_path, class: 'nav-link'
+/ .nav.justify-content-end
+/   = link_to 'メインページへ', combos_path, class: 'nav-link'
 table.table.table-hover
   tbody
     tr
@@ -30,21 +30,21 @@ table.table.table-hover
   = link_to 'ユーザー情報編集', edit_user_path, data: {"turbolinks" => false}, class: 'btn btn-primary mr-3'  
   = link_to 'ユーザー削除', @user, method: :delete, data: { confirm: "ユーザーデータを削除します。よろしいですか？"}, class: 'btn btn-danger'
 
-= link_to 'フォロー',  [@user, :followings] 
+= link_to 'フォロー',  [@user, :followings]
 = link_to 'フォロワー',  [@user, :followers]
 - if user_signed_in? && current_user != @user
   - if current_user.active_relationships.exists?(target_user_id: @user.id)
-    = link_to 'フォロー解除', [@user, :follow], method: :delete
+    = link_to 'フォロー解除', [@user, :follow], method: :delete, class: "btn btn-outline-secondary"
     - if current_user.active_relationships.exists?(notification: false)
       p コンボ投稿時の通知オフ🔕
-      = link_to "コンボ投稿時に通知する", user_follow_notification_path(user_id: @user.id), method: :post
+      = link_to "コンボ投稿時に通知する", user_follow_notification_path(user_id: @user.id), method: :post, class: "btn btn-outline-light"
       
     - else 
       p コンボ投稿時の通知オン🔔
-      = link_to "コンボ投稿時の通知をオフにする", user_follow_notification_path(user_id: @user.id), method: :post
+      = link_to "コンボ投稿時の通知をオフにする", user_follow_notification_path(user_id: @user.id), method: :post, class: "btn btn-outline-warning"
 
   - else
-    = link_to '👤フォローする', [@user, :follow], method: :post
+    = link_to '👤フォローする', [@user, :follow], method: :post, class: "btn btn-outline-success"
 
 #mypagecombo
 - if request.query_string == "combo=followingcombo"

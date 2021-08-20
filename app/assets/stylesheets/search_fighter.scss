@@ -8,8 +8,14 @@
 
 .search-fighter-main-wrap .search-fighter-title .inner {
   display: flex;
-  align-items: center;
+  //align-items: center;
   margin-bottom: 10px;
+}
+.search-fighter-main-wrap .search-fighter-title .inner .search-fighter-title-text{
+  display: flex;
+  flex-wrap: wrap;
+  
+  
 }
 
 .search-fighter-main-wrap .search-fighter-title .inner .search-fighter-title-text {
