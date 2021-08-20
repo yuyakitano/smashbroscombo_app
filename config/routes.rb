@@ -1,3 +1,12 @@
+class ErrorAvoid
+  def initialize
+    @url = "attachments/"
+  end
+
+  def matches?(request)
+    @url.include?(request.url)
+  end
+end
 Rails.application.routes.draw do
   
   namespace :admin do
@@ -74,4 +83,5 @@ Rails.application.routes.draw do
   post 'contacts/back', to: 'contacts#back', as: 'back'  
   #「お問い合わせ投稿完了しました」画面が必要なら
   #get 'done', to: 'contacts#done', as: 'done'
+
 end
