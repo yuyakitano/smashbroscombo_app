@@ -44,7 +44,7 @@
             .col 
               //(class="fighter-list-item")
               = link_to search_fighter_combos_path(search_fighter_id: fighter.id, rank: "all"), class: "fighter-list-item-name"
-                = attachment_image_tag fighter, :fighter_image, fallback: 'no-image.png', class: 'fighter-list-item-image', width:'60', height:'60'
+                = attachment_image_tag fighter, :fighter_image, format: 'jpeg', fallback: 'no-image.png', class: 'fighter-list-item-image', size: "60*60"
                 = fighter.name
   #main-search-condition
   .main-search-condition
