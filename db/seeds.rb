@@ -6,94 +6,94 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Command.find_or_create_by!(name: "ジャンプ") do |command|
-  command.name = "ジャンプ" 
-Command.find_or_create_by!(name: "小ジャンプ") do |command|
-  command.name = "小ジャンプ" 
-Command.find_or_create_by!(name: "大ジャンプ") do |command|
-  command.name = "大ジャンプ" 
-Command.find_or_create_by!(name: "A") do |command|
-  command.name = "A" 
-Command.find_or_create_by!(name: "上強攻撃") do |command|
-  command.name = "上強攻撃" 
-Command.find_or_create_by!(name: "下強攻撃") do |command|
-  command.name = "下強攻撃" 
-Command.find_or_create_by!(name: "前強攻撃") do |command|
-  command.name = "前強攻撃" 
-Command.find_or_create_by!(name: "後強攻撃") do |command|
-  command.name = "後強攻撃" 
-Command.find_or_create_by!(name: "空NA") do |command|
-  command.name = "空NA" 
-Command.find_or_create_by!(name: "空上A") do |command|
-  command.name = "空上A" 
-Command.find_or_create_by!(name: "空下A") do |command|
-  command.name = "空下A" 
-Command.find_or_create_by!(name: "空前A") do |command|
-  command.name = "空前A" 
-Command.find_or_create_by!(name: "空後A") do |command|
-  command.name = "空後A" 
-Command.find_or_create_by!(name: "B") do |command|
-  command.name = "B" 
-Command.find_or_create_by!(name: "上B") do |command|
-  command.name = "上B" 
-Command.find_or_create_by!(name: "下B") do |command|
-  command.name = "下B" 
-Command.find_or_create_by!(name: "前横B") do |command|
-  command.name = "前横B" 
-Command.find_or_create_by!(name: "後横B") do |command|
-  command.name = "後横B" 
-Command.find_or_create_by!(name: "空NB") do |command|
-  command.name = "空NB" 
-Command.find_or_create_by!(name: "空上B") do |command|
-  command.name = "空上B" 
-Command.find_or_create_by!(name: "空下B") do |command|
-  command.name = "空下B" 
-Command.find_or_create_by!(name: "空前横B") do |command|
-  command.name = "空前横B" 
-Command.find_or_create_by!(name: "空後横B") do |command|
-  command.name = "空後横B" 
-Command.find_or_create_by!(name: "低空ヒット") do |command|
-  command.name = "低空ヒット" 
-Command.find_or_create_by!(name: "次") do |command|
-  command.name = "次" 
-Command.find_or_create_by!(name: "前投げ") do |command|  
-  command.name = "前投げ" 
-Command.find_or_create_by!(name: "後投げ") do |command|
-  command.name = "後投げ" 
-Command.find_or_create_by!(name: "上投げ") do |command|
-  command.name = "上投げ" 
-Command.find_or_create_by!(name: "下投げ") do |command|
-  command.name = "下投げ" 
+# Command.find_or_create_by!(name: "ジャンプ") do |command|
+#   command.name = "ジャンプ" 
+# Command.find_or_create_by!(name: "小ジャンプ") do |command|
+#   command.name = "小ジャンプ" 
+# Command.find_or_create_by!(name: "大ジャンプ") do |command|
+#   command.name = "大ジャンプ" 
+# Command.find_or_create_by!(name: "A") do |command|
+#   command.name = "A" 
+# Command.find_or_create_by!(name: "上強攻撃") do |command|
+#   command.name = "上強攻撃" 
+# Command.find_or_create_by!(name: "下強攻撃") do |command|
+#   command.name = "下強攻撃" 
+# Command.find_or_create_by!(name: "前強攻撃") do |command|
+#   command.name = "前強攻撃" 
+# Command.find_or_create_by!(name: "後強攻撃") do |command|
+#   command.name = "後強攻撃" 
+# Command.find_or_create_by!(name: "空NA") do |command|
+#   command.name = "空NA" 
+# Command.find_or_create_by!(name: "空上A") do |command|
+#   command.name = "空上A" 
+# Command.find_or_create_by!(name: "空下A") do |command|
+#   command.name = "空下A" 
+# Command.find_or_create_by!(name: "空前A") do |command|
+#   command.name = "空前A" 
+# Command.find_or_create_by!(name: "空後A") do |command|
+#   command.name = "空後A" 
+# Command.find_or_create_by!(name: "B") do |command|
+#   command.name = "B" 
+# Command.find_or_create_by!(name: "上B") do |command|
+#   command.name = "上B" 
+# Command.find_or_create_by!(name: "下B") do |command|
+#   command.name = "下B" 
+# Command.find_or_create_by!(name: "前横B") do |command|
+#   command.name = "前横B" 
+# Command.find_or_create_by!(name: "後横B") do |command|
+#   command.name = "後横B" 
+# Command.find_or_create_by!(name: "空NB") do |command|
+#   command.name = "空NB" 
+# Command.find_or_create_by!(name: "空上B") do |command|
+#   command.name = "空上B" 
+# Command.find_or_create_by!(name: "空下B") do |command|
+#   command.name = "空下B" 
+# Command.find_or_create_by!(name: "空前横B") do |command|
+#   command.name = "空前横B" 
+# Command.find_or_create_by!(name: "空後横B") do |command|
+#   command.name = "空後横B" 
+# Command.find_or_create_by!(name: "低空ヒット") do |command|
+#   command.name = "低空ヒット" 
+# Command.find_or_create_by!(name: "次") do |command|
+#   command.name = "次" 
+# Command.find_or_create_by!(name: "前投げ") do |command|  
+#   command.name = "前投げ" 
+# Command.find_or_create_by!(name: "後投げ") do |command|
+#   command.name = "後投げ" 
+# Command.find_or_create_by!(name: "上投げ") do |command|
+#   command.name = "上投げ" 
+# Command.find_or_create_by!(name: "下投げ") do |command|
+#   command.name = "下投げ" 
 
-# Command.create(name: "ジャンプ") 
-# Command.create(name: "小ジャンプ") 
-# Command.create(name: "大ジャンプ") 
-# Command.create(name: "A") 
-# Command.create(name: "上強攻撃") 
-# Command.create(name: "下強攻撃") 
-# Command.create(name: "前強攻撃") 
-# Command.create(name: "後強攻撃") 
-# Command.create(name: "空NA") 
-# Command.create(name: "空上A") 
-# Command.create(name: "空下A") 
-# Command.create(name: "空前A") 
-# Command.create(name: "空後A") 
-# Command.create(name: "B") 
-# Command.create(name: "上B") 
-# Command.create(name: "下B") 
-# Command.create(name: "前横B") 
-# Command.create(name: "後横B") 
-# Command.create(name: "空NB") 
-# Command.create(name: "空上B") 
-# Command.create(name: "空下B") 
-# Command.create(name: "空前横B") 
-# Command.create(name: "空後横B")
-# Command.create(name: "低空ヒット")
-# Command.create(name: "次") 
-# Command.create(name: "前投げ") 
-# Command.create(name: "後投げ") 
-# Command.create(name: "上投げ") 
-# Command.create(name: "下投げ") 
+Command.create(name: "ジャンプ") 
+Command.create(name: "小ジャンプ") 
+Command.create(name: "大ジャンプ") 
+Command.create(name: "A") 
+Command.create(name: "上強攻撃") 
+Command.create(name: "下強攻撃") 
+Command.create(name: "前強攻撃") 
+Command.create(name: "後強攻撃") 
+Command.create(name: "空NA") 
+Command.create(name: "空上A") 
+Command.create(name: "空下A") 
+Command.create(name: "空前A") 
+Command.create(name: "空後A") 
+Command.create(name: "B") 
+Command.create(name: "上B") 
+Command.create(name: "下B") 
+Command.create(name: "前横B") 
+Command.create(name: "後横B") 
+Command.create(name: "空NB") 
+Command.create(name: "空上B") 
+Command.create(name: "空下B") 
+Command.create(name: "空前横B") 
+Command.create(name: "空後横B")
+Command.create(name: "低空ヒット")
+Command.create(name: "次") 
+Command.create(name: "前投げ") 
+Command.create(name: "後投げ") 
+Command.create(name: "上投げ") 
+Command.create(name: "下投げ") 
 Fighter.create(fighter_id:1, name: "マリオ", fighter_image: File.open("./app/assets/images/1.jpeg")) 
 Fighter.create(fighter_id:2, name: "ドンキーコング", fighter_image: File.open("./app/assets/images/2.jpeg")) 
 Fighter.create(fighter_id:3, name: "リンク", fighter_image: File.open("./app/assets/images/3.jpeg")) 
