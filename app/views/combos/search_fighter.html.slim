@@ -3,7 +3,7 @@
     .search-fighter-title
       .inner
         .search-fighter-title-image
-          = attachment_image_tag @search_fighter, :fighter_image, fallback: 'no-image.png', size: '35x35', alt: @search_fighter.name
+          = attachment_image_tag @search_fighter, :fighter_image, fallback: './app/assets/images/no-image.png', size: '35x35', alt: @search_fighter.name
         .search-fighter-title-text
           p #{@search_fighter.name}のコンボ
           - if request.query_string == "rank=all&search_fighter_id=search_fighter_id"
