@@ -1,12 +1,3 @@
-class ErrorAvoid
-  def initialize
-    @url = "attachments/"
-  end
-
-  def matches?(request)
-    @url.include?(request.url)
-  end
-end
 Rails.application.routes.draw do
   
   namespace :admin do
