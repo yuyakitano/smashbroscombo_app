@@ -187,5 +187,3 @@ Genre.create(name: 'ダメージ用')
 
 Startposition.create(name: '地上')
 Startposition.create(name: '空中')
-
-end
