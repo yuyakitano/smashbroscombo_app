@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to combos_url, notice: "ユーザーを削除しました"
+    redirect_to main_path, notice: "ユーザーを削除しました"
 	end
 
   def combos
@@ -50,6 +50,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :introduction, :profile_image)
+    params.require(:user).permit(:username, :email, :introduction, :profile_image)
   end
 end
