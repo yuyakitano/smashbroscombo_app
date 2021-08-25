@@ -127,14 +127,16 @@ html
       footer
         / .globalfooter
         .inner
-          .footer-corporate
+          .footer-corporate-pc
             | &copy;SUMASHBROSCOMBOMAKER
           .footer-link
             ul
               li
-                a = link_to '→お問い合わせ', new_contact_path, class: 'link'
+                a = link_to '→お問い合わせ', new_contact_path, class: 'footer-link-text'
               li
-                a = link_to "→トップ", main_path, class: 'link'
+                a = link_to "→トップ", main_path, class: 'footer-link-text'
+          .footer-corporate-phone
+            | &copy;SUMASHBROSCOMBOMAKER
     script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"
     script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"
     script src="/https:/getbootstrap.com/docs/5.0/assets/js/docs.min.js"

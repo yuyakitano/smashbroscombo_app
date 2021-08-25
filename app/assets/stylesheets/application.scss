@@ -67,53 +67,11 @@ html {
   font-size: 62.5%;/*rem算出をしやすくするために*/
 }
 
-
-
-// .header-wrapper {
-  
-//   background-color: blue;
-// }
-
-// .header-box-wrapper {
-//   background-color: bisque;
-// }
-
-// a {
-//   color: white;
-// }
-
-
-
-
-
-
-
-
-
-// .navbar.navbar-default.navbar-static-top {
-//   background-color: bisque;
-// }
-
 .link{
   text-decoration: none;
 
 }
 
-
-// .header-content {
-  
-//   background-color: #ccc;
-  
-// }
-
-
-// .content-wrapper {
-//   display: flex;
-//   padding: 5px 0;
-// }
-// header {
-//   background-color: #222222;
-// }
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
   width: 100%;
   position: fixed;
@@ -174,32 +132,6 @@ main {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // footer
 /* フッタークリック後の表示も白にする */
 footer {
@@ -208,65 +140,134 @@ footer {
   width: 100%;
   // padding-bottom: 0;
 }
-footer .inner {
-  // width: 100%;
-  padding: 10px 20px;/* ヘッダー高さはロゴのフォントサイズ＋ここで決める */
-  display: flex;
-  // margin-right: auto;
-  // margin-left: auto;
-  // // display:  table-cell;
-  justify-content: space-between;
-  // align-items: center;
-  vertical-align:  middle;
-  
-}
-footer .inner .footer-corporate {
-  display: inline-block;
-  margin: 0;
-  color: #fff;
-}
-footer .inner .footer-link {
-  margin-left: auto;
-  margin-right: 0;
-  // display: inline-block;
-}
-footer .inner .footer-link ul {
-  margin: 0;
-  display: flex;
-  list-style: none;
-}
-footer .inner .footer-link ul li {
-  position: relative;  
-  margin-right: 20px;
-}
-footer .inner .footer-link ul li a {
-  margin: 0;
-  font-size: 75%;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  transition: .3s;
-  letter-spacing: .2em;
-  color: #fff;
-}
-footer .inner .footer-link ul li a::after {
-  position: absolute;
-  bottom: 0;
-  left: 0%;
-  width: 0;
-  height: 2px;
-  content: "";
-  transition: .2s;
-  -webkit-transform: translateX(-100%);
-  transform: translateX(0%);
-  background-color: #fff;
-}
+
+
  /* フロート時アンダーライン */
-footer .inner .footer-link ul li a:hover::after {
-  width: 100%;
-}
-footer .inner .footer-link ul li a:visited {
-  color: #fff;
-}
+ //PC時のみ
+
+  
 
 
+
+
+@media only screen and (min-width: 200px) {
+  footer .inner {
+    // width: 100%;
+    //padding: 10px 20px;/* ヘッダー高さはロゴのフォントサイズ＋ここで決める */
+    
+    // margin-right: auto;
+    // margin-left: auto;
+    // // display:  table-cell;
+    justify-content: space-between;
+    // align-items: center;
+    vertical-align:  middle;
+    text-align: center;
+  }
+  footer .inner .footer-corporate-pc {
+    display: none;
+  }
+  footer .inner .footer-corporate-phone {
+    width: 100%;
+    display: inline-block;
+    margin: 0;
+    color: #fff;
+    font-size: 140%;
+    border-top: 1px solid #111;
+
+  }
+  footer .inner .footer-link {
+    margin: 0;
+    text-align: center;
+  
+    // display: inline-block;
+  }
+  footer .inner .footer-link ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  footer .inner .footer-link ul li {
+    position: relative;  
+    padding: 20px;
+    margin: 0;
+    border-top: 1px solid #111;
+  }
+  footer .inner .footer-link ul li a {
+    margin: 0;
+    padding: 0;
+    font-size: 150%;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    //transition: .3s;
+    //letter-spacing: .2em;
+    color: #fff;
+  }
+}
+
+@media only screen and (min-width: 641px) {
+  footer .inner {
+    // width: 100%;
+    padding: 10px 20px;/* ヘッダー高さはロゴのフォントサイズ＋ここで決める */
+    display: flex;
+    // margin-right: auto;
+    // margin-left: auto;
+    // // display:  table-cell;
+    justify-content: space-between;
+    // align-items: center;
+    vertical-align:  middle;
+  }
+  footer .inner .footer-corporate-pc {
+    display: inline-block;
+    margin: 0;
+    color: #fff;
+    font-size: 140%;
+    align-self: center;
+  }
+  footer .inner .footer-corporate-phone {
+    display: none;
+  }
+  footer .inner .footer-link {
+    margin-left: auto;
+    margin-right: 0;
+    // display: inline-block;
+  }
+  footer .inner .footer-link ul {
+    margin: 0;
+    display: flex;
+    list-style: none;
+  }
+  footer .inner .footer-link ul li {
+    position: relative;  
+    padding: 20px;
+    margin-right: 20px;
+  }
+  footer .inner .footer-link ul li a {
+    margin: 0;
+    font-size: 150%;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: .3s;
+    letter-spacing: .2em;
+    color: #fff;
+  }
+  footer .inner .footer-link ul li a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    content: "";
+    transition: .2s;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(0%);
+    background-color: #fff;
+  }
+  footer .inner .footer-link ul li a:hover::after {
+    width: 100%;
+  }
+  footer .inner .footer-link ul li a:visited {
+    color: #fff; 
+  }
+}
