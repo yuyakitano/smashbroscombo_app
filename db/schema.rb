@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_21_082906) do
+ActiveRecord::Schema.define(version: 2021_08_27_063708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_082906) do
     t.integer "startpossibledamage_max"
     t.string "youtube_url"
     t.integer "good_or_bad"
-    t.integer "available?"
     t.integer "damage_dealt"
-    t.integer "kill_or_damage?"
     t.integer "user_id"
     t.integer "likes_count"
     t.integer "genre_id"

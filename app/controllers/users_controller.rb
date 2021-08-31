@@ -15,7 +15,6 @@ class UsersController < ApplicationController
       @combo = Combo.where(user_id: [*current_user.following_ids])
     end
     #@combos = Combo.where(:user_id == @user.id).order('updated_at DESC')
-    
   end
 
   def edit

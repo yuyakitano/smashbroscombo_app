@@ -13,7 +13,7 @@ table.table.table-hover
     tr
       th = Combo.human_attribute_name(:fighter)
       /td = @combo.fighter.name
-      td = image_tag("#{@combo.fighter_id}.jpeg", size: '80x80') 
+      td = image_tag("#{@combo.fighter.fighter_id}.jpeg", size: '80x80') 
       //td = attachment_image_tag @combo.fighter, :fighter_image, size: '80x80', fallback: 'no-image.png', alt: @combo.fighter.name
     tr     
       th = Combo.human_attribute_name(:genre)

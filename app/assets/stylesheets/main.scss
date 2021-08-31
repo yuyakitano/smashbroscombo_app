@@ -29,6 +29,8 @@
 .main-title .inner .title-message {
   font-weight: 500;
   padding: 1% 0;
+  font-size: 130%;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
 }
 
 .main-title .inner .title-menu {
@@ -107,7 +109,13 @@
   height: 60px;
   width: 60px;
   margin: 0 2px;
+  border-radius: 5px;
+  border: solid 1px rgb(98, 98, 98);
 }
+
+
+  
+
 
 
 .sec-title {

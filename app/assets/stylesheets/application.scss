@@ -69,8 +69,10 @@ html {
 
 .link{
   text-decoration: none;
+  
 
 }
+
 
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
   width: 100%;
@@ -82,6 +84,9 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
 a.navbar-brand {
   display: flex;
   align-items: center;
+  font-size: 150%;
+  font-weight: 800;
+  padding: 5px, 0;
 }
 a.navbar-brand .navbar-brand-logo-image {
   margin-right: 10px;
@@ -93,7 +98,7 @@ img.d-inline-block.align-top{
 a.navbar-item {
   font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   margin-right: 10px;
-  font-size: 75%;
+  font-size: 100%;
   font-weight: bold;
   text-decoration: none;
   color: #fff;
@@ -151,6 +156,15 @@ footer {
 
 
 @media only screen and (min-width: 200px) {
+  .navbar-collapse.collapse .navbar-nav .nav-item {
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+    margin-right: 10px;
+    font-size: 150%;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    border-top: solid 1px rgb(27, 27, 27);
+  }
   footer .inner {
     // width: 100%;
     //padding: 10px 20px;/* ヘッダー高さはロゴのフォントサイズ＋ここで決める */
@@ -206,6 +220,15 @@ footer {
 }
 
 @media only screen and (min-width: 641px) {
+  .navbar-collapse.collapse .navbar-nav .nav-item {
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+    margin-right: 10px;
+    font-size: 120%;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    border-top: 0;
+  }
   footer .inner {
     // width: 100%;
     padding: 10px 20px;/* ヘッダー高さはロゴのフォントサイズ＋ここで決める */
@@ -239,8 +262,9 @@ footer {
   }
   footer .inner .footer-link ul li {
     position: relative;  
-    padding: 20px;
+    padding: 3px;
     margin-right: 20px;
+    border-top: 0;
   }
   footer .inner .footer-link ul li a {
     margin: 0;
