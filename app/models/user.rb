@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :combos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  validates :username, presence: true
   #通知機能
   
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy

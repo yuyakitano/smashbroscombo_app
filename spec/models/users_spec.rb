@@ -1,7 +1,7 @@
 require 'rails_helper'
 # describe ⇨何について仕様を記述しようとしているのか
 # context →テストの内容を状況・状態のバリエーションごとに分類するために利用する
-describe User, type: :model do
+RSpec.describe User, type: :model do
   describe '#create' do
     it "username、email、passwordがある場合、有効であること" do
       user = User.new(
@@ -9,6 +9,7 @@ describe User, type: :model do
         email: "yuya@test.com",
         password: "yuyayuya",
       )
+      user.valid?
       expect(user).to be_valid
     end
     it "emailが無い場合、無効であること" do
@@ -50,49 +51,18 @@ describe User, type: :model do
       user.valid?
     end
   end
-end
+  # context '本人ではない場合' do
+  #   subject { get edit_user_registration_path @user_a }
+  #   before do  
+  #     @user_a = create(:user)
+  #     @user_b = FactoryBot.create(:user, 
+  #       username: 'ユーザーb', 
+  #       email: 'userb@example.com')
 
-describe User, type: :controller do
-  describe 'アクセス制限機能' do
-    describe '#edit' do
-      subject { get edit_user_path }
-      context 'ユーザーAがログインしている時' do
-        before do
-          # user = User.new(
-          #   username: "ユーザーA",
-          #   email: "a@example.com",
-          #   password: "password"
-          # )
-          user_a = FactoryBot.create(:user, 
-            username: 'ユーザーA', 
-            email: 'a@example.com',
-            password: 'password'
-          )
-          sign_in user 
-        end
-        
-        it "自身のデータのedit操作が有効であること" do
-          
-          # is_expected.to eq 200    
-        end
-  
-      end      
-
-
-    end
-    describe '#update' do
-      it "ログイン中のユーザーがcurrent_userの場合、有効であること"
-      it "ログインしていない場合、無効であること(authenticate_user!)"
-      it "ログイン中のユーザーがcurrent_userでない場合、無効であること(ensure_current_user)"
-
-
-
-    end  
-    describe '#destroy' do
-      it "ログイン中のユーザーがcurrent_userの場合、有効であること" 
-      it "ログインしていない場合、無効であること(authenticate_user!)" 
-      it "ログイン中のユーザーがcurrent_userでない場合、無効であること(ensure_current_user)" 
-
-    end    
-  end
+  #     sign_in @user_b
+  #   end
+  #   it '失敗' do
+  #     is_expected.to root_path
+  #   end
+  # end
 end
