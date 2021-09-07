@@ -131,13 +131,7 @@
   //text-decoration: none;
 }
 
-.fighter-list-item-name {
-  flex: none;
-  text-decoration: none;
-  color: rgb(52, 52, 52);
-  font-weight: 800;
-  
-}
+
 
 
 
@@ -338,6 +332,13 @@
     min-width: 330px;
     
   }
+  .fighter-list-item-name {
+    flex: none;
+    text-decoration: none;
+    color: rgb(52, 52, 52);
+    font-weight: 800;
+    font-size: 104%;
+  }
   .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
 
     position: relative;
@@ -404,6 +405,13 @@
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
     min-width: 410px;
     
+  }
+  .fighter-list-item-name {
+    flex: none;
+    text-decoration: none;
+    color: rgb(52, 52, 52);
+    font-weight: 800;
+    // font-size: 104%;
   }
   .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
 
