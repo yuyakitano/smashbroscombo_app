@@ -158,14 +158,27 @@ footer {
 
 
 @media only screen and (min-width: 200px) {
+  a.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 165%;
+    font-weight: 800;
+    padding: 5px, 0;
+  }
   .navbar-collapse.collapse .navbar-nav .nav-item {
     font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
     margin-right: 10px;
-    font-size: 150%;
+    font-size: 155%;
     font-weight: bold;
     text-decoration: none;
     color: #fff;
     border-top: solid 1px rgb(27, 27, 27);
+  }
+  .navbar-toggler {
+    margin: 0 0 0 auto;
+    width: 50px;
+    height: 30px;
+    
   }
   footer .inner {
     // width: 100%;
