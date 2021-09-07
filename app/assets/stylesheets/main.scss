@@ -14,24 +14,20 @@
   background-color: #fff;
 }
 
+.main-title .inner {
+  position: relative;
+  z-index: 190;
+}
+
 .main-title .inner .title-image .title-image-img {
+  margin-top: 60px;
   width: 100%;
   max-width: 700px;
 }
 
-.main-title .inner .title-logo {
-  font-size: 500%;
-  color: black;
-  font-weight: 90;
-  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
-}
 
-.main-title .inner .title-message {
-  font-weight: 500;
-  padding: 1% 0;
-  font-size: 130%;
-  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
-}
+
+
 
 .main-title .inner .title-menu {
   
@@ -47,26 +43,9 @@
   margin: 1%;
   
 }
-.main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
-  min-width: 330px;
-  
-}
 
 
-.main-title .inner .title-menu .title-menu-link .btn.btn-outline-info {
-  min-width: 330px;
-  
-}
 
-.main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
-  min-width: 330px;
-  
-}
-
-.title-button-title {
-  font-size: larger;
-  font-weight: 800;
-}
 // .main-title .inner .title-menu .title-menu-link{
 //   width: 100%;
 //   max-width: 200px;
@@ -82,10 +61,15 @@
   width: 100%;
   text-align: center;
   min-height: 760px;
-
+  
   //margin: 5% 0 0 0;
   //height: 700px;
-  background-color: #fff;
+  // background-color: #fff;
+}
+.main-search-fighter .inner {
+  position: relative;
+  z-index: 190;
+  
 }
 .main-search-fighter .inner .fighter-list {
   padding-bottom: 20px;
@@ -122,15 +106,15 @@
   font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   width: 100%;
   margin: 0;
-  padding: 5% 0 1% 0;
-  font-size: 260%;
+  padding: 15% 0 1% 0;
+  font-size: 270%;
   font-weight: bold;
   text-align: center;
   color: black;
 }
 .sec-message {
-  width: 100%;
-  margin: 0;
+  width: 90%;
+  margin: 0 auto;
   padding: 0;
   font-size: 150%;
   font-weight: bold;
@@ -163,7 +147,9 @@
 
 .main-search-condition {
   min-height: 730px;
-  background-color: rgb(255, 150, 194);
+  // background-color: rgb(255, 150, 194);
+  position: relative;
+  z-index: 50;
 }
 
 .main-search-condition .inner{
@@ -173,7 +159,8 @@
   margin-right: auto;
   //text-align: center;
   justify-content: center;
-  
+  position: relative;
+  z-index: 50;
   min-height: 400px;
   
 }
@@ -189,7 +176,7 @@
   height: 550px;
   width: 85%;
   align-items: center;
-  margin: 20px auto;
+  margin: 30px auto;
 
 }
 
@@ -198,7 +185,8 @@
   width: 100%;
   background-color: #ffe6fa;
   border-radius: 140px 140px 0 0;
-  z-index: 20;
+  position: relative;
+  z-index: 80;
 }
 
 .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-title {
@@ -229,7 +217,8 @@
   transform: translate(-50% ,-50%);
   top: -73%;
   left: 50%;
-  z-index: 30;
+  
+  z-index: 90;
 }
 .main-search-condition .inner .main-search-condition-content .main-search-form-box .cc {
   height: 85px;
@@ -239,7 +228,7 @@
   transform: translate(-50% ,-50%);
   top: -77%;
   left: 50%;
-  z-index: 40;
+  z-index: 100;
 }
 .main-search-condition .inner .main-search-condition-content .main-search-form-box .dd {
   height: 65px;
@@ -249,7 +238,7 @@
   transform: translate(-50% ,-50%);
   top: -93%;
   left: 50%;
-  z-index: 50;
+  z-index: 110;
 }
 .main-search-condition .inner .main-search-condition-content .main-search-form-box .ee {
   height: 60px;
@@ -259,7 +248,7 @@
   transform: translate(-50% ,-50%);
   top: -99%;
   left: 50%;
-  z-index: 50;
+  z-index: 110;
 }
 
 .main-search-condition .main-search-condition-content .main-search-condition-search-menu .main-search-menu-form .main-search-menu-content .row.g-3 .main-search-form .main-search-group {
@@ -269,7 +258,7 @@
 
 
 .main-create-selectfighter .inner .combo-create-button .create-button-text {
-  padding-bottom: 20px;
+  padding-bottom: 60px;
   
 }
 
@@ -302,7 +291,9 @@
 
   margin: 0;
   // min-height: 290px;
-  background-color: #fff;
+  // background-color: #fff;
+  position: relative;
+  z-index: 190;
 }
 
 .main-create-selectfighter .inner .fighter-list {
@@ -321,6 +312,32 @@
   border: solid 0.5px rgb(67, 67, 67);
 }
 @media only screen and (min-width: 200px) {
+  .main-title .inner .title-logo {
+    font-size: 450%;
+    color: black;
+    font-weight: 90;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .main-title .inner .title-message {
+    font-weight: 500;
+    padding: 1% 0;
+    font-size: 120%;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .title-button-title {
+    font-size: 190%;
+    font-weight: 800;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .title-button-message {
+    font-size: 145%;
+    // font-weight: 800;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
+    min-width: 330px;
+    
+  }
   .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
 
     position: relative;
@@ -329,11 +346,65 @@
     left: 50%;
     font-size: 2em;
     padding: 0;
-    z-index: 60;
+    z-index: 190;
+  }
+  .slide {
+    position: fixed;
+    width: 100%;
+    top: 40px;
+    margin: 0;
+    // text-align: center;
+  }
+  
+  .slide img {
+    width: 100%;
+    // max-width: 700px;
+    // position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 5;
+    opacity: 0.2;
+    // min-width: 800px;
+    margin: 0 auto;
   }
 }
 
 @media only screen and (min-width: 641px) {
+  .main-title .inner .title-logo {
+    font-size: 660%;
+    color: black;
+    font-weight: 90;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .main-title .inner .title-message {
+    font-weight: 500;
+    padding: 1% 0;
+    font-size: 175%;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .title-button-title {
+    font-size: 200%;
+    font-weight: 800;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .title-button-message {
+    font-size: 150%;
+    font-weight: 800;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
+  }
+  .main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
+    min-width: 410px;
+    
+  }  
+  .main-title .inner .title-menu .title-menu-link .btn.btn-outline-info {
+    min-width: 410px;
+    
+  }
+  
+  .main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
+    min-width: 410px;
+    
+  }
   .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
 
     position: relative;
@@ -342,6 +413,28 @@
     left: 50%;
     font-size: 2em;
     padding: 0 0 0 40px ;
-    z-index: 60;
+    z-index: 190;
+  }
+}
+
+
+@media only screen and (min-width: 1350px) {
+  .slide {
+    position: fixed;
+    width: 100%;
+    top: 40px;
+    margin: 0;
+    // text-align: center;
+  }
+  
+  .slide img {
+    width: 100%;
+    // max-width: 700px;
+    position: absolute;
+    display: none;
+    z-index: 5;
+    opacity: 0.2;
+    // min-width: 800px;
+    margin: 0 auto;
   }
 }

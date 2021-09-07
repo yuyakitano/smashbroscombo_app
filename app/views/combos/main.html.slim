@@ -1,8 +1,20 @@
 #main
+  script src="script.js", type="text/javascript" 
+  .slide
+    = image_tag("115.jpeg")
+    = image_tag("116.jpeg")
+    = image_tag("117.jpeg")
+    = image_tag("118.jpeg")
+    = image_tag("119.jpeg")
+    = image_tag("120.jpeg")
+    = image_tag("121.jpeg")
+    = image_tag("122.jpeg")
+    = image_tag("123.jpeg")
+    / class: 'backgroundimage',, height:"460", width: "720"
   .main-title
     .inner
       .title-image
-        = image_tag("109.jpeg", class: "title-image-img") 
+        = image_tag("108.jpeg", class: "title-image-img") 
       .title-logo
         p コンボメーカー
       .title-message
@@ -37,7 +49,8 @@
       .sec-title
         p ファイターからコンボを探す
       .sec-message
-        p ファイターごとのいいねランキングから人気のコンボを探せます
+        p ファイターごとのいいねランキングから
+        p 人気のコンボを探せます
       .fighter-list
         .row
           - @fighters.each do |fighter|
