@@ -20,7 +20,7 @@
 }
 
 .main-title .inner .title-image .title-image-img {
-  margin-top: 60px;
+  margin-top: 10px;
   width: 100%;
   max-width: 700px;
 }
@@ -106,7 +106,7 @@
   font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   width: 100%;
   margin: 0;
-  padding: 15% 0 1% 0;
+  padding: 5% 0 1% 0;
   font-size: 270%;
   font-weight: bold;
   text-align: center;
@@ -301,10 +301,7 @@
   
 }
 
-.main-create-selectfighter .inner .fighter-list .row .col {
-  padding-top: 5px;
-  border: solid 0.5px rgb(67, 67, 67);
-}
+
 @media only screen and (min-width: 200px) {
   .main-title .inner .title-logo {
     font-size: 450%;
@@ -332,13 +329,26 @@
     min-width: 330px;
     
   }
+  // .main-create-selectfighter .inner .fighter-list .row {
+  //   padding-top: 5px;
+  //   border: solid 0.5px rgb(67, 67, 67);
+
+  // }
+  .main-create-selectfighter .inner .fighter-list .row .col {
+    padding-top: 5px;
+    border: solid 0.5px rgb(67, 67, 67);
+    text-align: center;
+  }
   .fighter-list-item-name {
     flex: none;
     text-decoration: none;
     color: rgb(52, 52, 52);
     font-weight: 800;
     font-size: 104%;
+    display: table-caption;
+
   }
+
   .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
 
     position: relative;
@@ -389,29 +399,44 @@
     font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   }
   .title-button-message {
-    font-size: 150%;
+    font-size: 100%;
     font-weight: 800;
     font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   }
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
-    min-width: 410px;
+    min-width: 370px;
     
   }  
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-info {
-    min-width: 410px;
+    min-width: 370px;
     
   }
   
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
-    min-width: 410px;
+    min-width: 370px;
     
+  }
+  .fighter-list-item-name {
+    // flex: none;
+    text-decoration: none;
+    color: rgb(52, 52, 52);
+    font-weight: 800;
+    // font-size: 104%;
+  }
+  .main-create-selectfighter .inner .fighter-list .row .col {
+    padding-top: 5px;
+    border: solid 0.5px rgb(67, 67, 67);
+    text-align: center;
+    align-content: center;
   }
   .fighter-list-item-name {
     flex: none;
     text-decoration: none;
     color: rgb(52, 52, 52);
     font-weight: 800;
-    // font-size: 104%;
+    font-size: 104%;
+    
+
   }
   .main-search-condition .inner .main-search-condition-content .main-search-form-box .aa .main-search-menu-form {
 

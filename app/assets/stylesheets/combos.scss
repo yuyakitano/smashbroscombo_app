@@ -1,101 +1,37 @@
 // Place all the styles related to the combos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.search-condition-main-wrap {
+
+.combo-show {
   width: 95%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
-
-
-
-// .search-condition-main-wrap .search-condition-title .inner {
-//   // display: flex;
-//   // align-items: center;
-//   // margin-bottom: 10px;
-// }
-
-.search-condition-main-wrap .search-condition-title .inner .search-condition-title-text {
-  //width: 100%;
-  margin: 0;
-  //padding: 5% 0 1% 0;
-  font-size: 250%;
-  font-weight: bold;
-  //text-align: center;
-  color: black;
-}
-.search-condition-main-wrap .search-condition-content {
-  display: flex;
-}
-
-.search-condition-main-wrap .search-condition-content .search-condition-search-menu {
-  width: 265px;
-  margin: 10px 10px 20px 10px;
-  
-  border: solid 1px black;
-  border-radius: 3px;
-  
-
-}
-.search-condition-main-wrap .search-condition-content .search-condition-search-menu .inner {
-  padding: 2%;
-  
-}
-.search-condition-main-wrap .search-condition-content .search-condition-search-menu .inner .search-menu-title {
+.main-content a {
   font-size: 150%;
-}   
-
-.search-condition-main-wrap .search-condition-content .search-condition-search-menu .inner .search-menu-form .search-form .search-group-a {
-   display: flex;
 }
-.search-condition-main-wrap .search-condition-content .search-condition-search-menu .inner .search-menu-form .search-form .search-group-c {
-  display: flex;
+.combo-show .combo-show-content .table.table.table-hover .tbody.tbody {
+  font-size: 150%;
+}
+.combo-show .combo-show-content .table.table.table-hover .tbody.tbody .btn.btn-secondary.border.border-dark{
+  font-size: 100%;
   flex-wrap: wrap;
 }
-
-
-
-.search-condition-main-wrap .search-condition-content .search-condition-sort-menu {
-  
-  margin: 10px 10px 20px 10px;
-  width: 265px;
-  border: solid 1px black;
-  border-radius: 3px;
-  
-
+.combo-show .combo-show-sub-content {
+  display: flex;
+  margin-bottom: 10px;
 }
-.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-title {
-  font-size: 150%;
-}
-.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .inner .sort-menu-list .sort-menu-item {
-  
-  margin: 5px;
-  // border: solid 1px black;
-  // border-radius: 3px;
-  // max-width: fit-content;
-
+.combo-show .combo-show-sub-content .combo-show-twitter {
+  margin-left: 20px;
 }
 
-.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .inner {
-  padding: 2%;
+.like-link .iine__button {
+  font-size: 156%;
 }
-.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-list .sort-menu-item .sort_link{
-  font-size: larger;
-
-}
-.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-list .sort-menu-item .sort_link.asc{
-  font-size: larger;
-
+.like-link .combo-show-like-flex {
+  display: flex;
 }
 
-.search-condition-search-index {
-  padding: 5px;
-}
-.search-condition-search-index .inner .search-index-title {
-  margin: 0;
-  //padding: 5% 0 1% 0;
-  font-size: 240%;
-  font-weight: bold;
-  //text-align: center;
-  color: black;
+.combo-show .combo-show-comment .product__topContent__commentBox__index .combo-show-comment-flex {
+  display: flex;
+  margin-bottom: 20px;
 }

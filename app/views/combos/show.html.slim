@@ -1,126 +1,119 @@
-h1 コンボデータ詳細
-/.nav.justify-content-end
-  = link_to '一覧', combos_path, class: 'nav-link'
-= link_to "戻る", search_fighter_combos_path(search_fighter_id: @combo.fighter_id, rank: "all")
-table.table.table-hover
-  tbody 
-    /tr
-      th = Combo.human_attribute_name(:id)
-      td = @combo.id
-    tr
-      th = Combo.human_attribute_name(:name)
-      td = @combo.name
-    tr
-      th = Combo.human_attribute_name(:fighter)
-      /td = @combo.fighter.name
-      td = image_tag("#{@combo.fighter.fighter_id}.jpeg", size: '80x80') 
-      //td = attachment_image_tag @combo.fighter, :fighter_image, size: '80x80', fallback: 'no-image.png', alt: @combo.fighter.name
-    tr     
-      th = Combo.human_attribute_name(:genre)
-      td = @combo.genre.name
-    tr
-      th = Combo.human_attribute_name(:startposition)
-      td = @combo.startposition.name
-    tr
-      th = Combo.human_attribute_name(:startpossibledamage_min)
-      td = @combo.startpossibledamage_min
-    tr
-      th = Combo.human_attribute_name(:startpossibledamage_max)
-      td = @combo.startpossibledamage_max
-    tr
-      th = Combo.human_attribute_name(:combocommand)
-      /- binding.pry
+.combo-show
+  .combo-show-title 
+    h1 コンボデータ詳細
+    /.nav.justify-content-end
+      = link_to '一覧', combos_path, class: 'nav-link'
+  .combo-show-content
+    = link_to "戻る", search_fighter_combos_path(search_fighter_id: @combo.fighter_id, rank: "all")
+    table.table.table-hover
+      tbody.tbody
+        /tr
+          th = Combo.human_attribute_name(:id)
+          td = @combo.id
+        tr
+          th = Combo.human_attribute_name(:name)
+          td = @combo.name
+        tr
+          th = Combo.human_attribute_name(:fighter)
+          /td = @combo.fighter.name
+          td = image_tag("#{@combo.fighter.fighter_id}.jpeg", size: '80x80') 
+          //td = attachment_image_tag @combo.fighter, :fighter_image, size: '80x80', fallback: 'no-image.png', alt: @combo.fighter.name
+        tr     
+          th = Combo.human_attribute_name(:genre)
+          td = @combo.genre.name
+        tr
+          th = Combo.human_attribute_name(:startposition)
+          td = @combo.startposition.name
+        tr
+          th = Combo.human_attribute_name(:startpossibledamage_min)
+          td = @combo.startpossibledamage_min
+        tr
+          th = Combo.human_attribute_name(:startpossibledamage_max)
+          td = @combo.startpossibledamage_max
+        tr
+          th = Combo.human_attribute_name(:combocommand)
+          /- binding.pry
 
-      td
-      
-        - @combo.commands.each do |command|
-          .btn.btn-secondary.border.border-dark 
-            = command.name 
-      /td = @combo.command_ids.name
-    tr
-      th = Combo.human_attribute_name(:damage_dealt)
-      td = @combo.damage_dealt
-    - if @combo.fighter_ids.present?
-      tr
-        th = Combo.human_attribute_name(:combofightertarget)
-        /td = @combo.fighters.name
-        
-        td 
-          - @combo.fighters.each do |fighter|
-            = fighter.name
+          td
+          
+            - @combo.commands.each do |command|
+              .btn.btn-secondary.border.border-dark
+                = command.name 
+          /td = @combo.command_ids.name
+        tr
+          th = Combo.human_attribute_name(:damage_dealt)
+          td = @combo.damage_dealt
+          
+        - if @combo.fighter_ids.present?
+          tr
+            th = Combo.human_attribute_name(:combofightertarget)
+            /td = @combo.fighters.name
+            
+            td 
+              - @combo.fighters.each do |fighter|
+                = fighter.name
 
-    tr
-      th = Combo.human_attribute_name(:level)
-      td = @combo.level_i18n
-    - if @combo.youtube_url.present?
-      tr
-        th = Combo.human_attribute_name(:youtube_url)
-        td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
-    tr
-      th = Combo.human_attribute_name(:message)
-      td = simple_format(h(@combo.message), {}, sanitize: false, wrapper_tag: "div")
-    tr
-      th = Combo.human_attribute_name(:make_by)
-      td = link_to @combo.user.username, user_path(@combo.user_id)
-    tr
-      th = Combo.human_attribute_name(:created_at)
-      td = l @combo.created_at
-    tr
-      th = Combo.human_attribute_name(:updated_at)
-      td = l @combo.updated_at
-
-
-- if user_signed_in? && current_user.id == @combo.user_id
-  = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
-  = link_to '削除', @combo, method: :delete, data: { confirm: "コンボデータ「#{@combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
- 
-= link_to 'Twitterでコンボをシェアする', "https://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。&hashtags=スマブラ %0D%0A &hashtags=コンボメーカー", title: 'Twitter', target: '_blank'
-/=link_to "http://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。/&hashtags=スマブラ/&hashtags=コンボメーカー",{class:"footer-icon_1"} do
-/ %i.fab.fa-twitter.twitter
-
-= render 'likes/like', combo: @combo
-/ - if current_user.liked_by?(@combo.id)
-/   = link_to 'いいねを外す', destroy_like_path(@combo), method: :DELETE
-/   = "❤️#{@combo.likes.count}"
-/ - else 
-/   = link_to 'いいね', create_like_path(@combo), method: :POST
-/   = "❤️#{@combo.likes.count}"
-
-/いいね機能の実装①「[Rails]いいね機能の非同期での実装!!!」
-/= render partial: 'combos/combos', collection: @combos, as: :combo
-/= render 'likes/like', combo: combo
-
-/いいね機能の実装②「【Rails・JavaScript・Ajax】いいね機能を2通りの方法で作ってみた」
-/#js-like-button
-  = render 'like', combo: @combo
+        tr
+          th = Combo.human_attribute_name(:level)
+          td = @combo.level_i18n
+        - if @combo.youtube_url.present?
+          tr
+            th = Combo.human_attribute_name(:youtube_url)
+            td = content_tag 'iframe', nil, width: "560", height: "315", src: "https://www.youtube.com/embed/#{@combo.youtube_url}", frameborder: 0, gesture: 'media', allow: 'encrypted-media', allowfullscreen: true
+        tr
+          th = Combo.human_attribute_name(:message)
+          td = simple_format(h(@combo.message), {}, sanitize: false, wrapper_tag: "div")
+        tr
+          th = Combo.human_attribute_name(:make_by)
+          td = link_to @combo.user.username, user_path(@combo.user_id)
+        tr
+          th = Combo.human_attribute_name(:created_at)
+          td = l @combo.created_at
+        tr
+          th = Combo.human_attribute_name(:updated_at)
+          td = l @combo.updated_at
 
 
-h3 コメントする
-.product__topContent__commentBox__index
-  - if user_signed_in?
-    = form_with(model: [@combo, @comment], local: true, id: "new_comment") do |f|
-      = f.text_area :content, placeholder: "コメントする", class: "combo__topContent__contentBox__content"
-      = f.hidden_field :combo_id, value: @combo.id
-      p 相手のことを考え丁寧なコメントを心がけましょう。
-      p 不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      = button_tag type: "submit", class: "combo__topContent__commentBox__submit" do
-        i.fa.fa-comment コメントする
-  - else
-    p コメントの投稿には
-    = link_to "ログイン", new_user_session_path
-    p または
-    = link_to 'ユーザー新規登録', new_user_registration_path
-    p が必要です
+    - if user_signed_in? && current_user.id == @combo.user_id
+      = link_to '編集', edit_combo_path, class: 'btn btn-primary mr-3'  
+      = link_to '削除', @combo, method: :delete, data: { confirm: "コンボデータ「#{@combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+  .combo-show-sub-content
+    .combo-show-likes
+      = render 'likes/like', combo: @combo
+    .combo-show-twitter
+      = link_to 'Twitterでコンボをシェアする', "https://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。&hashtags=スマブラ %0D%0A &hashtags=コンボメーカー", title: 'Twitter', target: '_blank'
+    /=link_to "http://twitter.com/share?url=#{request.url}/&text=コンボ作成しました。/&hashtags=スマブラ/&hashtags=コンボメーカー",{class:"footer-icon_1"} do
+    / %i.fab.fa-twitter.twitter
 
-.combo__topContent__commentBox__index 
-  - if @comments
-    - @comments.reverse.each do |comment|
-      .combo__topContent__commentBox__index__box       
-        span.combo__topContent__commentBox__index__box--username= comment.user.username
-        span.combo__topContent__commentBox__index__box--date= comment.created_at.strftime("%Y-%m-%d %H:%M")
-        p.combo__topContent__commentBox__index__box--content= comment.content
-      /- if current_user.id == comment.user_id
-        = link_to '削除', @combo_comment_path, method: :delete, data: { confirm: "削除しますか？"}
+  
+  .combo-show-comment
+    h3 コメントする
+    .product__topContent__commentBox__index
+      - if user_signed_in?
+        = form_with(model: [@combo, @comment], local: true, id: "new_comment") do |f|
+          = f.text_area :content, placeholder: "コメントする", class: "combo__topContent__contentBox__content"
+          = f.hidden_field :combo_id, value: @combo.id
+          p 相手のことを考え丁寧なコメントを心がけましょう。
+          p 不快な言葉遣いなどは利用制限や退会処分となることがあります。
+          = button_tag type: "submit", class: "combo__topContent__commentBox__submit" do
+            i.fa.fa-comment コメントする
+      - else
+        .combo-show-comment-flex
+          h4 コメントの投稿には
+          = link_to "ログイン", new_user_session_path
+          h4 または
+          = link_to 'ユーザー新規登録', new_user_registration_path
+          h4 が必要です
+
+  .combo__topContent__commentBox__index 
+    - if @comments
+      - @comments.reverse.each do |comment|
+        .combo__topContent__commentBox__index__box       
+          span.combo__topContent__commentBox__index__box--username= comment.user.username
+          span.combo__topContent__commentBox__index__box--date= comment.created_at.strftime("%Y-%m-%d %H:%M")
+          p.combo__topContent__commentBox__index__box--content= comment.content
+          /- if current_user.id == comment.user_id
+            = link_to '削除', @combo_comment_path, method: :delete, data: { confirm: "削除しますか？"}
 
 
-/ p Find me in app/views/combos/show.html.slim
+    / p Find me in app/views/combos/show.html.slim

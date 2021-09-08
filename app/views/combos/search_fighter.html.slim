@@ -18,47 +18,6 @@
           - else 
             p いいね数ランキング            
     .search-fighter-content
-      /.search-fighter-search-index
-        = link_to "all", search_combos_path(rank: "all")
-        = link_to "week", search_combos_path(rank: "week")
-        = link_to "month", search_combos_path(rank: "month") 
-        = link_to "year", search_combos_path(rank: "year")  
-      /.search-fighter-search-menu
-        .inner
-          .search-menu-title
-            h4 コンボ絞り込み検索
-          .search-menu-form
-            = search_form_for @q, class: 'row g-3' do |f|
-              .search-form
-                .search-group
-                  .search-group-label
-                    i class="fas fa-search"
-                    | キーワード検索
-                    = f.search_field :name_cont, class: 'form .row.mb-9', placeholder: "例）下投げ"
-                .search-group
-                  .search-group-label
-                    i class="fas fa-search"
-                    = f.label :genre_id, Combo.human_attribute_name(:genre), class: 'form-label'
-                  .search-group-checkbox
-                    = f.radio_button 'genre_id_eq', '', {:checked => true}
-                    | 指定なし
-                    = f.collection_radio_buttons :genre_id_eq, @genre, :id, :name
-                .search-group
-                  .search-group-label
-                    i class="fas fa-search"
-                    = f.label :damage_dealt, "与ダメージ値範囲(片方のみも可です)", class: 'form-label'  
-                  .search-group-forms
-                    = f.number_field :damage_dealt_gteq, placeholder: "最小ダメージ％"
-                    | 〜
-                    = f.number_field :damage_dealt_lteq, placeholder: "最大ダメージ％"
-                .search-roup
-                  .search-group-label
-                    = f.label :fighter_id, Combo.human_attribute_name(:fighter)
-                  .search-group-forms
-                    = f.collection_select :fighter_id_eq, @fighter, :id, :name,  include_blank: '指定なし'  
-                .col-12
-                  = f.submit class: 'btn btn-primary'
-
       .search-fighter-search-index 
         .inner 
           .search-index-title
@@ -78,18 +37,18 @@
                   tr
                     th
                     th = Combo.human_attribute_name(:name)
-                    th = Combo.human_attribute_name(:fighter)
+                    / th = Combo.human_attribute_name(:fighter)
                     th = Combo.human_attribute_name(:startpossibledamage_min)
                     th = Combo.human_attribute_name(:startpossibledamage_max)
                     th = Combo.human_attribute_name(:damage_dealt)
                     th = Combo.human_attribute_name(:make_by)  
                     th
-                tbody 
+                tbody.tbody
                   - @combos.each.with_index(1) do |combo, i|
-                    tr        
+                    tr.tr
                       td 第#{i}位
                       td = link_to combo.name, combo_path(combo)
-                      td = combo.fighter.name
+                      / td = combo.fighter.name
                       td = combo.startpossibledamage_min
                       td = combo.startpossibledamage_max
                       td = combo.damage_dealt
@@ -98,33 +57,4 @@
                         - if user_signed_in? && current_user.id == combo.user_id
                           = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
                           = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger' 
-              / table.table.table-hover
-              /   thead.thead-default 
-              /     tr
-              /       th = Combo.human_attribute_name(:name)
-              /       th = Combo.human_attribute_name(:fighter)
-              /       th = Combo.human_attribute_name(:startpossibledamage_min)
-              /       th = Combo.human_attribute_name(:startpossibledamage_max)
-              /       th = sort_link(@q, :damage_dealt, anchor: 'indexcombo')
-              /       /th = sort_link(@q, :likes_count)
-              /       th = Combo.human_attribute_name(:likes_count)
-              /       th = sort_link(@q, :created_at, anchor: 'indexcombo')
-              /       th = Combo.human_attribute_name(:make_by)      
-              /       th
-              /   tbody 
-              /     - @combos.each.with_index do |combo, i|
-              /       tr
-              /         td = link_to combo.name, combo_path(combo)
-              /         td = attachment_image_tag combo.fighter, :fighter_image, fallback: 'no-image.png', size: '35x35', alt: combo.fighter.name
-              /         td = combo.startpossibledamage_min
-              /         td = combo.startpossibledamage_max
-              /         td = combo.damage_dealt
-              /         td = combo.likes.count
-              /         td = l combo.created_at
-              /         td = link_to combo.user.username, user_path(combo.user_id)
-              /         td
-              /           - if user_signed_in? && current_user.id == combo.user_id
-              /             = link_to '編集', edit_combo_path(combo), class: 'btn btn-primary mr-3'  
-              /             = link_to '削除', combo, method: :delete, data: { confirm: "コンボデータ「#{combo.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
-            /ページネーション
-            /= paginate @combos
+

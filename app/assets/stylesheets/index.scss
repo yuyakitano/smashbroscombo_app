@@ -1,0 +1,143 @@
+.search-condition-main-wrap .search-condition-title .search-condition-title-text {
+  margin: 0;
+  //padding: 5% 0 1% 0;
+  font-size: 250%;
+  font-weight: bold;
+  //text-align: center;
+  color: black;
+}
+
+
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-title {
+  font-size: 170%;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-form {
+  font-size: 130%;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-title {
+  font-size: 170%;
+}
+// Place all the styles related to the combos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.search-condition-main-wrap {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+// .search-condition-main-wrap .search-condition-title {
+//   // display: flex;
+//   // align-items: center;
+//   // margin-bottom: 10px;
+// }
+
+.search-condition-main-wrap .search-condition-title .search-condition-title-text {
+  //width: 100%;
+  margin: 0;
+  //padding: 5% 0 1% 0;
+  font-size: 250%;
+  font-weight: bold;
+  //text-align: center;
+  color: black;
+}
+.search-condition-main-wrap .search-condition-content {
+  display: flex;
+}
+
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu {
+  // width: 265px;
+  margin: 10px 10px 20px 10px;
+  
+  border: solid 1px black;
+  border-radius: 3px;
+  padding: 10px;
+  
+
+}
+
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-title {
+  font-size: 150%;
+}   
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-form .search-form .col-12 {
+  margin-top: 10px;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-form .search-form .search-group-a {
+   display: flex;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-form .search-form .search-group-a .search-group-label .row.mb-9{
+  margin-left: 10px;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-search-menu .search-menu-form .search-form .search-group-c {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu {
+  padding: 5px;
+  margin: 10px 10px 20px 10px;
+  width: 265px;
+  border: solid 1px black;
+  border-radius: 3px;
+  
+
+}
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-title {
+  font-size: 170%;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-list {
+  font-size: 115%;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-list .sort-menu-item {
+  
+  margin: 5px;
+  // border: solid 1px black;
+  // border-radius: 3px;
+  // max-width: fit-content;
+
+}
+
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu {
+  padding: 2%;
+}
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-list .sort-menu-item .sort_link {
+  font-size: larger;
+
+}
+.search-condition-main-wrap .search-condition-content .search-condition-sort-menu .sort-menu-list .sort-menu-item .sort_link.asc {
+  font-size: larger;
+
+}
+
+.search-condition-search-index {
+  width: 95%;
+  margin: 0 auto;
+  padding: 5px;
+
+}
+.search-condition-search-index .search-index-title {
+  margin: 0;
+  //padding: 5% 0 1% 0;
+  font-size: 240%;
+  font-weight: bold;
+  //text-align: center;
+  color: black;
+}
+
+
+.search-condition-search-index .search-index-content {
+  font-size: 125%;
+
+}
+.search-condition-search-index .search-index-content .table.table.table-hover .thead.thead-default .tr.tr{
+  font-size: 130%;
+
+}
+.search-condition-search-index .search-index-content .table.table.table-hover .tbody.tbody .tr.tr{
+  font-size: 115%;
+
+}

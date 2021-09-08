@@ -24,7 +24,7 @@ html
         - if user_signed_in?
           .container-fluid
             a.navbar-brand href="/main"
-              = image_tag('105.jpeg', class: "navbar-brand-logo-image", size: "30x30" )
+              = image_tag('/assets/105.jpeg', class: "navbar-brand-logo-image", size: "30x30")
               / = image_tag "105.png", size: "16x16", alt: "アイコン"
               / alt="logo" height="25" width="25" 
               /img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
@@ -44,23 +44,7 @@ html
                 li.nav-item
                   a.nav-link href="/main#main-search-condition" 条件を指定してコンボを探す
                 li.nav-item
-                  a.nav-link href="/main#main-create-selectfighter" コンボを投稿する
-                /main#main-search-fighter
-                / li.nav-item.dropdown
-                /   a#navbarDropdown.nav-link.dropdown-toggle href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                /     | TOP
-                /   ul class="dropdown-menu" aria-labelledby="navbarDropdown"
-                /     li 
-                /       a.dropdown-item href="/main#main-search-fighter" 
-                /         |ファイターから人気コンボを探す
-                /     li 
-                /       a.dropdown-item href="/main#main-search-condition"
-                /         | 条件を指定してコンボを探す
-                /     li 
-                /       a.dropdown-item href="/main#main-create-selectfighter"
-                /         | コンボを投稿する
-
-                
+                  a.nav-link href="/main#main-create-selectfighter" コンボを投稿する                
                 li.nav-item
                   /a.nav-link.active aria-current="page" href="#"  Home
                   a.nav-link href="/users/#{current_user.id}" マイページ
@@ -91,7 +75,8 @@ html
         - else
           .container-fluid.justify-content-start
             a.navbar-brand href="/main"
-              img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
+              = image_tag('/assets/105.jpeg', class: "navbar-brand-logo-image", size: "30x30")
+              /img.d-inline-block.align-top src="assets/105.jpeg" alt="logo" height="25" width="25" 
               | スマブラコンボメーカー
             /= link_to 'ユーザー新規登録(無料)', new_user_registration_path, class: 'nav-link'
             /= link_to 'ログイン', new_user_session_path, class: 'nav-link'

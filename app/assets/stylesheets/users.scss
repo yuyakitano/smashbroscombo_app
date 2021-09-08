@@ -1,19 +1,90 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.devise-wrap {
+  position: relative;
+  z-index: 80;
+  margin-bottom: 340px;
+}
 
 .devise-wrap .inner {
   margin: 50px 0 100px 20px;
 }
+.devise-wrap .inner .devise-content a {
+  font-size: 135%;
 
+}
+.devise-wrap .inner .devise-content .new_user .field {
+  font-size: 150%;
+  margin-bottom: 10px;
+}
+input[type="text"] {
+  width: 400px;
+  height: 30px;
+}
+input[type="email"] {
+  width: 600px;
+  height: 30px;
+}
+input[type="password"] {
+  width: 400px;
+  height: 30px;
+}
+input[type="submit"] {
+  font-size: 150%;
+  margin-bottom: 10px;
+}
 .devise-wrap .inner .devise-content .actions {
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
+
 }
 
 .devise-wrap .inner .devise-title{
   font-size: 200%;
   font-weight: bolder;
 }
-.devise-wrap .inner .devise-title{
-  font-size: 130%;
+.devise-wrap .inner .devise-message{
+  font-size: 120%;
+  font-weight: bolder;
+}
+@media only screen and (min-width: 200px) {
+  .slide {
+    position: fixed;
+    width: 100%;
+    top: 40px;
+    margin: 0;
+    // text-align: center;
+  }
+  
+  .slide img {
+    width: 100%;
+    // max-width: 700px;
+    // position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 5;
+    opacity: 0.2;
+    // min-width: 800px;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 1350px) {
+  .slide {
+    position: fixed;
+    width: 100%;
+    top: 40px;
+    margin: 0;
+    // text-align: center;
+  }
+  
+  .slide img {
+    width: 100%;
+    // max-width: 700px;
+    position: absolute;
+    display: none;
+    z-index: 5;
+    opacity: 0.2;
+    // min-width: 800px;
+    margin: 0 auto;
+  }
 }

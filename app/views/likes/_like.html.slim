@@ -12,8 +12,9 @@
           | ♡️#{@combo.likes.count}
   - else
     | ❤️#{@combo.likes.count}
-    p いいねを行うには
-    = link_to "ログイン", new_user_session_path
-    p または
-    = link_to 'ユーザー新規登録', new_user_registration_path
-    p が必要です
+    .combo-show-like-flex
+      h4 いいねを行うには
+      = link_to "ログイン", new_user_session_path
+      h4 または
+      = link_to 'ユーザー新規登録', new_user_registration_path
+      h4 が必要です
