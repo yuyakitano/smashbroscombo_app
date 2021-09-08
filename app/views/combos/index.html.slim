@@ -78,7 +78,8 @@
             - @combos.each.with_index do |combo, i|
               tr.tr
                 td = link_to combo.name, combo_path(combo)
-                td = attachment_image_tag combo.fighter, :fighter_image, fallback: 'no-image.png', size: '35x35', alt: combo.fighter.name
+                //td = attachment_image_tag combo.fighter, :fighter_image, fallback: '/assets/no-image.png', size: '35x35', alt: combo.fighter.name
+                td = image_tag("#{combo.fighter.fighter_id}.jpeg", size: '35x35', alt: combo.fighter.name) 
                 td = combo.startpossibledamage_min
                 td = combo.startpossibledamage_max
                 td = combo.damage_dealt
