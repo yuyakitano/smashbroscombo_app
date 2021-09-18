@@ -1,0 +1,11 @@
+- if model.errors.any?
+  #error_explanation
+    / - binding.pry
+    h2
+      = I18n.t("errors.messages.not_saved",
+        count: model.errors.count,
+        resource: model.class.model_name.human.downcase)
+    ul
+      - model.errors.full_messages.each do |message|
+        li
+          = message

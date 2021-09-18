@@ -22,9 +22,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    user.update!(user_params)
-    redirect_to user_path(params[:id]), notice: "ユーザー情報を更新しました"
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_path(params[:id]), notice: "ユーザー情報を更新しました"
+    else
+      # binding.pry
+      render 'users/edit'
+      # binding.pry
+    end
+    # user.update!(user_params)
+    # redirect_to user_path(params[:id]), notice: "ユーザー情報を更新しました"
   end
   def destroy
     @user = User.find(params[:id])

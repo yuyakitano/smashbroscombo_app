@@ -1,0 +1,55 @@
+
+.main
+  script src="script.js", type="text/javascript" 
+  .slide
+    = image_tag("115.jpeg")
+    = image_tag("116.jpeg")
+    = image_tag("117.jpeg")
+    = image_tag("118.jpeg")
+    = image_tag("119.jpeg")
+    = image_tag("120.jpeg")
+    = image_tag("121.jpeg")
+    = image_tag("122.jpeg")
+    = image_tag("123.jpeg")
+/ h2 スマブラコンボアプリプレミアムプラン登録
+/ = form_tag teams_path do
+/   article
+/     - if flash[:error].present?
+/       #error_explanation
+/         p
+/           = flash[:error]
+/     label.amount
+/       / span
+/       p プレミアムプランに登録すると、コンボ作成が便利になります。
+/       p 利用できる機能: コンボ登録時のコマンドボタンを自身で作成できます
+/       p 料金: 100円/月
+/       p テストなのでカード番号は4242 4242 4242 4242 期限とセキュコードは任意
+/   script.stripe-button[src="https://checkout.stripe.com/checkout.js" data-image="/assets/105.jpeg" data-key="pk_test_51JacIpBlNtGZVYcswCr6lpnQOCkQvdI7UbECzxyM62Br2oDyj5aHKhdQRE4I3fdU07q4hPu8tLWdURsOvKCjYHY100r0cXIs85" data-description="コンボアプリ課金プラン" data-amount="100" data-locale="ja" data-currency="JPY" data-label="購入する"]
+
+/ = link_to "解約する",@team, method: :delete, data: { confirm: "プレミアムプランを解約しますがよろしいですか?"}
+/ - if @team
+/   p
+/     | 次回の決済日は
+/     / = @team.active_untilstrftime("%Y年%m月%d日 %H:%M:%S").to_s
+/     | です。
+/   p
+/     | 登録日が月末付近の場合ご注意ください
+
+.team-main
+  h2 スマブラコンボアプリプレミアムプラン登録
+
+  h4 プレミアムプランに登録すると、コンボ作成の幅が広がります！
+  h4 利用できる機能: コンボ登録時のコマンドボタンを自身で作成できます
+  h4 料金: 100円/月
+  h4 テストなのでカード番号は4242 4242 4242 4242 期限とセキュコードは任意
+  = form_tag teams_path do
+    article
+      - if flash[:error].present?
+        #error_explanation
+          p
+            = flash[:error]
+      
+    script.stripe-button[src="https://checkout.stripe.com/checkout.js" data-image="/assets/105.jpeg" data-key="pk_test_51JacIpBlNtGZVYcswCr6lpnQOCkQvdI7UbECzxyM62Br2oDyj5aHKhdQRE4I3fdU07q4hPu8tLWdURsOvKCjYHY100r0cXIs85" data-description="コンボアプリ課金プラン" data-amount="100" data-locale="ja" data-currency="JPY" data-label="購入する"]
+
+  = link_to "解約する",@team, method: :delete, data: { confirm: "プレミアムプランを解約しますがよろしいですか?"}
+  - if @team

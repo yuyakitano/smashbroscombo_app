@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  validates :username, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :combos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  validates :username, presence: true
+  
   #通知機能
   
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
@@ -38,4 +39,12 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+  
+  has_one :team
+
+  def unsubscribe
+    team = Team.find_by(user_id: self.id)
+    team.destroy
+  end
+
 end

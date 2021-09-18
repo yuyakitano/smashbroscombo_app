@@ -49,7 +49,7 @@ $(document).on('turbolinks:load', ()=> {
     })
     // 通信に失敗した時
     .fail(function(){
-      alert('コメントを入力してください。。');
+      alert('コメントを入力してください。');
     })
   })
 })

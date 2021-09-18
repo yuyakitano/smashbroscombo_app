@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :combo do
-    name { 'テストコンボを書く' }
+    sequence(:name) { |n| "テスト_コンボ#{n}" }
     fighter
     startpossibledamage_min { 11 }
     level { 'easy' }

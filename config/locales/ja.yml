@@ -13,13 +13,13 @@ ja:
           attributes:
             email:
               taken: "は既に使用されています。"
-              blank: "が入力されていません。"
+              blank: "を入力してください。"
               too_short: "は%{count}文字以上に設定して下さい。"
               too_long: "は%{count}文字以下に設定して下さい。"
               invalid: "は有効でありません。"
             password:
               taken: "は既に使用されています。"
-              blank: "が入力されていません。"
+              blank: "を入力してください。"
               too_short: "は%{count}文字以上に設定して下さい。"
               too_long: "は%{count}文字以下に設定して下さい。"
               invalid: "は有効でありません。"
@@ -59,6 +59,7 @@ ja:
         startpossibledamage_min: 始動可能最小ダメージ％
         startpossibledamage_max: 始動可能最大ダメージ％
         level: 難易度
+        combo_command_ids: コンボコマンド
 
         youtube_url: YouTubeのURL
         message: 備考
@@ -235,9 +236,9 @@ ja:
     format: "%{attribute}%{message}"
     messages:
       accepted: を受諾してください
-      blank: を入力してください
+      blank: を入力してください。
       confirmation: と%{attribute}の入力が一致しません
-      empty: を入力してください
+      empty: を入力してください。
       equal_to: は%{count}にしてください
       even: は偶数にしてください
       exclusion: は予約されています
@@ -248,16 +249,16 @@ ja:
       less_than: は%{count}より小さい値にしてください
       less_than_or_equal_to: は%{count}以下の値にしてください
       model_invalid: 'バリデーションに失敗しました: %{errors}'
-      not_a_number: は数値で入力してください
-      not_an_integer: は整数で入力してください
+      not_a_number: は数値で入力してください。
+      not_an_integer: は整数で入力してください。
       odd: は奇数にしてください
       other_than: は%{count}以外の値にしてください
       present: は入力しないでください
-      required: を入力してください
+      required: を入力してください。
       taken: はすでに存在します
-      too_long: は%{count}文字以内で入力してください
-      too_short: は%{count}文字以上で入力してください
-      wrong_length: は%{count}文字で入力してください
+      too_long: は%{count}文字以内で入力してください。
+      too_short: は%{count}文字以上で入力してください。
+      wrong_length: は%{count}文字で入力してください。
     template:
       body: 次の項目を確認してください
       header:

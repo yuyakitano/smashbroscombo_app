@@ -1,5 +1,7 @@
 class Combo < ApplicationRecord
-  
+  validates :name, :level , :user_id, presence: true
+  validates :combo_command_ids,  presence: true
+  validates :damage_dealt, presence: true
   belongs_to :user
   has_many :combo_commands, dependent: :destroy
   has_many :commands, through: :combo_commands, dependent: :destroy
@@ -30,9 +32,9 @@ class Combo < ApplicationRecord
   accepts_nested_attributes_for :combo_fighter_targets
   belongs_to :fighter
   
-  validates :name, :fighter_id, :level , :user_id, presence: true
-  belongs_to :startposition
   belongs_to :genre
+  belongs_to :startposition
+  
   enum level: {easy: 0, normal: 1, difficult: 2}
   
 
@@ -64,9 +66,9 @@ class Combo < ApplicationRecord
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
     temp_ids = Comment.select(:user_id).where(combo_id: id).where.not(user_id: current_user.id).distinct
-    binding.pry
+    # binding.pry
     temp_ids.each do |temp_id|
-      binding.pry
+      # binding.pry
       save_notification_comment!(current_user, comment_id, temp_id['user_id'])
     end
     # まだ誰もコメントしていない場合は、投稿者に通知を送る

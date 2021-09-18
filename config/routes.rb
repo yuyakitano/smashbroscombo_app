@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+ 
   namespace :admin do
     resources :users
     resources :combos
@@ -74,5 +74,8 @@ Rails.application.routes.draw do
   post 'contacts/back', to: 'contacts#back', as: 'back'  
   #「お問い合わせ投稿完了しました」画面が必要なら
   #get 'done', to: 'contacts#done', as: 'done'
+
+  #決済機能(サブスク機能)の実装
+  resources :teams, only: [:new, :create, :destroy]
 
 end

@@ -1,0 +1,28 @@
+// Place all the styles related to the teams controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.slide {
+  position: fixed;
+  width: 100%;
+  top: 40px;
+  margin: 0;
+  // text-align: center;
+}
+
+.slide img {
+  width: 100%;
+  // max-width: 700px;
+  // position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 5;
+  opacity: 0.2;
+  // min-width: 800px;
+  margin: 0 auto;
+}
+.team-main {
+  position: relative;
+  padding: 0 0 0 40px ;
+  z-index: 190;
+}

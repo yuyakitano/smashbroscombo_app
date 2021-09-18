@@ -41,7 +41,7 @@
 }
 .main-title .inner .title-menu .title-menu-link {
   margin: 1%;
-  
+  // min-width: 420px;
 }
 
 
@@ -326,8 +326,16 @@
     font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   }
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
-    min-width: 330px;
     
+    min-width: 470px;
+  }
+  .main-title .inner .title-menu .title-menu-link .btn.btn-outline-info {
+    
+    min-width: 470px;
+  }
+  .main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
+    
+    min-width: 470px;
   }
   // .main-create-selectfighter .inner .fighter-list .row {
   //   padding-top: 5px;
@@ -404,16 +412,16 @@
     font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;
   }
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-success {
-    min-width: 370px;
+    min-width: 420px;
     
   }  
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-info {
-    min-width: 370px;
+    min-width: 420px;
     
   }
   
   .main-title .inner .title-menu .title-menu-link .btn.btn-outline-primary {
-    min-width: 370px;
+    min-width: 420px;
     
   }
   .fighter-list-item-name {

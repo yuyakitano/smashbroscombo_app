@@ -9,60 +9,59 @@ RSpec.describe User, type: :model do
         email: "yuya@test.com",
         password: "yuyayuya",
       )
-      user.valid?
+      #user.valid?
+      #expect(user)で「userの中に入れたものが今どうゆう状態かをチェック」
+      #be_validで「expect().toの状態が有効であるという意味になる」
       expect(user).to be_valid
     end
-    it "emailが無い場合、無効であること" do
-      #user = build(:user, email: nil)
+    it "usernameがない場合無効であること" do
       user = User.new(
-        username: "yuya1",
-        email: nil,
+        username: nil,
+        email: "yuya1@test.com",
         password: "yuyayuya1"
       )
       user.valid?
-      #expect(user.errors[:name]).to include("が入力されていません。")
+      #valid ?を使ってエラー検証を行えるようにする
+      #valid?メソッドでfalseであれば、user.errosでどんなerrorを持っているか返してくれます。
+      #今回は[:username]のエラーがみたいのでexpect()内部で指定してあげます。
+      #今回は"が入力されていません"というエラーを含んでいる(include)しているエラーのはずという記述になります。複数含む場合ももちろんあります。
+      expect(user.errors[:username]).to include("を入力してください。")
+    end
+
+    it "emailが無い場合、無効であること" do
+      #user = build(:user, email: nil)
+      user = User.new(
+        username: "yuya2",
+        email: nil,
+        password: "yuyayuya2"
+      )
+      user.valid?
+      #valid ?を使ってエラー検証を行えるようにする
+      #valid?メソッドでfalseであれば、user.errosでどんなerrorを持っているか返してくれます。
+      #今回は[:email]のエラーがみたいのでexpect()内部で指定してあげます。
+      #今回は"が入力されていません"というエラーを含んでいる(include)しているエラーのはずという記述になります。複数含む場合ももちろんあります。
+      expect(user.errors[:email]).to include("を入力してください。")
     end
     it "passwordが無い場合、無効であること" do
       #user = build(:user, email: nil)
       user = User.new(
-        username: "yuya2",
-        email: "yuya2@test.com",
+        username: "yuya3",
+        email: "yuya3@test.com",
         password: nil
       )
       user.valid?
-      #expect(user.errors[:name]).to include("が入力されていません。")
+      expect(user.errors[:password]).to include("を入力してください。")
     end
     it "passwordが6文字以上出ないと、無効であること" do
       #user = build(:user, email: nil)
       user = User.new(
-        username: "yuya3",
-        email: "yuya3@test.com",
-        password: "yuya3"
-      )
-      user.valid?
-    end
-    it "emailに@が入っていないと、無効であること" do
-      #user = build(:user, email: nil)
-      user = User.new(
         username: "yuya4",
-        email: "yuya4test.com",
-        password: "yuyayuya4"
+        email: "yuya4@test.com",
+        password: "yuya4"
       )
       user.valid?
+      expect(user.errors[:password]).to include("は６文字以上に設定してください。")
     end
   end
-  # context '本人ではない場合' do
-  #   subject { get edit_user_registration_path @user_a }
-  #   before do  
-  #     @user_a = create(:user)
-  #     @user_b = FactoryBot.create(:user, 
-  #       username: 'ユーザーb', 
-  #       email: 'userb@example.com')
 
-  #     sign_in @user_b
-  #   end
-  #   it '失敗' do
-  #     is_expected.to root_path
-  #   end
-  # end
 end

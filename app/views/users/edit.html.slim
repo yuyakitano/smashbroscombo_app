@@ -1,6 +1,10 @@
 h1 ユーザー情報編集
 
+/ = render "users/shared/error_messages", model: @user
+/ - binding.pry
 = form_with model: @user, local: true do |f|
+  / - binding.pry
+  = render "layouts/error_messages", model: f.object
   .form-group 
     = f.label :profile_image
     = f.file_field :profile_image, class: 'img_field', style: 'display:none;'

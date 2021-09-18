@@ -3,7 +3,8 @@ class CombosController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy ]
   before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
   def main
-    @fighters = Fighter.all
+    # @fighters = Fighter.all
+    @fighters = Fighter.order(:id)
     @fighter = Fighter.all
     @q = Combo.ransack(Like.group(:combo_id).order("count(*) desc").limit(5).pluck(:combo_id))
     @combos = @q.result(distinct: true).page(params[:page])
@@ -198,7 +199,6 @@ class CombosController < ApplicationController
 
   def create
     
-    
     @combo = Combo.new(combo_params)
     
     #コマンド配列作成
@@ -206,7 +206,7 @@ class CombosController < ApplicationController
     command_ids2 = command_ids1.split(",")
     @combo.command_ids = command_ids2
     @combo.user_id = current_user.id
-
+    # binding.pry
     #ユーチューブURL加工
     url = params[:combo][:youtube_url]
     url = url.split('/').last

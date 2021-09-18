@@ -16,7 +16,9 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-
+    .container
+      - if flash.notice.present?
+        .alert.alert-success= flash.notice
     / .app-title.navbar.navbar-expand-md.navbar-light.bg-light 
     /   .container
     wrapper
@@ -52,6 +54,8 @@ html
                   a.nav-link href="/notifications.#{current_user.id}" 通知一覧
                 li.nav-item
                   a.nav-link href="/users/sign_out" data-confirm="ログアウトしますか？" data-method="delete" ログアウト
+                li.nav-item
+                  a.nav-link href="/teams/new" プレミアムプラン登録(課金)
         - elsif admin_signed_in?
           .container-fluid
             a.navbar-brand href="/main"
