@@ -82,7 +82,6 @@ class Admin::CombosController < ApplicationController
     #ComboCommand.find([:combo_id = @combo.id])
     #@commands = Command.find(params[:command_id])
     #@user = User.find_by(id: @combo.user_id)
-    #@kill_or_damage = {1: 'kill', 2: 'damage'}
     #@comments = @combo.comments
     @comment = Comment.new
     #コメントを新着順で取得
